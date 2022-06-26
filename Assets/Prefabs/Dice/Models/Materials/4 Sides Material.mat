@@ -25,7 +25,6 @@ Material:
   m_ValidKeywords:
   - _METALLICSPECGLOSSMAP
   - _NORMALMAP
-  - _SMOOTHNESS_TEXTURE_ALBEDO_CHANNEL_A
   - _SPECGLOSSMAP
   m_InvalidKeywords:
   - _METALLICGLOSSMAP
@@ -119,7 +118,7 @@ Material:
     - _ReceiveShadows: 1
     - _Shininess: 0.23
     - _Smoothness: 1
-    - _SmoothnessTextureChannel: 1
+    - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
     - _Surface: 0
@@ -127,8 +126,8 @@ Material:
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
-    - _BaseColor: {r: 1, g: 0.46705538, b: 0, a: 1}
-    - _Color: {r: 1, g: 0.46705538, b: 0, a: 1}
+    - _BaseColor: {r: 0, g: 0.45752144, b: 1, a: 1}
+    - _Color: {r: 0, g: 0.45752144, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0.00019914216, b: 0.0007314645, a: 1}
     - _SpecColor: {r: 1, g: 0.9893892, b: 0, a: 1}
   m_BuildTextureStacks: []

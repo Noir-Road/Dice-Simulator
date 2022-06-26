@@ -4,6 +4,9 @@ using UnityEngine.UI;
 
 public class DicePhysics : Singleton<DicePhysics>
 {
+    [Header("Game Manager")] [SerializeField]
+    GameManager gameManager;
+
     [Header("Gravity")]
     [SerializeField] Slider gravitySlider;
     [SerializeField] TextMeshProUGUI gravityValue;
@@ -24,14 +27,10 @@ public class DicePhysics : Singleton<DicePhysics>
     [SerializeField] Slider rigidbodySlider;
     [SerializeField] TextMeshProUGUI rigidbodyValue;
 
-    [Header("Drag")] 
-    [SerializeField] Slider dragSlider;
-    [SerializeField] TextMeshProUGUI dragValue;
+    [Header("Shake Threshold")] 
+    [SerializeField] Slider shakeSlider;
+    [SerializeField] TextMeshProUGUI shakeValue;
 
-    [Header("Angular Drag")] 
-    [SerializeField] Slider angularDragSlider;
-    [SerializeField] TextMeshProUGUI angularDragValue;
-    
     void Start()
     {
        SliderDefaultValues(); // Load default values for sliders;
@@ -71,21 +70,13 @@ public class DicePhysics : Singleton<DicePhysics>
           DiceLord.Mass?.Invoke(v);
           PlayerPrefs.SetFloat("Mass", v);
       });
-  /*     
-       dragSlider.onValueChanged.AddListener((v) =>
-       {
-           dragValue.text = v.ToString("0.00");
-           rb.drag = v;
-           PlayerPrefs.SetFloat("Drag", v);
-       });
        
-       angularDragSlider.onValueChanged.AddListener((v) =>
+       shakeSlider.onValueChanged.AddListener((v) =>
        {
-           angularDragValue.text = v.ToString("0.00");
-           rb.angularDrag = v;
-           PlayerPrefs.SetFloat("AngularDrag",v);
+           shakeValue.text = v.ToString("0.00");
+           gameManager.shakeThreshold = v;
+           PlayerPrefs.SetFloat("Shake", v);
        });
-  */
     }
 
     public void LoadSavedValues()
@@ -120,21 +111,15 @@ public class DicePhysics : Singleton<DicePhysics>
             rigidbodySlider.value = PlayerPrefs.GetFloat("Mass");
             rigidbodyValue.text = PlayerPrefs.GetFloat("Mass").ToString("0.00");
         }
-/*
-        if (PlayerPrefs.HasKey("Drag"))
-        {
-            dragSlider.value = PlayerPrefs.GetFloat("Drag");
-            dragValue.text = PlayerPrefs.GetFloat("Drag").ToString();
-            rb.drag = PlayerPrefs.GetFloat("Drag");
-        }
 
-        if (PlayerPrefs.HasKey("AngularDrag"))
+        if (PlayerPrefs.HasKey("Shake"))
         {
-            angularDragSlider.value = PlayerPrefs.GetFloat("AngularDrag");
-            angularDragValue.text = PlayerPrefs.GetFloat("AngularDrag").ToString();
-            rb.angularDrag = PlayerPrefs.GetFloat("AngularDrag");
-} */
-    }
+            shakeSlider.value = PlayerPrefs.GetFloat("Shake");
+            shakeValue.text = PlayerPrefs.GetFloat("Shake").ToString();
+            gameManager.shakeThreshold = PlayerPrefs.GetFloat("Shake");
+        } 
+    } 
+
     public void SliderDefaultValues()
     {
         gravitySlider.minValue = -500f;
@@ -157,12 +142,8 @@ public class DicePhysics : Singleton<DicePhysics>
         rigidbodySlider.maxValue = 25f;
         rigidbodySlider.value = 6.3f;
 
-      // dragSlider.minValue = 0f;
-      // dragSlider.maxValue = 3f;
-      // dragSlider.value = 3f;
-
-      // angularDragSlider.minValue = 0f;
-      // angularDragSlider.maxValue = 3f;
-      // angularDragSlider.value = 3f;
+        shakeSlider.minValue = 1.5f;
+        shakeSlider.maxValue = 5f;
+        shakeSlider.value = 2.5f;
     }
 }

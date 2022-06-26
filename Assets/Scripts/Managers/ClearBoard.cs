@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -9,31 +8,27 @@ public class ClearBoard : Singleton<ClearBoard>
 
     [Header("Canvas")] 
     [SerializeField] CanvasGroup diceCanvas;
-
-    IEnumerator Start()
-    {   // Is filled when the pool is created ? **BUG**
-        yield return new WaitForSeconds(.5f);
-        dices.Clear();
-        diceCanvas.interactable = true;
-    }
-    public bool CheckList()
+    
+    public bool CheckList() // Maximum Dices on PlayGround are 30. If this var is higher, needs to also tweak the Object Pooler
     {
         if (dices.Count >= 30) diceCanvas.interactable = false;
         return true;
     }
-    public void AddDices(GameObject dice)
+    public void AddDices(GameObject dice) // Little check to see if the dice has not been added already into the list.
     {
         if (!dices.Contains(dice)) dices.Add(dice);
     }
-    public void ClearDiceList()
+    public void ClearDiceList() // Clear the dices by removing the collider and have them to fall into the ground.
     {
         foreach (var dice in dices)
         {
             dice.GetComponent<MeshCollider>().enabled = false;
         }
-        diceCanvas.interactable = true;
+        diceCanvas.interactable = true; // Re enabled canvas to spawn more Dices.
         dices.Clear();
     }
+
+    #region DiceLord Listeners
 
     void ChangeForce(float f)
     {
@@ -63,8 +58,7 @@ public class ClearBoard : Singleton<ClearBoard>
             dice.GetComponent<PlayerRoll>().rb.mass = m;
         }
     }
-
-    void OnEnable()
+    void OnEnable() // Subscribe to Dice Lord Event
     {
         DiceLord.Force += ChangeForce;
         DiceLord.Rotation += ChangeRotation;
@@ -72,11 +66,13 @@ public class ClearBoard : Singleton<ClearBoard>
         DiceLord.Mass += ChangeMass;
     }
 
-    void OnDisable()
+    void OnDisable() // Needs to unsubscribe to avoid any errors, Just a check, might not be needed.
     {
         DiceLord.Force -= ChangeForce;
         DiceLord.Rotation -= ChangeRotation;
         DiceLord.AnglesRotation -= ChangeRotationAngles;
         DiceLord.Mass -= ChangeMass;
     }
+    
+    #endregion
 }

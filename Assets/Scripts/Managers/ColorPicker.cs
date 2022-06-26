@@ -1,20 +1,45 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class ColorPicker : MonoBehaviour
 {
-
+    public static ColorPicker Instance;
+    [Header("Color Picker")]
     [SerializeField] RectTransform _texture;
-    [SerializeField] GameObject dice;
     [SerializeField] Texture2D _sprite;
+    MeshRenderer meshRenderer;
+    GameObject lightHolder;
+
+    [Header("Textures")] 
+    [SerializeField] Texture blackOverWhite;
+    [SerializeField] Texture whiteOverBlack;
+
+    void Awake() => Instance = this;
+
+    public void SetMesh(MeshRenderer mr, GameObject _light)
+    {
+        meshRenderer = mr;
+        lightHolder = _light;
+        _light.SetActive(true);
+    }
+    /// <summary>
+    /// _BaseMap keyword for BaseMap Material render
+    /// </summary>
+    public void ChangeToBlack()
+    {
+        meshRenderer.material.SetTexture("_BaseMap", blackOverWhite);
+    }
+
+    public void ChangeToWhite()
+    {
+        meshRenderer.material.SetTexture("_BaseMap", whiteOverBlack);
+    }
 
     public void ColorPickerColor()
     {
         SetColor();
     }
 
-    void SetColor()
+    void SetColor() // Gets global position of the touch over the Spectrum Image added and gets the pixel
     {
         Vector3 imagePos = _texture.position;
         float globalXPos = Input.GetTouch(0).position.x - imagePos.x;
@@ -24,11 +49,16 @@ public class ColorPicker : MonoBehaviour
         int localPosY = (int) (globalYPos * (_sprite.height / _texture.rect.height));
 
         Color c = _sprite.GetPixel(localPosX, localPosY);
-        SetActualColor(c);
+        SetActualColor(c); // send color to mesh renderer selected
     }
 
     void SetActualColor(Color c)
     {
-        dice.GetComponent<MeshRenderer>().material.color = c;
+        meshRenderer.material.color = c;
+    }
+
+    void OnDisable()
+    {
+        lightHolder.SetActive(false);
     }
 }

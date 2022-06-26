@@ -2,11 +2,13 @@ using UnityEngine;
 using System;
 using System.Collections;
 using Sirenix.OdinInspector;
-public class SoundManager : Singleton<SoundManager>
+public class SoundManager : MonoBehaviour
 {
+    public static SoundManager Instance;
     public Sounds[] sounds;
     void Awake() // Add sounds Components 
     {
+        Instance = this;
         foreach (Sounds s in sounds)
         {
             s.source = gameObject.AddComponent<AudioSource>();

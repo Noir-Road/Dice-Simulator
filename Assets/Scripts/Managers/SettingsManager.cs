@@ -12,6 +12,8 @@ public class SettingsManager : MonoBehaviour
     [SerializeField] GameObject separator;
     [SerializeField] GameObject debugOptions;
 
+    [SerializeField] GameManager gameManager;
+
     public void BackgroundChanger(int value)
     {
         mesh.material = value switch
@@ -61,6 +63,11 @@ public class SettingsManager : MonoBehaviour
             debugOptions.SetActive(false);
             separator.SetActive(true);
         }
+    }
+
+    public void ShakeToThrow(bool state)
+    {
+        gameManager.blockShakeMovement = state;
     }
 
 }
