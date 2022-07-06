@@ -13,8 +13,7 @@ GameObject:
   - component: {fileID: 23326943778514844}
   - component: {fileID: 64845298809898044}
   - component: {fileID: 54977493419179528}
-  - component: {fileID: 1744461735}
-  - component: {fileID: -4633602675234376737}
+  - component: {fileID: 1378113778}
   m_Layer: 6
   m_Name: high_6_sides
   m_TagString: Dice
@@ -110,7 +109,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1394906286297606}
   serializedVersion: 2
-  m_Mass: 6.3
+  m_Mass: 3
   m_Drag: 3
   m_AngularDrag: 3
   m_UseGravity: 1
@@ -118,7 +117,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 1
---- !u!114 &1744461735
+--- !u!114 &1378113778
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -127,29 +126,20 @@ MonoBehaviour:
   m_GameObject: {fileID: 1394906286297606}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fc83ab2a42deec446af9b7675036c356, type: 3}
+  m_Script: {fileID: 11500000, guid: 168c89355adf1499c85c0583a034db4b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   type: 1
   upDiceForce: 5000
   rotationSpeed: 30
   rotationAngles: 25
+  impulseDirection: 1000
+  mutiplyGravity: 2
   _rotation: {x: 0, y: 0, z: 0}
   rb: {fileID: 54977493419179528}
   meshCollider: {fileID: 64845298809898044}
+  state: 0
   isRolling: 0
---- !u!114 &-4633602675234376737
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1394906286297606}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d8492ea082d26d14a892661680815afb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &2417526895542723416
 GameObject:
   m_ObjectHideFlags: 0

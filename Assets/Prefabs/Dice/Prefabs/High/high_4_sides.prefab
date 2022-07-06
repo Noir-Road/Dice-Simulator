@@ -128,7 +128,7 @@ GameObject:
   - component: {fileID: 23302133296322644}
   - component: {fileID: 64151204367812286}
   - component: {fileID: 54113620038424922}
-  - component: {fileID: 8090889394400096294}
+  - component: {fileID: 467952676}
   m_Layer: 6
   m_Name: high_4_sides
   m_TagString: Dice
@@ -232,7 +232,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 1
---- !u!114 &8090889394400096294
+--- !u!114 &467952676
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -241,14 +241,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 1290935171854316}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fc83ab2a42deec446af9b7675036c356, type: 3}
+  m_Script: {fileID: 11500000, guid: 168c89355adf1499c85c0583a034db4b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   type: 0
   upDiceForce: 5000
   rotationSpeed: 30
   rotationAngles: 25
+  impulseDirection: 1000
+  mutiplyGravity: 2
   _rotation: {x: 0, y: 0, z: 0}
   rb: {fileID: 54113620038424922}
   meshCollider: {fileID: 64151204367812286}
+  state: 0
   isRolling: 0

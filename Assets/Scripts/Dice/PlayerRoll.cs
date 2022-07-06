@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 public class PlayerRoll : MonoBehaviour
 {
@@ -14,13 +15,13 @@ public class PlayerRoll : MonoBehaviour
     public Rigidbody rb;
     [SerializeField] MeshCollider meshCollider;
     
-    enum Dice{IDLE, ROLLING}
-    Dice state;
+    public enum Dice{IDLE, ROLLING, FALLING}
+    public Dice state;
     public bool isRolling;
     
     void OnEnable()
     {
-        DiceLord.Jump += DiceJumper;
+       // DiceLord.Jump += DiceJumper;
         ClearBoard.Instance.AddDices(gameObject);
         meshCollider.enabled = true;
         LoadValues();
@@ -28,7 +29,7 @@ public class PlayerRoll : MonoBehaviour
 
     void OnDisable()
     {
-        DiceLord.Jump -= DiceJumper;
+      //  DiceLord.Jump -= DiceJumper;
     }
 
     void Update()
@@ -52,15 +53,33 @@ public class PlayerRoll : MonoBehaviour
                 RequestNewImpulse();
                 break;
             case 0:
-                state = Dice.IDLE;
+                
                 break;
         }
     }
 
+    void DiceJump()
+    {
+        if (state != Dice.IDLE) return;
+        state = Dice.ROLLING;
+        isRolling = true;
+        RequestNewRotationValues();
+        RequestNewImpulse();
+    }
+
     void FixedUpdate()
     {
-        if(state == Dice.ROLLING)
-            LiftDice();
+        switch (state)
+        {
+            case Dice.IDLE:
+                return;
+            case Dice.FALLING:
+                rb.AddForce(Physics.gravity, ForceMode.Impulse);
+                break;
+            case Dice.ROLLING:
+                LiftDice();
+                break;
+        }
     }
 
     void RequestNewRotationValues()

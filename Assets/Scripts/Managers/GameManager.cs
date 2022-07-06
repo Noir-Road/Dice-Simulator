@@ -1,6 +1,7 @@
 using UnityEngine.EventSystems;
 using UnityEngine;
 using System;
+
 public class GameManager : MonoBehaviour
 {
     public enum TypeOfMovement { SHAKING, TOUCHING } 
@@ -22,7 +23,6 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject settingCanvas;
     [SerializeField] GameObject diceCanvas;
     [SerializeField] GameObject customizerCanvas;
-
     GameObject lightObject;
 
     void Start()
@@ -30,6 +30,7 @@ public class GameManager : MonoBehaviour
         SoundManager.Instance.PlaySound("Theme One");
         blockShakeMovement = true;
     }
+
     //Runs on every frame
     void Update()
     {
@@ -49,13 +50,6 @@ public class GameManager : MonoBehaviour
     }
     void DiceJumper()
     {
-       /*   PC testing, if enabled, comment the whole below code from Dice Jumper, otherwise it wont work because of the Input.Touch = 0
-        if (Input.GetKey("space"))
-        {
-            DiceLord.Jump?.Invoke(1);
-        }
-        else DiceLord.Jump?.Invoke(0);
-        */
         if (blockShakeMovement)         // Auto Movement Switch *By default, both movements are enabled, by shake & touch*
         {
             mobileAccelerometer = Input.acceleration;
@@ -71,24 +65,20 @@ public class GameManager : MonoBehaviour
                     case 1: // If 1 touch is detected and the below condition is meet, then invoke DiceLord
                         if (HoldMenu() && !holdDice)
                             if(TouchBlocker())
-                                DiceLord.Jump?.Invoke(1);
-                        break;
-                    case 0:
-                        DiceLord.Jump?.Invoke(0);
+                                DiceLord.Roll?.Invoke();
                         break;
                 }
-
+        
                 break;
-
+        
             case TypeOfMovement.SHAKING:
                 if (TouchBlocker())
-                    DiceLord.Jump?.Invoke(mobileAccelerometer.sqrMagnitude >= shakeThreshold ? 1 : 0);
+                    DiceLord.Roll?.Invoke();
                 break;
-
-            default:
-                throw new ArgumentOutOfRangeException();
-        }
+         }
     }
+    
+    
     bool HoldMenu()
     {
         foreach (Touch touch in Input.touches)
@@ -140,8 +130,9 @@ public class GameManager : MonoBehaviour
 /// </summary>
 public class DiceLord
 {
-    public static Action<int> Jump;
+    public static Action Roll;
     public static Action<float> Force;
+    public static Action<float> Multiplier;
     public static Action<float> Rotation;
     public static Action<float> AnglesRotation;
     public static Action<float> Mass;

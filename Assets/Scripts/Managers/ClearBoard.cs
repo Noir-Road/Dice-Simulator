@@ -34,33 +34,42 @@ public class ClearBoard : Singleton<ClearBoard>
     {
         foreach (var dice in dices)
         {
-            dice.GetComponent<PlayerRoll>().upDiceForce = f;
+            dice.GetComponent<DiceRoller>().upDiceForce = f;
+        }
+    }
+
+    void ChangeMultiplier(float mu)
+    {
+        foreach (var dice in dices)
+        {
+            dice.GetComponent<DiceRoller>().mutiplyGravity = mu;
         }
     }
     void ChangeRotation(float r)
     {
         foreach (var dice in dices)
         {
-            dice.GetComponent<PlayerRoll>().rotationSpeed = r;
+            dice.GetComponent<DiceRoller>().rotationSpeed = r;
         }
     }
     void ChangeRotationAngles(float ra)
     {
         foreach (var dice in dices)
         {
-            dice.GetComponent<PlayerRoll>().rotationAngles = ra;
+            dice.GetComponent<DiceRoller>().rotationAngles = ra;
         }
     }
     void ChangeMass(float m)
     {
         foreach (var dice in dices)
         {
-            dice.GetComponent<PlayerRoll>().rb.mass = m;
+            dice.GetComponent<DiceRoller>().rb.mass = m;
         }
     }
     void OnEnable() // Subscribe to Dice Lord Event
     {
         DiceLord.Force += ChangeForce;
+        DiceLord.Multiplier += ChangeMultiplier;
         DiceLord.Rotation += ChangeRotation;
         DiceLord.AnglesRotation += ChangeRotationAngles;
         DiceLord.Mass += ChangeMass;
@@ -69,6 +78,7 @@ public class ClearBoard : Singleton<ClearBoard>
     void OnDisable() // Needs to unsubscribe to avoid any errors, Just a check, might not be needed.
     {
         DiceLord.Force -= ChangeForce;
+        DiceLord.Multiplier -= ChangeMultiplier;
         DiceLord.Rotation -= ChangeRotation;
         DiceLord.AnglesRotation -= ChangeRotationAngles;
         DiceLord.Mass -= ChangeMass;

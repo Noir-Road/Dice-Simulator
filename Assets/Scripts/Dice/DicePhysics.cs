@@ -11,6 +11,10 @@ public class DicePhysics : Singleton<DicePhysics>
     [SerializeField] Slider gravitySlider;
     [SerializeField] TextMeshProUGUI gravityValue;
 
+    [Header("Gravity Multiplier")]
+    [SerializeField] Slider multiplierSlider;
+    [SerializeField] TextMeshProUGUI multiplierValue;
+
     [Header("Force")]
     [SerializeField] Slider forceSlider;
     [SerializeField] TextMeshProUGUI forceValue;
@@ -38,42 +42,49 @@ public class DicePhysics : Singleton<DicePhysics>
         
        gravitySlider.onValueChanged.AddListener((v) =>
        {
-           gravityValue.text = v.ToString("0.00");
+           gravityValue.text = v.ToString("0.0");
            Physics.gravity = new Vector3(0f, v, 0f);
            PlayerPrefs.SetFloat("Gravity", v);
        });
 
+       multiplierSlider.onValueChanged.AddListener((v) =>
+       {
+            multiplierValue.text = v.ToString("0.0");
+            DiceLord.Multiplier?.Invoke(v);
+            PlayerPrefs.SetFloat("Multiplier", v);
+       });
+
        forceSlider.onValueChanged.AddListener((v) =>
        {
-           forceValue.text = v.ToString("0.00");
+           forceValue.text = v.ToString("0.0");
            DiceLord.Force?.Invoke(v);
            PlayerPrefs.SetFloat("Force", v);
        });
        
       rotationSlider.onValueChanged.AddListener((v) =>
       {
-          rotationValue.text = v.ToString("0.00");
+          rotationValue.text = v.ToString("0.0");
           DiceLord.Rotation?.Invoke(v);
           PlayerPrefs.SetFloat("Rotation", v);
       });
 
       rotationAnglesSlider.onValueChanged.AddListener((v) =>
       {
-          rotationAnglesValue.text = v.ToString("0.00");
+          rotationAnglesValue.text = v.ToString("0.0");
           DiceLord.AnglesRotation?.Invoke(v);
           PlayerPrefs.SetFloat("Angles", v);
       });
       
       rigidbodySlider.onValueChanged.AddListener((v) =>
       {
-          rigidbodyValue.text = v.ToString("0.00");
+          rigidbodyValue.text = v.ToString("0.0");
           DiceLord.Mass?.Invoke(v);
           PlayerPrefs.SetFloat("Mass", v);
       });
        
        shakeSlider.onValueChanged.AddListener((v) =>
        {
-           shakeValue.text = v.ToString("0.00");
+           shakeValue.text = v.ToString("0.0");
            gameManager.shakeThreshold = v;
            PlayerPrefs.SetFloat("Shake", v);
        });
@@ -84,32 +95,38 @@ public class DicePhysics : Singleton<DicePhysics>
         if (PlayerPrefs.HasKey("Gravity"))
         {
             gravitySlider.value = PlayerPrefs.GetFloat("Gravity");
-            gravityValue.text = PlayerPrefs.GetFloat("Gravity").ToString("0.00");
+            gravityValue.text = PlayerPrefs.GetFloat("Gravity").ToString("0.0");
             Physics.gravity = new Vector3(0f, PlayerPrefs.GetFloat("Gravity"), 0f);
+        }
+
+        if (PlayerPrefs.HasKey("Multiplier"))
+        {
+            multiplierSlider.value = PlayerPrefs.GetFloat("Multiplier");
+            multiplierValue.text = PlayerPrefs.GetFloat("Multiplier").ToString("0.0");
         }
         
         if (PlayerPrefs.HasKey("Force"))
         {
             forceSlider.value = PlayerPrefs.GetFloat("Force");
-            forceValue.text = PlayerPrefs.GetFloat("Force").ToString("0.00");
+            forceValue.text = PlayerPrefs.GetFloat("Force").ToString("0.0");
         }
 
         if (PlayerPrefs.HasKey("Rotation"))
         {
             rotationSlider.value = PlayerPrefs.GetFloat("Rotation");
-            rotationValue.text = PlayerPrefs.GetFloat("Rotation").ToString("0.00");
+            rotationValue.text = PlayerPrefs.GetFloat("Rotation").ToString("0.0");
         }
 
         if (PlayerPrefs.HasKey("Angles"))
         {
             rotationAnglesSlider.value = PlayerPrefs.GetFloat("Angles");
-            rotationAnglesValue.text = PlayerPrefs.GetFloat("Angles").ToString("0.00");
+            rotationAnglesValue.text = PlayerPrefs.GetFloat("Angles").ToString("0.0");
         }
         
         if (PlayerPrefs.HasKey("Mass"))
         {
             rigidbodySlider.value = PlayerPrefs.GetFloat("Mass");
-            rigidbodyValue.text = PlayerPrefs.GetFloat("Mass").ToString("0.00");
+            rigidbodyValue.text = PlayerPrefs.GetFloat("Mass").ToString("0.0");
         }
 
         if (PlayerPrefs.HasKey("Shake"))
@@ -122,12 +139,16 @@ public class DicePhysics : Singleton<DicePhysics>
 
     public void SliderDefaultValues()
     {
-        gravitySlider.minValue = -500f;
-        gravitySlider.maxValue = -9.81f;
-        gravitySlider.value = -133.5f;
+        gravitySlider.minValue = -120f;
+        gravitySlider.maxValue = -0f;
+        gravitySlider.value = -110f;
 
-        forceSlider.minValue = 100f;
-        forceSlider.maxValue = 5000f;
+        multiplierSlider.minValue = 1f;
+        multiplierSlider.maxValue = 4f;
+        multiplierSlider.value = 2f;
+
+        forceSlider.minValue = 4000f;
+        forceSlider.maxValue = 8000f;
         forceSlider.value = 4000f;
 
         rotationSlider.minValue = 0f;
@@ -139,11 +160,11 @@ public class DicePhysics : Singleton<DicePhysics>
         rotationAnglesSlider.value = 25f;
         
         rigidbodySlider.minValue = 1f;
-        rigidbodySlider.maxValue = 25f;
-        rigidbodySlider.value = 6.3f;
+        rigidbodySlider.maxValue = 6f;
+        rigidbodySlider.value = 3f;
 
         shakeSlider.minValue = 1.5f;
         shakeSlider.maxValue = 5f;
-        shakeSlider.value = 2.5f;
+        shakeSlider.value = 2f;
     }
 }
