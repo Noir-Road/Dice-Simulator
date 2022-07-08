@@ -25,6 +25,7 @@ public class GameManager : MonoBehaviour
     GameObject lightObject;
 
     Transform test;
+    Transform test2;
 
     void Start()
     {
