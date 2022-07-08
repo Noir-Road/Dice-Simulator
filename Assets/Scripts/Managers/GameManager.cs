@@ -12,7 +12,6 @@ public class GameManager : MonoBehaviour
     [SerializeField] float holdTime;
     [SerializeField] float currentTime;
     
-    
     [Header("Mobile Shake Properties")]
     [Tooltip("This variable represent how hard you must shake the phone to raise the dice(s)")]
     public float shakeThreshold;
@@ -24,6 +23,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject diceCanvas;
     [SerializeField] GameObject customizerCanvas;
     GameObject lightObject;
+
+    Transform test;
 
     void Start()
     {
