@@ -1,4 +1,3 @@
 # Dice-Simulator
-Unity Dice Simulator
-Dice Simulator Beta 1.2
+Dice Simulator is a simple project created using Unity Engine.
 #se agrega comentario como descarga del proyecto
