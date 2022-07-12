@@ -52,32 +52,40 @@ public class GameManager : MonoBehaviour
     }
     void DiceJumper()
     {
-        if (blockShakeMovement)         // Auto Movement Switch *By default, both movements are enabled, by shake & touch*
+
+        if (Input.GetKey("space"))
         {
-            mobileAccelerometer = Input.acceleration;
-            if (mobileAccelerometer.sqrMagnitude >= shakeThreshold) state = TypeOfMovement.SHAKING;
+            DiceLord.Roll?.Invoke();
+            Debug.Log("Jumping");
         }
 
-        if (Input.touchCount >= 1) state = TypeOfMovement.TOUCHING;
-        switch (state)
-        {
-            case TypeOfMovement.TOUCHING:
-                switch (Input.touchCount)
-                {
-                    case 1: // If 1 touch is detected and the below condition is meet, then invoke DiceLord
-                        if (HoldMenu() && !holdDice)
-                            if(TouchBlocker())
-                                DiceLord.Roll?.Invoke();
-                        break;
-                }
         
-                break;
-        
-            case TypeOfMovement.SHAKING:
-                if (TouchBlocker())
-                    DiceLord.Roll?.Invoke();
-                break;
-         }
+        //if (blockShakeMovement)         // Auto Movement Switch *By default, both movements are enabled, by shake & touch*
+        //{
+        //    mobileAccelerometer = Input.acceleration;
+        //    if (mobileAccelerometer.sqrMagnitude >= shakeThreshold) state = TypeOfMovement.SHAKING;
+        //}
+        //
+        //if (Input.touchCount >= 1) state = TypeOfMovement.TOUCHING;
+        //switch (state)
+        //{
+        //    case TypeOfMovement.TOUCHING:
+        //        switch (Input.touchCount)
+        //        {
+        //            case 1: // If 1 touch is detected and the below condition is meet, then invoke DiceLord
+        //                if (HoldMenu() && !holdDice)
+        //                    if(TouchBlocker())
+        //                        DiceLord.Roll?.Invoke();
+        //                break;
+        //        }
+        //
+        //        break;
+        //
+        //    case TypeOfMovement.SHAKING:
+        //        if (TouchBlocker())
+        //            DiceLord.Roll?.Invoke();
+        //        break;
+        // }
     }
     
     

@@ -28,6 +28,9 @@ public class DiceRoller : MonoBehaviour
         ClearBoard.Instance.AddDices(gameObject);
         meshCollider.enabled = true;
         LoadValues();
+        //Ray ray = new Ray(gameObject. transform.position, transform.forward);
+
+
     }
 
     private void OnDisable() {
@@ -43,14 +46,70 @@ public class DiceRoller : MonoBehaviour
         RequestNewImpulse(); // Impulse Dice in all axis
     }
 
+    Ray rayA, rayB;
     void Update()
     {
+
         if (state == Dice.ROLLING)
         {
             transform.Rotate(_rotation * rotationSpeed * Time.deltaTime);
         }
-        if(transform.position.y <= -17f)
+        else if (state == Dice.IDLE)
+        {
+    
+            Ray ray1 = new Ray(transform.position, transform.forward);
+            RaycastHit hitData;
+            if (Physics.Raycast(ray1, out hitData))
+            {
+                // The Ray hit something!
+                string name = hitData.collider.name;
+                Debug.Log("HIT SOMETHING AFTER ROLLING: " + name);
+            }
+
+        }
+        if (transform.position.y <= -17f)
             PoolManager.Instance.ReturnObjectOfType(gameObject,type);
+
+        //Z == North
+        //-Z == South
+        //X == West
+        //-X == East
+        //Y == Roof
+        //-Y == Ground
+        
+        //For Debug
+        rayA = new Ray(transform.position, transform.forward);
+        rayB = new Ray(transform.position, -transform.forward);
+
+        Debug.DrawRay(rayA.origin, rayA.direction * 500, Color.green);
+        Debug.DrawRay(rayB.origin, rayB.direction * 500, Color.red);
+
+        /*
+        switch (type)
+        {
+            case PoolObjectType.FourSides:
+                //fire();
+                break;
+            case PoolObjectType.SixSides:
+                // code block
+                break;
+            case PoolObjectType.EightSides:
+                // code block
+                break;
+            case PoolObjectType.TenSides:
+                // code block
+                break;
+            case PoolObjectType.TwelveSides:
+                // code block
+                break;
+            case PoolObjectType.TwentySides:
+                // code block
+                break;
+            default:
+                // code block
+                break;
+        }
+        */
     }
 
     void FixedUpdate()
