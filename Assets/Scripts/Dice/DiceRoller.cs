@@ -1,3 +1,4 @@
+using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -23,6 +24,28 @@ public class DiceRoller : MonoBehaviour
     public Dice state;
     public bool isRolling;
 
+    public bool toggle_rolled = false;
+
+    public Vector3[] diceNormals;
+    private MeshFilter filter;
+
+    void Start()
+    {
+        
+        filter = GetComponent<MeshFilter>();
+
+    }
+    private Vector3[] CalculateNormals(Mesh mesh)
+    {
+        foreach(Vector3 vector3 in mesh.normals.Distinct().ToArray().ToArray() )
+        {
+            Debug.Log("Normals distinct: " + vector3);
+        }
+        return mesh.normals.Distinct().ToArray().ToArray();
+    }
+
+
+
     private void OnEnable() {
         DiceLord.Roll += DiceRolling; //Subscribing
         ClearBoard.Instance.AddDices(gameObject);
@@ -45,28 +68,43 @@ public class DiceRoller : MonoBehaviour
         RequestNewRotationValues(); // Rotate Dice in all axis
         RequestNewImpulse(); // Impulse Dice in all axis
     }
-
-    Ray rayA, rayB;
+Ray ray1, rayA, rayB,rayC, rayD, rayE, rayF;
+    RaycastHit hitData;
     void Update()
     {
+
 
         if (state == Dice.ROLLING)
         {
             transform.Rotate(_rotation * rotationSpeed * Time.deltaTime);
+            toggle_rolled = true;
         }
         else if (state == Dice.IDLE)
         {
     
             Ray ray1 = new Ray(transform.position, transform.forward);
             RaycastHit hitData;
-            if (Physics.Raycast(ray1, out hitData))
+            
+            if (Physics.Raycast(ray1, out hitData) && toggle_rolled)
             {
                 // The Ray hit something!
                 string name = hitData.collider.name;
-                Debug.Log("HIT SOMETHING AFTER ROLLING: " + name);
+                //Vector3 v = gameObject.meshCollider.bounds.extents;
+                Debug.Log("DICE: " + gameObject.name + " INSTANCE: " +gameObject.GetHashCode().ToString()+ " HIT SOMETHING AFTER ROLLING: " + name);
+                GameObject dice = GameObject.FindGameObjectWithTag("Dice");
+                MeshCollider meshColliders = gameObject.GetComponent<MeshCollider>();
+
+
+                Debug.Log("Dice Center:" + transform.position);
+                Debug.Log("Mesh Collider Center:" + meshCollider.bounds.center);
+                //Debug.DrawLine(meshCollider.bounds.min, meshCollider.bounds.max, Color.blue, 1000f);
+
+
             }
+            toggle_rolled = false;
 
         }
+        //
         if (transform.position.y <= -17f)
             PoolManager.Instance.ReturnObjectOfType(gameObject,type);
 
@@ -83,6 +121,7 @@ public class DiceRoller : MonoBehaviour
 
         Debug.DrawRay(rayA.origin, rayA.direction * 500, Color.green);
         Debug.DrawRay(rayB.origin, rayB.direction * 500, Color.red);
+
 
         /*
         switch (type)
