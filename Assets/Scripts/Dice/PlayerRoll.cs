@@ -95,9 +95,8 @@ public class PlayerRoll : MonoBehaviour
     void RequestNewImpulse()
     {
         float dirX = RandomValues();
-        float dirY = RandomValues();
         float dirZ = RandomValues();
-        rb.AddForce(dirX,dirY,dirZ, ForceMode.VelocityChange);
+        rb.AddForce(dirX,0,dirZ, ForceMode.VelocityChange);
     }
 
     void LiftDice()

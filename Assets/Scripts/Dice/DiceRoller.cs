@@ -51,9 +51,6 @@ public class DiceRoller : MonoBehaviour
         ClearBoard.Instance.AddDices(gameObject);
         meshCollider.enabled = true;
         LoadValues();
-        //Ray ray = new Ray(gameObject. transform.position, transform.forward);
-
-
     }
 
     private void OnDisable() {
