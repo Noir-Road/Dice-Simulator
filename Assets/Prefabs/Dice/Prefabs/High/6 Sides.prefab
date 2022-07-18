@@ -142,6 +142,8 @@ MonoBehaviour:
   isRolling: 0
   toggle_rolled: 0
   diceNormals: []
+  Pos: {x: 0, y: 0, z: 0}
+  Fw: {x: 0, y: 0, z: 0}
 --- !u!1 &2417526895542723416
 GameObject:
   m_ObjectHideFlags: 0

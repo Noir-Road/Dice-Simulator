@@ -14,8 +14,12 @@ public class ClearBoard : Singleton<ClearBoard>
         if (dices.Count >= 30) diceCanvas.interactable = false;
         return true;
     }
+    int i =0;
     public void AddDices(GameObject dice) // Little check to see if the dice has not been added already into the list.
     {
+        i++;
+        dice.name="Dice_" +i;
+        
         if (!dices.Contains(dice)) dices.Add(dice);
     }
     public void ClearDiceList() // Clear the dices by removing the collider and have them to fall into the ground.

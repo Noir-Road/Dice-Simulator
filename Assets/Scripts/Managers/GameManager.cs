@@ -56,7 +56,7 @@ public class GameManager : MonoBehaviour
         if (Input.GetKey("space"))
         {
             DiceLord.Roll?.Invoke();
-            Debug.Log("Jumping");
+            //Debug.Log("Jumping");
         }
 
         
