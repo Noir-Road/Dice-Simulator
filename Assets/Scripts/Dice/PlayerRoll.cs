@@ -1,5 +1,6 @@
 using Unity.VisualScripting;
 using UnityEngine;
+using TMPro;
 public class PlayerRoll : MonoBehaviour
 {
     [Header("Object Pool")] 
@@ -13,8 +14,8 @@ public class PlayerRoll : MonoBehaviour
     
     [Header("Object Components")]
     public Rigidbody rb;
-    [SerializeField] MeshCollider meshCollider;
-    
+    //[SerializeField] MeshCollider meshCollider;
+    [SerializeField] TextMeshProUGUI TEXT_front;
     public enum Dice{IDLE, ROLLING, FALLING}
     public Dice state;
     public bool isRolling;
@@ -23,7 +24,7 @@ public class PlayerRoll : MonoBehaviour
     {
        // DiceLord.Jump += DiceJumper;
         ClearBoard.Instance.AddDices(gameObject);
-        meshCollider.enabled = true;
+        //meshCollider.enabled = true;
         LoadValues();
     }
 
@@ -36,6 +37,8 @@ public class PlayerRoll : MonoBehaviour
     {
         if (isRolling)
         {
+
+            TEXT_front.text = "1";
             transform.Rotate(_rotation * rotationSpeed * Time.deltaTime);
         }
         if(transform.position.y <= -17f)
