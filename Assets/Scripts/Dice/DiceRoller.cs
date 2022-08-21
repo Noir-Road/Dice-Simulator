@@ -82,7 +82,22 @@ public class DiceRoller : MonoBehaviour
     public bool toggle_getV2Coords = true;
     public bool isMoving = false;
 
+    //TODO create object identity for DICE with this
+    public     int diceNumber = -1;
+    public     int sideNumber = -1;
+    public string nameWallHitted = "";
+    public string nameDice = "";
+    // this
+
     public Ray rayDiceToBox, rayRoofToDice, rayDiceNormalA, rayDiceNormalB;
+
+    //Z == North
+    //-Z == South
+    //X == West
+    //-X == East
+    //Y == Roof
+    //-Y == Ground
+
     void Update()
     {
 
@@ -111,15 +126,6 @@ public class DiceRoller : MonoBehaviour
         }
         else if (state == Dice.IDLE)
         {
-            rayDiceToBox = new Ray(transform.position, transform.forward);
-
-            if (Physics.Raycast(rayDiceToBox, out hitDataRayDiceToBox) && toggle_rolled)
-            {
-                // The Ray hit something Wall!
-                string name = hitDataRayDiceToBox.collider.name;
-            }
-
-            toggle_rolled = false;
 
             if (toggle_getV2Coords && !isMoving)
             {
@@ -130,11 +136,6 @@ public class DiceRoller : MonoBehaviour
             //For Debug
             if(!toggle_getV2Coords && debug)
             {
-                Debug.Log("DICE: " + gameObject.name + " INSTANCE G.O.: " + (ulong)(long)(gameObject.GetHashCode()) + " HIT: " + name);
-                Debug.Log(" HIT Name: " + hitDataRayRoofToDice.collider.name);
-                Debug.Log(" HIT Dice Hit: " + hitDataRayRoofToDice.point);
-                Debug.Log(" HIT Triangle Index: " + hitDataRayRoofToDice.triangleIndex);
-                Debug.Log(" HIT Texture Coords: " + hitDataRayRoofToDice.textureCoord);
 
                 //Debug.DrawRay(rayRoofToDice.origin, rayRoofToDice.direction*500, Color.magenta);
 
@@ -174,13 +175,9 @@ public class DiceRoller : MonoBehaviour
 
             }
 
+            toggle_rolled = false;
+
         }
-        //Z == North
-        //-Z == South
-        //X == West
-        //-X == East
-        //Y == Roof
-        //-Y == Ground
     }
 
     Texture2D duplicateTexture(Texture2D source, Vector3 pixelUV)
@@ -229,7 +226,6 @@ public class DiceRoller : MonoBehaviour
 
     public void getV2Coords()
     {
-        Debug.Log("getV2Coords");
         //WORKAROUND: For detect collision with Meshcollider and RigidBody (turn true - false)
         //Non-convex MeshCollider with non-kinematic Rigidbody is no longer supported since Unity 5. 
         rb.isKinematic = true;
@@ -238,10 +234,31 @@ public class DiceRoller : MonoBehaviour
         //ray from roof to dice center
         rayRoofToDice = new Ray(roof.transform.position, (transform.position - roof.transform.position).normalized);
 
+        rayDiceToBox = new Ray(transform.position, transform.forward);
+
+        if (Physics.Raycast(rayDiceToBox, out hitDataRayDiceToBox))
+        {
+            // The Ray hit something Wall!
+            nameWallHitted = hitDataRayDiceToBox.collider.name;
+        }
+
         //Debug.DrawLine(roof.transform.position, transform.position, Color.cyan,1000f);
         if (Physics.Raycast(rayRoofToDice, out hitDataRayRoofToDice))
         {
             IdentifyDice(hitDataRayRoofToDice.triangleIndex);
+
+            if(debug)
+            {
+                //Show when the dice is stopped and raycast work (This needs stay here because Texture coords and triangle index isKinematic and convex   )
+                Debug.Log("DICE: " + gameObject.name + " INSTANCE G.O.: " + (uint)(uint)(gameObject.GetHashCode()) + " HIT RAY GREEN: " + nameWallHitted);
+                Debug.Log("HIT Dice    V3 Coords: " + hitDataRayRoofToDice.point);
+                Debug.Log("HIT Texture V2 Coords: " + hitDataRayRoofToDice.textureCoord);
+                Debug.Log("HIT Triangle Index: " + hitDataRayRoofToDice.triangleIndex);
+            }
+
+            Debug.Log("The Dice: [........[ " + gameObject.name + " ]..........]");
+            Debug.Log("The Side: [..............[ " + sideNumber + " ]...............]");
+
         }
 
         rb.isKinematic = false;
@@ -250,34 +267,26 @@ public class DiceRoller : MonoBehaviour
 
     void IdentifyDice(int tringleIndex)
     {
-        int dice = -1;
-
         switch (PoolObjectType.SixSides)
         {
             case PoolObjectType.FourSides:
-                Debug.Log("Dice 4: FourSides");
-                dice = 4;
+                diceNumber = 4;
                 break;
             case PoolObjectType.SixSides:
                 IdentifyDiceSide(tringleIndex);
-                dice = 6;
-                Debug.Log("Dice 6: SixSides");
+                diceNumber = 6;
                 break;
             case PoolObjectType.EightSides:
-                Debug.Log("Dice 8: EightSides");
-                dice = 8;
+                diceNumber = 8;
                 break;
             case PoolObjectType.TenSides:
-                Debug.Log("Dice 10: TenSides");
-                dice = 10;
+                diceNumber = 10;
                 break;
             case PoolObjectType.TwelveSides:
-                Debug.Log("Dice 12: TwelveSides");
-                dice = 12;
+                diceNumber = 12;
                 break;
             case PoolObjectType.TwentySides:
-                Debug.Log("Dice 20: TwentySides");
-                dice = 20;
+                diceNumber = 20;
                 break;
             default:
                 // code block
@@ -288,23 +297,19 @@ public class DiceRoller : MonoBehaviour
 
     void IdentifyDiceSide(int tringleIndex)
     {
-        int side = -1;
 
         if (tringleIndex == 0 || tringleIndex == 1)
-            side = 1;
+            sideNumber = 1;
         else if (tringleIndex == 10 || tringleIndex == 11)
-            side = 2;
+            sideNumber = 2;
         else if (tringleIndex == 4 || tringleIndex == 5)
-            side = 3;
+            sideNumber = 3;
         else if (tringleIndex == 8 || tringleIndex == 9)
-            side = 4;
+            sideNumber = 4;
         else if (tringleIndex == 6 || tringleIndex == 7)
-            side = 5;
+            sideNumber = 5;
         else if (tringleIndex == 2 || tringleIndex == 3)
-            side = 6;
-
-        Debug.Log("The Side is: [........[ " + gameObject.name + " ]..........]");
-        Debug.Log("The Side is: [..............[ " + side + " ]...............]");
+            sideNumber = 6;
     }
 
     void RequestNewImpulse()
