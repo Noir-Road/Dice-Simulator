@@ -27,7 +27,7 @@ public class DiceRoller : MonoBehaviour
     public bool isRolling;
 
     public bool toggle_rolled = false;
-    public bool debug = false;
+    public static bool debug = false;
 
     public Vector3[] diceNormals;
     private MeshFilter filter;
@@ -85,6 +85,11 @@ public class DiceRoller : MonoBehaviour
     public Ray rayDiceToBox, rayRoofToDice, rayDiceNormalA, rayDiceNormalB;
     void Update()
     {
+
+        //If fall return instance to pool
+        if (transform.position.y <= -17f)
+            PoolManager.Instance.ReturnObjectOfType(gameObject, type);
+
         if (rb.velocity != Vector3.zero)
             isMoving = true;
         else
@@ -122,38 +127,29 @@ public class DiceRoller : MonoBehaviour
             {
                 getV2Coords();
                 toggle_getV2Coords = false;
+
             }
 
-        }
-        //
-        if (transform.position.y <= -17f)
-            PoolManager.Instance.ReturnObjectOfType(gameObject, type);
-
-        //Z == North
-        //-Z == South
-        //X == West
-        //-X == East
-        //Y == Roof
-        //-Y == Ground
-
-        //For Debug
-        if (debug)
-        {
-            rayDiceNormalA = new Ray(transform.position, transform.forward);
-            rayDiceNormalB = new Ray(transform.position, -transform.forward);
-
-            Debug.DrawRay(rayDiceNormalA.origin, rayDiceNormalA.direction * 500, Color.green);
-            Debug.DrawRay(rayDiceNormalB.origin, rayDiceNormalB.direction * 500, Color.red);
-
-            if (!toggle_getV2Coords)
+            //For Debug
+            if(!toggle_getV2Coords && debug)
             {
+
+                if(debug)
+                {
+                    Debug.Log(" HIT Name: " + hitDataRayRoofToDice.collider.name);
+                    Debug.Log(" HIT Dice Hit: " + hitDataRayRoofToDice.point);
+                    Debug.Log(" HIT Triangle Index: " + hitDataRayRoofToDice.triangleIndex);
+                    Debug.Log(" HIT Texture Coords: " + hitDataRayRoofToDice.textureCoord);
+
+                }
+
                 //Debug.DrawRay(rayRoofToDice.origin, rayRoofToDice.direction*500, Color.magenta);
 
-                Debug.Log(" HIT Name: " + hitDataRayRoofToDice.collider.name);
-                Debug.Log(" HIT Dice Hit: " + hitDataRayRoofToDice.point);
-                Debug.Log(" HIT Triangle Index: " + hitDataRayRoofToDice.triangleIndex);
-                Debug.Log(" HIT Texture Coords: " + hitDataRayRoofToDice.textureCoord);
+                rayDiceNormalA = new Ray(transform.position, transform.forward);
+                rayDiceNormalB = new Ray(transform.position, -transform.forward);
 
+                Debug.DrawRay(rayDiceNormalA.origin, rayDiceNormalA.direction * 500, Color.green);
+                Debug.DrawRay(rayDiceNormalB.origin, rayDiceNormalB.direction * 500, Color.red);
 
                 // Find the line from the gun to the point that was clicked.
                 Vector3 incomingVec = hitDataRayRoofToDice.point - roof.transform.position;
@@ -164,10 +160,19 @@ public class DiceRoller : MonoBehaviour
                 // Draw lines to show the incoming "beam" and the reflection.
                 Debug.DrawLine(roof.transform.position, hitDataRayRoofToDice.point, Color.blue);
                 //Debug.DrawRay(hitDataRayRoofToDice.point, reflectVec, Color.yellow);
+
             }
 
         }
 
+
+
+        //Z == North
+        //-Z == South
+        //X == West
+        //-X == East
+        //Y == Roof
+        //-Y == Ground
     }
 
     Texture2D duplicateTexture(Texture2D source, Vector3 pixelUV)
@@ -217,7 +222,7 @@ public class DiceRoller : MonoBehaviour
     public void getV2Coords()
     {
         Debug.Log("getV2Coords");
-        //WORKAROUND: For detect collision with Meshcollider and RigidBody
+        //WORKAROUND: For detect collision with Meshcollider and RigidBody (turn true - false)
         //Non-convex MeshCollider with non-kinematic Rigidbody is no longer supported since Unity 5. 
         rb.isKinematic = true;
         meshCollider.convex = false;
@@ -228,7 +233,6 @@ public class DiceRoller : MonoBehaviour
         //Debug.DrawLine(roof.transform.position, transform.position, Color.cyan,1000f);
         if (Physics.Raycast(rayRoofToDice, out hitDataRayRoofToDice))
         {
-
             IdentifyDice(hitDataRayRoofToDice.triangleIndex);
         }
 
@@ -291,7 +295,8 @@ public class DiceRoller : MonoBehaviour
         else if (tringleIndex == 2 || tringleIndex == 3)
             side = 6;
 
-        Debug.Log("The Side is: [........[ " + side + " ]..........]");
+        Debug.Log("The Side is: [........[ " + gameObject.name + " ]..........]");
+        Debug.Log("The Side is: [..............[ " + side + " ]...............]");
     }
 
     void RequestNewImpulse()
