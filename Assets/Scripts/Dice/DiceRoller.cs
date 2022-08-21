@@ -86,7 +86,7 @@ public class DiceRoller : MonoBehaviour
     void Update()
     {
 
-        //If fall return instance to pool
+        //If gameObject fall return instance to pool
         if (transform.position.y <= -17f)
             PoolManager.Instance.ReturnObjectOfType(gameObject, type);
 
@@ -115,33 +115,26 @@ public class DiceRoller : MonoBehaviour
 
             if (Physics.Raycast(rayDiceToBox, out hitDataRayDiceToBox) && toggle_rolled)
             {
-                // The Ray hit something!
+                // The Ray hit something Wall!
                 string name = hitDataRayDiceToBox.collider.name;
-                //Vector3 v = gameObject.meshCollider.bounds.extents;
-                Debug.Log("DICE: " + gameObject.name + " INSTANCE: " + (gameObject.GetHashCode().ToString()) + " HIT SOMETHING AFTER ROLLING: " + name);
-
             }
+
             toggle_rolled = false;
 
             if (toggle_getV2Coords && !isMoving)
             {
                 getV2Coords();
                 toggle_getV2Coords = false;
-
             }
 
             //For Debug
             if(!toggle_getV2Coords && debug)
             {
-
-                if(debug)
-                {
-                    Debug.Log(" HIT Name: " + hitDataRayRoofToDice.collider.name);
-                    Debug.Log(" HIT Dice Hit: " + hitDataRayRoofToDice.point);
-                    Debug.Log(" HIT Triangle Index: " + hitDataRayRoofToDice.triangleIndex);
-                    Debug.Log(" HIT Texture Coords: " + hitDataRayRoofToDice.textureCoord);
-
-                }
+                Debug.Log("DICE: " + gameObject.name + " INSTANCE G.O.: " + (ulong)(long)(gameObject.GetHashCode()) + " HIT: " + name);
+                Debug.Log(" HIT Name: " + hitDataRayRoofToDice.collider.name);
+                Debug.Log(" HIT Dice Hit: " + hitDataRayRoofToDice.point);
+                Debug.Log(" HIT Triangle Index: " + hitDataRayRoofToDice.triangleIndex);
+                Debug.Log(" HIT Texture Coords: " + hitDataRayRoofToDice.textureCoord);
 
                 //Debug.DrawRay(rayRoofToDice.origin, rayRoofToDice.direction*500, Color.magenta);
 
@@ -161,12 +154,27 @@ public class DiceRoller : MonoBehaviour
                 Debug.DrawLine(roof.transform.position, hitDataRayRoofToDice.point, Color.blue);
                 //Debug.DrawRay(hitDataRayRoofToDice.point, reflectVec, Color.yellow);
 
+                Mesh mesh = meshCollider.sharedMesh;
+                Vector3[] vertices = mesh.vertices;
+                int[] triangles = mesh.triangles; 
+
+                Vector3 p0 = vertices[triangles[hitDataRayRoofToDice.triangleIndex * 3 + 0]];
+                Vector3 p1 = vertices[triangles[hitDataRayRoofToDice.triangleIndex * 3 + 1]];
+                Vector3 p2 = vertices[triangles[hitDataRayRoofToDice.triangleIndex * 3 + 2]];
+
+                Transform hitTransform = hitDataRayRoofToDice.collider.transform;
+                p0 = hitTransform.TransformPoint(p0);
+                p1 = hitTransform.TransformPoint(p1);
+                p2 = hitTransform.TransformPoint(p2);
+
+                //Draw triangle hitted Enable for testing , disable by default
+                Debug.DrawLine(p0, p1,Color.cyan);
+                Debug.DrawLine(p1, p2,Color.magenta);
+                Debug.DrawLine(p2, p0,Color.blue);
+
             }
 
         }
-
-
-
         //Z == North
         //-Z == South
         //X == West
