@@ -27,6 +27,7 @@ public class DiceRoller : MonoBehaviour
     public bool isRolling;
 
     public bool toggle_rolled = false;
+    public bool debug = false;
 
     public Vector3[] diceNormals;
     private MeshFilter filter;
@@ -34,9 +35,7 @@ public class DiceRoller : MonoBehaviour
     void Start()
     {
         
-        filter = GetComponent<MeshFilter>();
-        //meshCollider.enabled = true;
-        //meshCollider = gameObject.AddComponent<MeshCollider>();
+        Debug.Log(" START MC Name: " + meshCollider.sharedMesh.name);
 
     }
     private Vector3[] CalculateNormals(Mesh mesh)
@@ -69,26 +68,42 @@ public class DiceRoller : MonoBehaviour
         RequestNewRotationValues(); // Rotate Dice in all axis
         RequestNewImpulse(); // Impulse Dice in all axis
     }
-Ray rayDiceToBox, rayRoofToDice, rayDiceNormalA, rayDiceNormalB;
-
-    RaycastHit hitDataRayDiceToBox, hitDataRayRoofToDice;
-
     [SerializeField] Vector3 Pos;
     [SerializeField] Vector3 Fw;
+    
+    internal static Ray rayDiceToBox, rayRoofToDice, rayDiceNormalA, rayDiceNormalB;
+
+    internal static RaycastHit hitDataRayDiceToBox, hitDataRayRoofToDice;
+    
+    //Roof for ray Casting
+    internal static GameObject roof;
+
+    internal static bool toggle_getV2Coords = true;
+    public bool isMoving = false;
+
     void Update()
     {
+        if(rb.velocity != Vector3.zero)
+            isMoving = true;
+        else
+            isMoving =false;
+
+        if (Input.GetMouseButton(0))
+            debug = debug? false: true;
 
         Pos = transform.position;
         Fw = transform.forward;
+
+        roof = GameObject.FindGameObjectWithTag("Roof");
 
         if (state == Dice.ROLLING)
         {
             transform.Rotate(_rotation * rotationSpeed * Time.deltaTime);
             toggle_rolled = true;
+            toggle_getV2Coords = true;
         }
         else if (state == Dice.IDLE)
         {
-    
             rayDiceToBox = new Ray(transform.position, transform.forward);
             
             if (Physics.Raycast(rayDiceToBox, out hitDataRayDiceToBox) && toggle_rolled)
@@ -96,87 +111,17 @@ Ray rayDiceToBox, rayRoofToDice, rayDiceNormalA, rayDiceNormalB;
                 // The Ray hit something!
                 string name = hitDataRayDiceToBox.collider.name;
                 //Vector3 v = gameObject.meshCollider.bounds.extents;
-                Debug.Log("DICE: " + gameObject.name + " INSTANCE: " +gameObject.GetHashCode().ToString()+ " HIT SOMETHING AFTER ROLLING: " + name);
-
-                //Debug.Log("Dice Center:" + transform.position);
-                //Debug.Log("Mesh Collider Center:" + meshCollider.bounds.center);
-                //Debug.DrawLine(meshCollider.bounds.center, meshCollider.bounds.center * 3, Color.blue, 1000f);
+                Debug.Log("DICE: " + gameObject.name + " INSTANCE: " +(gameObject.GetHashCode().ToString())+ " HIT SOMETHING AFTER ROLLING: " + name);
 
             }
             toggle_rolled = false;
 
-
-            if (!Input.GetMouseButton(0))
-                return;
-
-            //Get the roof
-            GameObject roof = GameObject.FindGameObjectWithTag("Roof");
-            
-            //ray from roof to dice center
-            rayRoofToDice = new Ray(roof.transform.position, (transform.position - roof.transform.position).normalized);
-
-            //Debug.DrawLine(roof.transform.position, transform.position, Color.cyan,1000f);
-            if (Physics.Raycast(rayRoofToDice, out hitDataRayRoofToDice))
+            if(toggle_getV2Coords && !isMoving)
             {
-                Debug.DrawRay(rayRoofToDice.origin, rayRoofToDice.direction*500, Color.magenta);
-                Debug.Log(" HIT Name: " + hitDataRayRoofToDice.collider.name);
-                Debug.Log(" HIT SharedMesh: " + hitDataRayRoofToDice.collider.gameObject.GetComponent<MeshCollider>().sharedMesh);
-                Debug.Log(" HIT SharedMesh: " + hitDataRayRoofToDice.collider.gameObject.GetComponent<MeshCollider>().sharedMesh.normals);
-                Debug.Log(" HIT SharedMesh: " + hitDataRayRoofToDice.collider.gameObject.GetComponent<MeshCollider>().sharedMesh.vertexCount);
-                Debug.Log(" HIT Dice Center: " + hitDataRayRoofToDice.point);
-
-
-                Debug.Log(" TriangelIdex: " + hitDataRayRoofToDice.triangleIndex);
-                Debug.Log(" TextureCoords: " + hitDataRayRoofToDice.textureCoord);
-                //hitData2.collider.gameObject.transform.GetComponent<Renderer>().forceRenderingOff=true;
-
-                MeshCollider meshC = gameObject.GetComponent<MeshCollider>();
-                //meshC = hitDataRayRoofToDice.collider as MeshCollider;
-                if (meshC == null || meshC.sharedMesh == null)
-                    return;
-
-                Mesh mesh = meshC.sharedMesh;
-                Vector3[] vertices = mesh.vertices;
-                int[] triangles = mesh.triangles; 
-                Debug.Log(" HIT TRIANGLES: " + triangles.Length);
-                Debug.Log(" HIT VERTICES: " + vertices.Length);
-                Debug.Log("TIndex" + hitDataRayRoofToDice.triangleIndex);
-/*              Vector3 p0 = vertices[triangles[hitDataRayRoofToDice.triangleIndex * 3 + 0]];
-                Vector3 p1 = vertices[triangles[hitDataRayRoofToDice.triangleIndex * 3 + 1]];
-                Vector3 p2 = vertices[triangles[hitDataRayRoofToDice.triangleIndex * 3 + 2]]; */
-                Vector3 p0 = vertices[triangles[0 * 3 + 0]];
-                Vector3 p1 = vertices[triangles[0 * 3 + 1]];
-                Vector3 p2 = vertices[triangles[0 * 3 + 2]];
-                Transform hitTransform = hitDataRayRoofToDice.collider.transform;
-                p0 = hitTransform.TransformPoint(p0);
-                p1 = hitTransform.TransformPoint(p1);
-                p2 = hitTransform.TransformPoint(p2);
-                Debug.DrawLine(p0, p1,Color.cyan,1000f);
-                Debug.DrawLine(p1, p2,Color.magenta,1000f);
-                Debug.DrawLine(p2, p0,Color.blue,1000f);
-
-
-
-/*                 Renderer rend = hitDataRayRooftoDice.transform.GetComponent<Renderer>();
-                MeshCollider meshCollider1 = hitDataRayRooftoDice.collider as MeshCollider;
-
-                if (rend == null || rend.sharedMaterial == null || rend.sharedMaterial.mainTexture == null || meshCollider1 == null)
-                    return;
-
-
-                Texture2D tex = hitDataRayRooftoDice.collider.gameObject.transform.GetComponent<Renderer>().material.mainTexture as Texture2D;
-                Vector2 pixelUV = hitDataRayRooftoDice.textureCoord;
-                pixelUV.x *= 5;
-                pixelUV.y *= 5;
-    
-                gameObject.GetComponent<Renderer>().material.mainTexture = duplicateTexture(tex,pixelUV);
-                rend.material.mainTexture = duplicateTexture(tex,pixelUV);
-
-                
-                tex.SetPixel((int)pixelUV.x, (int)pixelUV.y, Color.red);
-                tex.Apply(); */
-
+                getV2Coords();
+                toggle_getV2Coords = false;
             }
+
         }
         //
         if (transform.position.y <= -17f)
@@ -190,15 +135,40 @@ Ray rayDiceToBox, rayRoofToDice, rayDiceNormalA, rayDiceNormalB;
         //-Y == Ground
         
         //For Debug
-        rayDiceNormalA = new Ray(transform.position, transform.forward);
-        rayDiceNormalB = new Ray(transform.position, -transform.forward);
+        if(debug)
+        {
+            rayDiceNormalA = new Ray(transform.position, transform.forward);
+            rayDiceNormalB = new Ray(transform.position, -transform.forward);
 
-        Debug.DrawRay(rayDiceNormalA.origin, rayDiceNormalA.direction * 500, Color.green);
-        Debug.DrawRay(rayDiceNormalB.origin, rayDiceNormalB.direction * 500, Color.red);
+            Debug.DrawRay(rayDiceNormalA.origin, rayDiceNormalA.direction * 500, Color.green);
+            Debug.DrawRay(rayDiceNormalB.origin, rayDiceNormalB.direction * 500, Color.red);
+
+            if(!toggle_getV2Coords)
+            {
+                //Debug.DrawRay(rayRoofToDice.origin, rayRoofToDice.direction*500, Color.magenta);
+                
+                Debug.Log(" HIT Name: " + hitDataRayRoofToDice.collider.name);
+                Debug.Log(" HIT Dice Hit: " + hitDataRayRoofToDice.point);
+                Debug.Log(" HIT Triangle Index: " + hitDataRayRoofToDice.triangleIndex);
+                Debug.Log(" HIT Texture Coords: " + hitDataRayRoofToDice.textureCoord);
+
+
+                // Find the line from the gun to the point that was clicked.
+                Vector3 incomingVec = hitDataRayRoofToDice.point - roof.transform.position;
+
+                // Use the point's normal to calculate the reflection vector.
+                //Vector3 reflectVec = Vector3.Reflect(incomingVec, hitDataRayRoofToDice.normal);
+
+                // Draw lines to show the incoming "beam" and the reflection.
+                Debug.DrawLine(roof.transform.position, hitDataRayRoofToDice.point, Color.blue);
+                //Debug.DrawRay(hitDataRayRoofToDice.point, reflectVec, Color.yellow);
+            }
+
+        }
 
     }
 
-    Texture2D duplicateTexture(Texture2D source, Vector3 pixelUV)
+Texture2D duplicateTexture(Texture2D source, Vector3 pixelUV)
 {
     RenderTexture renderTex = RenderTexture.GetTemporary(
                 source.width,
@@ -223,6 +193,7 @@ Ray rayDiceToBox, rayRoofToDice, rayDiceNormalA, rayDiceNormalB;
     {
         if(!(state == Dice.ROLLING)) return;
          rb.AddForce(Physics.gravity * mutiplyGravity, ForceMode.Acceleration);
+
     }
 
     void LiftDice()
@@ -239,6 +210,86 @@ Ray rayDiceToBox, rayRoofToDice, rayDiceNormalA, rayDiceNormalB;
          _rotation.x = dirX;
          _rotation.y = dirY;
          _rotation.z = dirZ;
+    }
+
+        public void getV2Coords()
+    {
+            Debug.Log("getV2Coords");
+            //WORKAROUND: For detect collision with Meshcollider and RigidBody
+            //Non-convex MeshCollider with non-kinematic Rigidbody is no longer supported since Unity 5. 
+            rb.isKinematic =true;
+            meshCollider.convex = false;
+            
+            //ray from roof to dice center
+            rayRoofToDice = new Ray(roof.transform.position, (transform.position - roof.transform.position).normalized);
+
+            //Debug.DrawLine(roof.transform.position, transform.position, Color.cyan,1000f);
+            if (Physics.Raycast(rayRoofToDice, out hitDataRayRoofToDice))
+            {
+
+                IdentifyDice(hitDataRayRoofToDice.triangleIndex);
+            }
+
+            rb.isKinematic =false;
+            meshCollider.convex = true;
+    }
+
+    void IdentifyDice(int tringleIndex)
+    {
+        int dice = -1;
+        
+        switch (PoolObjectType.SixSides)
+        {
+            case PoolObjectType.FourSides:
+                Debug.Log("Dice 4: FourSides");
+                dice = 4;
+                break;
+            case PoolObjectType.SixSides:
+                 IdentifyDiceSide(tringleIndex);
+                dice = 6;
+                 Debug.Log("Dice 6: SixSides");
+                break;
+            case PoolObjectType.EightSides:
+                Debug.Log("Dice 8: EightSides");
+                dice = 8;
+                break;
+            case PoolObjectType.TenSides:
+                Debug.Log("Dice 10: TenSides");
+                dice = 10;
+                break;
+            case PoolObjectType.TwelveSides:
+                Debug.Log("Dice 12: TwelveSides");
+                dice = 12;
+                break;
+            case PoolObjectType.TwentySides:
+                Debug.Log("Dice 20: TwentySides");
+                dice = 20;
+                break;
+            default:
+                // code block
+                break;
+        }
+                //Debug.Log("The Dice is: [........[ "+ dice + " ]..........]");
+    }
+
+    void IdentifyDiceSide(int tringleIndex)
+    { 
+        int side = -1;
+
+        if(tringleIndex == 0 || tringleIndex == 1)
+            side = 1;
+        else if(tringleIndex == 10 || tringleIndex == 11)
+            side = 2;
+        else if(tringleIndex == 4 || tringleIndex == 5)
+            side = 3;
+        else if(tringleIndex == 8 || tringleIndex == 9)
+            side = 4;
+        else if(tringleIndex == 6 || tringleIndex == 7)
+            side = 5;
+        else if(tringleIndex == 2 || tringleIndex == 3)
+            side = 6;
+
+        Debug.Log("The Side is: [........[ "+ side + " ]..........]");
     }
 
     void RequestNewImpulse()

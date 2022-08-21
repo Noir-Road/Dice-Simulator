@@ -20,7 +20,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &4644813307179244
 Transform:
   m_ObjectHideFlags: 0
@@ -142,6 +142,8 @@ MonoBehaviour:
   isRolling: 0
   toggle_rolled: 0
   diceNormals: []
+  Pos: {x: 0, y: 0, z: 0}
+  Fw: {x: 0, y: 0, z: 0}
 --- !u!1 &8827806196464508705
 GameObject:
   m_ObjectHideFlags: 0

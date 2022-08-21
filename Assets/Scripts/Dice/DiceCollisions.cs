@@ -8,16 +8,20 @@ public class DiceCollisions : MonoBehaviour
     void OnCollisionEnter(Collision collision)
     {
         if (!collision.gameObject.CompareTag("Dice")) return;
-        state = DiceSound.ON;
+            state = DiceSound.ON;
         RandomSound();
 
     }
 
     void OnCollisionStay(Collision collision) {
-        if (collision.gameObject.GetComponent<DiceRoller>().rb.velocity != Vector3.zero)
+
+        
+        //constant collision and is stopped
+        if (collision.gameObject.GetComponent<DiceRoller>().isMoving)
         {
             collision.gameObject.GetComponent<DiceRoller>().state = DiceRoller.Dice.IDLE;
         }
+
     }
 
 
@@ -25,6 +29,7 @@ public class DiceCollisions : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Dice"))
             state = DiceSound.OFF;
+
     }
 
     void RandomSound()
