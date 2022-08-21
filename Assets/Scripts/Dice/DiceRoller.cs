@@ -34,21 +34,8 @@ public class DiceRoller : MonoBehaviour
 
     void Start()
     {
-
         ClearBoard.Instance.AddDices(gameObject);
-        Debug.Log(" START MC Name: " + meshCollider.sharedMesh.name);
-
     }
-    private Vector3[] CalculateNormals(Mesh mesh)
-    {
-        foreach (Vector3 vector3 in mesh.normals.Distinct().ToArray().ToArray())
-        {
-            Debug.Log("Normals distinct: " + vector3);
-        }
-        return mesh.normals.Distinct().ToArray().ToArray();
-    }
-
-
 
     private void OnEnable()
     {
@@ -261,6 +248,7 @@ public class DiceRoller : MonoBehaviour
 
         }
 
+        //WORKARROUND
         rb.isKinematic = false;
         meshCollider.convex = true;
     }
