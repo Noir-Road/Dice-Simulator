@@ -9,7 +9,7 @@ public class DiceRoller : MonoBehaviour
 {
     [Header("Object Pool")]
     [SerializeField] PoolObjectType type;
-    
+
     [Header("Object Physics")]
     public float upDiceForce;
     public float rotationSpeed;
@@ -17,12 +17,12 @@ public class DiceRoller : MonoBehaviour
     public float impulseDirection;
     public float mutiplyGravity;
     [SerializeField] Vector3 _rotation;
-    
+
     [Header("Object Components")]
     public Rigidbody rb;
-     [SerializeField] MeshCollider meshCollider;
-    
-    public enum Dice{IDLE, ROLLING}
+    [SerializeField] MeshCollider meshCollider;
+
+    public enum Dice { IDLE, ROLLING }
     public Dice state;
     public bool isRolling;
 
@@ -34,13 +34,14 @@ public class DiceRoller : MonoBehaviour
 
     void Start()
     {
-        
+
+        ClearBoard.Instance.AddDices(gameObject);
         Debug.Log(" START MC Name: " + meshCollider.sharedMesh.name);
 
     }
     private Vector3[] CalculateNormals(Mesh mesh)
     {
-        foreach(Vector3 vector3 in mesh.normals.Distinct().ToArray().ToArray() )
+        foreach (Vector3 vector3 in mesh.normals.Distinct().ToArray().ToArray())
         {
             Debug.Log("Normals distinct: " + vector3);
         }
@@ -49,14 +50,15 @@ public class DiceRoller : MonoBehaviour
 
 
 
-    private void OnEnable() {
+    private void OnEnable()
+    {
         DiceLord.Roll += DiceRolling; //Subscribing
-        ClearBoard.Instance.AddDices(gameObject);
         meshCollider.enabled = true;
         LoadValues();
     }
 
-    private void OnDisable() {
+    private void OnDisable()
+    {
         DiceLord.Roll -= DiceRolling; // Unsubscribing
     }
 
@@ -70,26 +72,26 @@ public class DiceRoller : MonoBehaviour
     }
     [SerializeField] Vector3 Pos;
     [SerializeField] Vector3 Fw;
-    
-    internal static Ray rayDiceToBox, rayRoofToDice, rayDiceNormalA, rayDiceNormalB;
 
-    internal static RaycastHit hitDataRayDiceToBox, hitDataRayRoofToDice;
-    
+
+    internal  RaycastHit hitDataRayDiceToBox, hitDataRayRoofToDice;
+
     //Roof for ray Casting
     internal static GameObject roof;
 
-    internal static bool toggle_getV2Coords = true;
+    public bool toggle_getV2Coords = true;
     public bool isMoving = false;
 
+    public Ray rayDiceToBox, rayRoofToDice, rayDiceNormalA, rayDiceNormalB;
     void Update()
     {
-        if(rb.velocity != Vector3.zero)
+        if (rb.velocity != Vector3.zero)
             isMoving = true;
         else
-            isMoving =false;
+            isMoving = false;
 
-        if (Input.GetMouseButton(0))
-            debug = debug? false: true;
+        if (Input.GetMouseButton(1))
+            debug = debug ? false : true;
 
         Pos = transform.position;
         Fw = transform.forward;
@@ -105,18 +107,18 @@ public class DiceRoller : MonoBehaviour
         else if (state == Dice.IDLE)
         {
             rayDiceToBox = new Ray(transform.position, transform.forward);
-            
+
             if (Physics.Raycast(rayDiceToBox, out hitDataRayDiceToBox) && toggle_rolled)
             {
                 // The Ray hit something!
                 string name = hitDataRayDiceToBox.collider.name;
                 //Vector3 v = gameObject.meshCollider.bounds.extents;
-                Debug.Log("DICE: " + gameObject.name + " INSTANCE: " +(gameObject.GetHashCode().ToString())+ " HIT SOMETHING AFTER ROLLING: " + name);
+                Debug.Log("DICE: " + gameObject.name + " INSTANCE: " + (gameObject.GetHashCode().ToString()) + " HIT SOMETHING AFTER ROLLING: " + name);
 
             }
             toggle_rolled = false;
 
-            if(toggle_getV2Coords && !isMoving)
+            if (toggle_getV2Coords && !isMoving)
             {
                 getV2Coords();
                 toggle_getV2Coords = false;
@@ -125,7 +127,7 @@ public class DiceRoller : MonoBehaviour
         }
         //
         if (transform.position.y <= -17f)
-            PoolManager.Instance.ReturnObjectOfType(gameObject,type);
+            PoolManager.Instance.ReturnObjectOfType(gameObject, type);
 
         //Z == North
         //-Z == South
@@ -133,9 +135,9 @@ public class DiceRoller : MonoBehaviour
         //-X == East
         //Y == Roof
         //-Y == Ground
-        
+
         //For Debug
-        if(debug)
+        if (debug)
         {
             rayDiceNormalA = new Ray(transform.position, transform.forward);
             rayDiceNormalB = new Ray(transform.position, -transform.forward);
@@ -143,10 +145,10 @@ public class DiceRoller : MonoBehaviour
             Debug.DrawRay(rayDiceNormalA.origin, rayDiceNormalA.direction * 500, Color.green);
             Debug.DrawRay(rayDiceNormalB.origin, rayDiceNormalB.direction * 500, Color.red);
 
-            if(!toggle_getV2Coords)
+            if (!toggle_getV2Coords)
             {
                 //Debug.DrawRay(rayRoofToDice.origin, rayRoofToDice.direction*500, Color.magenta);
-                
+
                 Debug.Log(" HIT Name: " + hitDataRayRoofToDice.collider.name);
                 Debug.Log(" HIT Dice Hit: " + hitDataRayRoofToDice.point);
                 Debug.Log(" HIT Triangle Index: " + hitDataRayRoofToDice.triangleIndex);
@@ -168,31 +170,31 @@ public class DiceRoller : MonoBehaviour
 
     }
 
-Texture2D duplicateTexture(Texture2D source, Vector3 pixelUV)
-{
-    RenderTexture renderTex = RenderTexture.GetTemporary(
-                source.width,
-                source.height,
-                0,
-                RenderTextureFormat.Default,
-                RenderTextureReadWrite.Linear);
+    Texture2D duplicateTexture(Texture2D source, Vector3 pixelUV)
+    {
+        RenderTexture renderTex = RenderTexture.GetTemporary(
+                    source.width,
+                    source.height,
+                    0,
+                    RenderTextureFormat.Default,
+                    RenderTextureReadWrite.Linear);
 
-    Graphics.Blit(source, renderTex);
-    RenderTexture previous = RenderTexture.active;
-    RenderTexture.active = renderTex;
-    Texture2D readableText = new Texture2D(source.width, source.height);
-    readableText.ReadPixels(new Rect(0, 0, renderTex.width, renderTex.height), 0, 0);
-    readableText.SetPixel((int)pixelUV.x, (int)pixelUV.y, Color.red);
-    readableText.Apply();
-    RenderTexture.active = previous;
-    RenderTexture.ReleaseTemporary(renderTex);
-    return readableText;
-}
+        Graphics.Blit(source, renderTex);
+        RenderTexture previous = RenderTexture.active;
+        RenderTexture.active = renderTex;
+        Texture2D readableText = new Texture2D(source.width, source.height);
+        readableText.ReadPixels(new Rect(0, 0, renderTex.width, renderTex.height), 0, 0);
+        readableText.SetPixel((int)pixelUV.x, (int)pixelUV.y, Color.red);
+        readableText.Apply();
+        RenderTexture.active = previous;
+        RenderTexture.ReleaseTemporary(renderTex);
+        return readableText;
+    }
 
     void FixedUpdate()
     {
-        if(!(state == Dice.ROLLING)) return;
-         rb.AddForce(Physics.gravity * mutiplyGravity, ForceMode.Acceleration);
+        if (!(state == Dice.ROLLING)) return;
+        rb.AddForce(Physics.gravity * mutiplyGravity, ForceMode.Acceleration);
 
     }
 
@@ -204,40 +206,40 @@ Texture2D duplicateTexture(Texture2D source, Vector3 pixelUV)
 
     void RequestNewRotationValues()
     {
-         float dirX = RandomRotation();
-         float dirY = RandomRotation();
-         float dirZ = RandomRotation();
-         _rotation.x = dirX;
-         _rotation.y = dirY;
-         _rotation.z = dirZ;
+        float dirX = RandomRotation();
+        float dirY = RandomRotation();
+        float dirZ = RandomRotation();
+        _rotation.x = dirX;
+        _rotation.y = dirY;
+        _rotation.z = dirZ;
     }
 
-        public void getV2Coords()
+    public void getV2Coords()
     {
-            Debug.Log("getV2Coords");
-            //WORKAROUND: For detect collision with Meshcollider and RigidBody
-            //Non-convex MeshCollider with non-kinematic Rigidbody is no longer supported since Unity 5. 
-            rb.isKinematic =true;
-            meshCollider.convex = false;
-            
-            //ray from roof to dice center
-            rayRoofToDice = new Ray(roof.transform.position, (transform.position - roof.transform.position).normalized);
+        Debug.Log("getV2Coords");
+        //WORKAROUND: For detect collision with Meshcollider and RigidBody
+        //Non-convex MeshCollider with non-kinematic Rigidbody is no longer supported since Unity 5. 
+        rb.isKinematic = true;
+        meshCollider.convex = false;
 
-            //Debug.DrawLine(roof.transform.position, transform.position, Color.cyan,1000f);
-            if (Physics.Raycast(rayRoofToDice, out hitDataRayRoofToDice))
-            {
+        //ray from roof to dice center
+        rayRoofToDice = new Ray(roof.transform.position, (transform.position - roof.transform.position).normalized);
 
-                IdentifyDice(hitDataRayRoofToDice.triangleIndex);
-            }
+        //Debug.DrawLine(roof.transform.position, transform.position, Color.cyan,1000f);
+        if (Physics.Raycast(rayRoofToDice, out hitDataRayRoofToDice))
+        {
 
-            rb.isKinematic =false;
-            meshCollider.convex = true;
+            IdentifyDice(hitDataRayRoofToDice.triangleIndex);
+        }
+
+        rb.isKinematic = false;
+        meshCollider.convex = true;
     }
 
     void IdentifyDice(int tringleIndex)
     {
         int dice = -1;
-        
+
         switch (PoolObjectType.SixSides)
         {
             case PoolObjectType.FourSides:
@@ -245,9 +247,9 @@ Texture2D duplicateTexture(Texture2D source, Vector3 pixelUV)
                 dice = 4;
                 break;
             case PoolObjectType.SixSides:
-                 IdentifyDiceSide(tringleIndex);
+                IdentifyDiceSide(tringleIndex);
                 dice = 6;
-                 Debug.Log("Dice 6: SixSides");
+                Debug.Log("Dice 6: SixSides");
                 break;
             case PoolObjectType.EightSides:
                 Debug.Log("Dice 8: EightSides");
@@ -269,27 +271,27 @@ Texture2D duplicateTexture(Texture2D source, Vector3 pixelUV)
                 // code block
                 break;
         }
-                //Debug.Log("The Dice is: [........[ "+ dice + " ]..........]");
+        //Debug.Log("The Dice is: [........[ "+ dice + " ]..........]");
     }
 
     void IdentifyDiceSide(int tringleIndex)
-    { 
+    {
         int side = -1;
 
-        if(tringleIndex == 0 || tringleIndex == 1)
+        if (tringleIndex == 0 || tringleIndex == 1)
             side = 1;
-        else if(tringleIndex == 10 || tringleIndex == 11)
+        else if (tringleIndex == 10 || tringleIndex == 11)
             side = 2;
-        else if(tringleIndex == 4 || tringleIndex == 5)
+        else if (tringleIndex == 4 || tringleIndex == 5)
             side = 3;
-        else if(tringleIndex == 8 || tringleIndex == 9)
+        else if (tringleIndex == 8 || tringleIndex == 9)
             side = 4;
-        else if(tringleIndex == 6 || tringleIndex == 7)
+        else if (tringleIndex == 6 || tringleIndex == 7)
             side = 5;
-        else if(tringleIndex == 2 || tringleIndex == 3)
+        else if (tringleIndex == 2 || tringleIndex == 3)
             side = 6;
 
-        Debug.Log("The Side is: [........[ "+ side + " ]..........]");
+        Debug.Log("The Side is: [........[ " + side + " ]..........]");
     }
 
     void RequestNewImpulse()
@@ -297,7 +299,7 @@ Texture2D duplicateTexture(Texture2D source, Vector3 pixelUV)
         float dirX = RandomImpulse();
         float dirY = RandomImpulse();
         float dirZ = RandomImpulse();
-        rb.AddForce(dirX,0,dirZ, ForceMode.Acceleration);
+        rb.AddForce(dirX, 0, dirZ, ForceMode.Acceleration);
     }
 
     float RandomRotation() => Random.Range(-rotationAngles, rotationAngles); // Random Velocity for all axis
@@ -320,7 +322,7 @@ Texture2D duplicateTexture(Texture2D source, Vector3 pixelUV)
         {
             rotationAngles = PlayerPrefs.GetFloat("Angles");
         }
-        
+
         if (PlayerPrefs.HasKey("Mass"))
         {
             rb.mass = PlayerPrefs.GetFloat("Mass");
