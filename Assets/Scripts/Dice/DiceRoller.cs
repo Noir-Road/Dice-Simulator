@@ -1,6 +1,3 @@
-using System.Linq;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using Sirenix.OdinInspector;
 
@@ -43,6 +40,7 @@ public class DiceRoller : MonoBehaviour
         DiceRolling();
         meshCollider.enabled = true;
         LoadValues();
+        
     }
 
     private void OnDisable()
