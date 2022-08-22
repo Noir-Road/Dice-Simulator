@@ -4,6 +4,7 @@ public class DiceCollisions : MonoBehaviour
 {
     enum DiceSound{ON, OFF}
     DiceSound state;
+
     
     void OnCollisionEnter(Collision collision)
     {

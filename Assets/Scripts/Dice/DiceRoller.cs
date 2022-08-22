@@ -2,13 +2,16 @@ using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using Sirenix.OdinInspector;
 
 [RequireComponent(typeof(MeshFilter))]
 public class DiceRoller : MonoBehaviour
 {
     [Header("Object Pool")]
     [SerializeField] PoolObjectType type;
+
+    [Title("Dice Class")]
+    [SerializeField] DiceClass diceClass;
 
     [Header("Object Physics")]
     public float upDiceForce;
@@ -32,14 +35,12 @@ public class DiceRoller : MonoBehaviour
     public Vector3[] diceNormals;
     private MeshFilter filter;
 
-    void Start()
-    {
-        ClearBoard.Instance.AddDices(gameObject);
-    }
 
     private void OnEnable()
     {
         DiceLord.Roll += DiceRolling; //Subscribing
+        ClearBoard.Instance.AddDices(gameObject);
+        DiceRolling();
         meshCollider.enabled = true;
         LoadValues();
     }
@@ -334,4 +335,13 @@ public class DiceRoller : MonoBehaviour
             rb.mass = PlayerPrefs.GetFloat("Mass");
         }
     }
+}
+
+[System.Serializable]
+public class DiceClass
+{
+    public string diceName;
+    public int faces;
+
+    public int[] triangleIndex;
 }

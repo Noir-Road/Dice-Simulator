@@ -20,7 +20,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4278320738097322
 Transform:
   m_ObjectHideFlags: 0
@@ -144,6 +144,12 @@ MonoBehaviour:
   diceNormals: []
   Pos: {x: 0, y: 0, z: 0}
   Fw: {x: 0, y: 0, z: 0}
+  toggle_getV2Coords: 1
+  isMoving: 0
+  diceNumber: -1
+  sideNumber: -1
+  nameWallHitted: 
+  nameDice: 
 --- !u!1 &7786308768178967082
 GameObject:
   m_ObjectHideFlags: 0

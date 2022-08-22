@@ -135,7 +135,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4410632345243006
 Transform:
   m_ObjectHideFlags: 0
@@ -245,6 +245,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 0
+  diceClass:
+    diceName: Dice 4
+    faces: 4
+    triangleIndex: 00000000000000000000000000000000
   upDiceForce: 5000
   rotationSpeed: 30
   rotationAngles: 25
@@ -259,3 +263,9 @@ MonoBehaviour:
   diceNormals: []
   Pos: {x: 0, y: 0, z: 0}
   Fw: {x: 0, y: 0, z: 0}
+  toggle_getV2Coords: 1
+  isMoving: 0
+  diceNumber: -1
+  sideNumber: -1
+  nameWallHitted: 
+  nameDice: 
