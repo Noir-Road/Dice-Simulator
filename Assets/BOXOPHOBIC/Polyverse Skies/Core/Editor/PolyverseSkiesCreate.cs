@@ -4,29 +4,32 @@ using UnityEditor;
 using UnityEditor.SceneManagement;
 using UnityEngine;
 
-public class PolyverseSkiesCreate
+namespace PolyverseSkiesAsset
 {
-    [MenuItem("GameObject/BOXOPHOBIC/Polyverse Skies/Manager", false, 8)]
-    static void CreateManager()
+    public class PolyverseSkiesCreate
     {
-        if (GameObject.Find("Polyverse Skies") != null)
+        [MenuItem("GameObject/BOXOPHOBIC/Polyverse Skies/Manager", false, 8)]
+        static void CreateManager()
         {
-            Debug.Log("[Polyverse Skies] " + "Polyverse Skies is already added to your scene!");
-            return;
+            if (GameObject.Find("Polyverse Skies") != null)
+            {
+                Debug.Log("[Polyverse Skies] " + "Polyverse Skies is already added to your scene!");
+                return;
+            }
+
+            GameObject go = new GameObject();
+            go.name = "Polyverse Skies";
+            go.AddComponent<PolyverseSkies>();
+
+            if (Selection.activeGameObject != null)
+            {
+                go.transform.parent = Selection.activeGameObject.transform;
+            }
+
+            Selection.activeGameObject = go;
+
+            EditorSceneManager.MarkSceneDirty(EditorSceneManager.GetActiveScene());
         }
-
-        GameObject go = new GameObject();
-        go.name = "Polyverse Skies";
-        go.AddComponent<PolyverseSkies>();
-
-        if (Selection.activeGameObject != null)
-        {
-            go.transform.parent = Selection.activeGameObject.transform;
-        }
-
-        Selection.activeGameObject = go;
-
-        EditorSceneManager.MarkSceneDirty(EditorSceneManager.GetActiveScene());
     }
 }
 

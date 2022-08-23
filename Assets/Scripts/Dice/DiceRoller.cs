@@ -40,7 +40,6 @@ public class DiceRoller : MonoBehaviour
         DiceRolling();
         meshCollider.enabled = true;
         LoadValues();
-        
     }
 
     private void OnDisable()

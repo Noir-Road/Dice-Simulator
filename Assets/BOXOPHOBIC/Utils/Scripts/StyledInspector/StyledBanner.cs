@@ -24,6 +24,15 @@ namespace Boxophobic.StyledGUI
             this.helpURL = helpURL;
         }
 
+        public StyledBanner(float colorR, float colorG, float colorB, string title)
+        {
+            this.colorR = colorR;
+            this.colorG = colorG;
+            this.colorB = colorB;
+            this.title = title;
+            this.helpURL = "";
+        }
+
         public StyledBanner(float colorR, float colorG, float colorB, string title, string helpURL)
         {
             this.colorR = colorR;

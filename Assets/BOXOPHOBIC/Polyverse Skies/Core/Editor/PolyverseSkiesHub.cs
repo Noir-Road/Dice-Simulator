@@ -5,65 +5,68 @@ using UnityEditor;
 using Boxophobic.StyledGUI;
 using Boxophobic.Utils;
 
-public class PolyverseSkiesHub : EditorWindow
+namespace PolyverseSkiesAsset
 {
-    string assetFolder = "Assets/BOXOPHOBIC/Polyverse Skies";
-
-    int assetVersion;
-    string bannerVersion;
-
-    Color bannerColor;
-    string bannerText;
-    string helpURL;
-    static PolyverseSkiesHub window;
-
-    [MenuItem("Window/BOXOPHOBIC/Polyverse Skies/Hub", false, 1051)]
-    public static void ShowWindow()
+    public class PolyverseSkiesHub : EditorWindow
     {
-        window = GetWindow<PolyverseSkiesHub>(false, "Polyverse Skies", true);
-        window.minSize = new Vector2(300, 200);
-    }
+        string assetFolder = "Assets/BOXOPHOBIC/Polyverse Skies";
 
-    void OnEnable()
-    {
-        bannerColor = new Color(0.55f, 0.7f, 1f);
-        bannerText = "Polyverse Skies";
-        helpURL = "https://docs.google.com/document/d/1z7A_xKNa2mXhvTRJqyu-ZQsAtbV32tEZQbO1OmPS_-s/edit#heading=h.rp8ji698m9wz";
+        int assetVersion;
+        string bannerVersion;
 
-        //Safer search, there might be many user folders
-        string[] searchFolders;
+        Color bannerColor;
+        string bannerText;
+        string helpURL;
+        static PolyverseSkiesHub window;
 
-        searchFolders = AssetDatabase.FindAssets("Polyverse Skies");
-
-        for (int i = 0; i < searchFolders.Length; i++)
+        [MenuItem("Window/BOXOPHOBIC/Polyverse Skies/Hub", false, 1051)]
+        public static void ShowWindow()
         {
-            if (AssetDatabase.GUIDToAssetPath(searchFolders[i]).EndsWith("Polyverse Skies.pdf"))
-            {
-                assetFolder = AssetDatabase.GUIDToAssetPath(searchFolders[i]);
-                assetFolder = assetFolder.Replace("/Polyverse Skies.pdf", "");
-            }
+            window = GetWindow<PolyverseSkiesHub>(false, "Polyverse Skies", true);
+            window.minSize = new Vector2(300, 200);
         }
 
-        assetVersion = SettingsUtils.LoadSettingsData(assetFolder + "/Core/Editor/Version.asset", -99);
-        bannerVersion = assetVersion.ToString();
-        bannerVersion = bannerVersion.Insert(1, ".");
-        bannerVersion = bannerVersion.Insert(3, ".");
+        void OnEnable()
+        {
+            bannerColor = new Color(0.55f, 0.7f, 1f);
+            bannerText = "Polyverse Skies";
+            helpURL = "https://docs.google.com/document/d/1z7A_xKNa2mXhvTRJqyu-ZQsAtbV32tEZQbO1OmPS_-s/edit#heading=h.rp8ji698m9wz";
 
-        bannerColor = new Color(0.968f, 0.572f, 0.890f);
-        bannerText = "Polyverse Skies " + bannerVersion;
-    }
+            //Safer search, there might be many user folders
+            string[] searchFolders;
 
-    void OnGUI()
-    {
-        StyledGUI.DrawWindowBanner(bannerColor, bannerText, helpURL);
+            searchFolders = AssetDatabase.FindAssets("Polyverse Skies");
 
-        GUILayout.BeginHorizontal();
-        GUILayout.Space(20);
+            for (int i = 0; i < searchFolders.Length; i++)
+            {
+                if (AssetDatabase.GUIDToAssetPath(searchFolders[i]).EndsWith("Polyverse Skies.pdf"))
+                {
+                    assetFolder = AssetDatabase.GUIDToAssetPath(searchFolders[i]);
+                    assetFolder = assetFolder.Replace("/Polyverse Skies.pdf", "");
+                }
+            }
 
-        EditorGUILayout.HelpBox("The included shaders are compatible by default with Standard and Universal Render Pipelines!", MessageType.Info, true);
+            assetVersion = SettingsUtils.LoadSettingsData(assetFolder + "/Core/Editor/Version.asset", -99);
+            bannerVersion = assetVersion.ToString();
+            bannerVersion = bannerVersion.Insert(1, ".");
+            bannerVersion = bannerVersion.Insert(3, ".");
 
-        GUILayout.Space(13);
-        GUILayout.EndHorizontal();
+            bannerColor = new Color(0.968f, 0.572f, 0.890f);
+            bannerText = "Polyverse Skies " + bannerVersion;
+        }
+
+        void OnGUI()
+        {
+            StyledGUI.DrawWindowBanner(bannerColor, bannerText, helpURL);
+
+            GUILayout.BeginHorizontal();
+            GUILayout.Space(20);
+
+            EditorGUILayout.HelpBox("The included shaders are compatible by default with Standard and Universal Render Pipelines!", MessageType.Info, true);
+
+            GUILayout.Space(13);
+            GUILayout.EndHorizontal();
+        }
     }
 }
 

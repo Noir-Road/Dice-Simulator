@@ -15,6 +15,8 @@ public class StyledOptionsSliderDrawer : MaterialPropertyDrawer
     public float top = 0;
     public float down = 0;
 
+    bool showAdvancedOptions = false;
+
     public StyledOptionsSliderDrawer(string nameMin, string nameMax, string nameVal, float min, float max, float val)
     {
         this.nameMin = nameMin;
@@ -52,6 +54,11 @@ public class StyledOptionsSliderDrawer : MaterialPropertyDrawer
                 fontSize = 9,
             };
 
+            var styleButton = new GUIStyle(EditorStyles.label)
+            {
+
+            };
+
             var internalValueMin = internalPropMin.floatValue;
             var internalValueMax = internalPropMax.floatValue;
             var internalValueVal = internalPropVal.floatValue;
@@ -67,11 +74,11 @@ public class StyledOptionsSliderDrawer : MaterialPropertyDrawer
             }
             else
             {
-                if (internalValueMin < internalValueMax)
+                if (internalValueMin <= internalValueMax)
                 {
                     propVector.w = 0;
                 }
-                else if (internalValueMin < internalValueMax)
+                else if (internalValueMin > internalValueMax)
                 {
                     propVector.w = 1;
                 }
@@ -95,8 +102,11 @@ public class StyledOptionsSliderDrawer : MaterialPropertyDrawer
             EditorGUI.showMixedValue = prop.hasMixedValue;
 
             GUILayout.BeginHorizontal();
-            GUILayout.Space(-1);
-            GUILayout.Label(label, GUILayout.Width(EditorGUIUtility.labelWidth));
+
+            if (GUILayout.Button(label, styleButton, GUILayout.Width(EditorGUIUtility.labelWidth), GUILayout.Height(18)))
+            {
+                showAdvancedOptions = !showAdvancedOptions;
+            }
 
             if (propVector.w == 2)
             {
@@ -109,9 +119,30 @@ public class StyledOptionsSliderDrawer : MaterialPropertyDrawer
 
             GUILayout.Space(2);
 
-            propVector.w = (float)EditorGUILayout.Popup((int)propVector.w, new string[] { "Remap", "Invert", "Simple" }, stylePopup, GUILayout.Width(50));
+            propVector.w = (float)EditorGUILayout.Popup((int)propVector.w, new string[] { "Remap", "Invert", "Simple"}, stylePopup, GUILayout.Width(50));
 
             GUILayout.EndHorizontal();
+
+            if (showAdvancedOptions)
+            {
+                GUILayout.BeginHorizontal();
+                GUILayout.Space(-1);
+                GUILayout.Label("      Remap Min", GUILayout.Width(EditorGUIUtility.labelWidth));
+                propVector.x = EditorGUILayout.Slider(propVector.x, min, max);
+                GUILayout.EndHorizontal();
+
+                GUILayout.BeginHorizontal();
+                GUILayout.Space(-1);
+                GUILayout.Label("      Remap Max", GUILayout.Width(EditorGUIUtility.labelWidth));
+                propVector.y = EditorGUILayout.Slider(propVector.y, min, max);
+                GUILayout.EndHorizontal();
+
+                GUILayout.BeginHorizontal();
+                GUILayout.Space(-1);
+                GUILayout.Label("      Simple Value", GUILayout.Width(EditorGUIUtility.labelWidth));
+                propVector.z = EditorGUILayout.Slider(propVector.z, min, max);
+                GUILayout.EndHorizontal();
+            }
 
             if (propVector.w == 0f)
             {
@@ -133,6 +164,7 @@ public class StyledOptionsSliderDrawer : MaterialPropertyDrawer
             }
 
             EditorGUI.showMixedValue = false;
+
             if (EditorGUI.EndChangeCheck())
             {
                 prop.vectorValue = propVector;

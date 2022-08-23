@@ -99,36 +99,11 @@ namespace Boxophobic.Constants
         {
             get
             {
-                GUIStyle guiStyle = new GUIStyle
+                GUIStyle guiStyle = new GUIStyle("label")
                 {
                     richText = true,
                     alignment = TextAnchor.MiddleCenter
                 };
-
-                return guiStyle;
-            }
-        }
-
-        public static GUIStyle BoldTextStyle
-        {
-            get
-            {
-                GUIStyle guiStyle = new GUIStyle();
-
-                Color color;
-
-                if (EditorGUIUtility.isProSkin)
-                {
-                    color = new Color(0.87f, 0.87f, 0.87f);
-                }
-                else
-                {
-                    color = new Color(0.27f, 0.27f, 0.27f);
-                }
-
-                guiStyle.normal.textColor = color;
-                guiStyle.alignment = TextAnchor.MiddleCenter;
-                guiStyle.fontStyle = FontStyle.Bold;
 
                 return guiStyle;
             }

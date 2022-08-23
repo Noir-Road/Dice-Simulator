@@ -42,15 +42,19 @@ public class StyledRemapSliderDrawer : MaterialPropertyDrawer
 
         if (internalPropMin.displayName != null && internalPropMax.displayName != null)
         {
-            var internalValueMin = internalPropMin.floatValue;
-            var internalValueMax = internalPropMax.floatValue;
-            Vector4 propVector = prop.vectorValue;
-
-
             var stylePopup = new GUIStyle(EditorStyles.popup)
             {
                 fontSize = 9,
             };
+
+            var styleButton = new GUIStyle(EditorStyles.label)
+            {
+
+            };
+
+            var internalValueMin = internalPropMin.floatValue;
+            var internalValueMax = internalPropMax.floatValue;
+            Vector4 propVector = prop.vectorValue;
 
             EditorGUI.BeginChangeCheck();
 
@@ -79,26 +83,19 @@ public class StyledRemapSliderDrawer : MaterialPropertyDrawer
             EditorGUI.showMixedValue = prop.hasMixedValue;
 
             GUILayout.BeginHorizontal();
-            GUILayout.Space(-1);
-            GUILayout.Label(label, GUILayout.Width(EditorGUIUtility.labelWidth));
+
+            if (GUILayout.Button(label, styleButton, GUILayout.Width(EditorGUIUtility.labelWidth), GUILayout.Height(18)))
+            {
+                showAdvancedOptions = !showAdvancedOptions;
+            }
 
             EditorGUILayout.MinMaxSlider(ref propVector.x, ref propVector.y, min, max);
 
             GUILayout.Space(2);
 
-            propVector.w = (float)EditorGUILayout.Popup((int)propVector.w, new string[] { "Remap", "Invert", "Show Advanced Settings", "Hide Advanced Settings" }, stylePopup, GUILayout.Width(50));
+            propVector.w = (float)EditorGUILayout.Popup((int)propVector.w, new string[] { "Remap", "Invert" }, stylePopup, GUILayout.Width(50));
 
             GUILayout.EndHorizontal();
-
-            if (propVector.w == 2f)
-            {
-                showAdvancedOptions = true;
-            }
-
-            if (propVector.w == 3f)
-            {
-                showAdvancedOptions = false;
-            }
 
             if (showAdvancedOptions)
             {
@@ -106,14 +103,12 @@ public class StyledRemapSliderDrawer : MaterialPropertyDrawer
                 GUILayout.Space(-1);
                 GUILayout.Label("      Remap Min", GUILayout.Width(EditorGUIUtility.labelWidth));
                 propVector.x = EditorGUILayout.Slider(propVector.x, min, max);
-                GUILayout.Space(2);
                 GUILayout.EndHorizontal();
 
                 GUILayout.BeginHorizontal();
                 GUILayout.Space(-1);
                 GUILayout.Label("      Remap Max", GUILayout.Width(EditorGUIUtility.labelWidth));
                 propVector.y = EditorGUILayout.Slider(propVector.y, min, max);
-                GUILayout.Space(2);
                 GUILayout.EndHorizontal();
             }
 
@@ -129,6 +124,7 @@ public class StyledRemapSliderDrawer : MaterialPropertyDrawer
             }
 
             EditorGUI.showMixedValue = false;
+
             if (EditorGUI.EndChangeCheck())
             {
                 prop.vectorValue = propVector;
