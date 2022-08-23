@@ -4,15 +4,28 @@ using UnityEngine;
 
 public class Ground : MonoBehaviour
 {
+    [SerializeField] GameObject rb;
+    [SerializeField] GameObject prefab;
 
+    public Transform dice;
 
     public void OnTriggerEnter(Collider other)
     {
+
+       // rb = GetComponent
+
+    
+
         switch (other.name)
         {
             case "C1"://rutina 1
-                Debug.Log("esto es un objeto" + other.name);
+               // Debug.Log("esto es un objeto" + other.name);
                 Debug.Log("esto es un obje" + other.name);
+                // Instantiate(prefab, transform.position, Quaternion.identity);
+                //Instantiate(prefab, new Vector3(0f, 5f, 0f) , Quaternion.identity);
+                //prefab.transform.localScale = new Vector3(400f, 400f, 400f);
+                Instantiate(prefab, dice.transform.position + new Vector3(0f, 5f, 0f), Quaternion.identity);
+
                 break;
             case "C2"://rutina 2
                 Debug.Log("esto es un objeto" + other.name);
@@ -39,10 +52,10 @@ public class Ground : MonoBehaviour
         switch(collision.collider.name)
         {
             case "C1":
-                Debug.Log("esto es un objeto" + collision.collider.name);
+                //Debug.Log("esto es un objeto" + collision.collider.name);
                 break;
             default:
-                Debug.Log("esto es un objeto default" + collision.gameObject.name);
+               // Debug.Log("esto es un objeto default" + collision.gameObject.name);
                 break;
         }
       //  Debug.Log("esto es un objeto" + collision.collider.name);

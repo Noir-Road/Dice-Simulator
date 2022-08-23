@@ -44,6 +44,8 @@ public class ToonDiceRoll : MonoBehaviour
 
         if (rb.transform.position.y <= 2)
         {
+
+           // rb.MovePosition(Vector3);
             state = Dice.IDLE;
            // score.characterSpacing = score.characterSpacing + 3;
             
