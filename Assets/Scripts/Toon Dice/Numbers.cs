@@ -5,7 +5,7 @@ using UnityEngine;
 public class Numbers : MonoBehaviour
 {
 
-    public float destroytime;
+    public float destroytime = 1.5f;
 
     // Start is called before the first frame update
     void Start()

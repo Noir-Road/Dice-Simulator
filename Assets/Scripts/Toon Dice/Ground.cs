@@ -47,8 +47,12 @@ public class Ground : MonoBehaviour
                      break;
             }
      }
-    public void OnCollisionEnter(Collision collision)
+    public void OnCollisionStay(Collision collision)
     {
+
+/*         if (!collision.gameObject.GetComponent<ToonDiceRoll>().isMoving)
+            Debug.Log("Dado quiet"); */
+
         switch(collision.collider.name)
         {
             case "C1":
