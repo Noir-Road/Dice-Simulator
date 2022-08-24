@@ -21,37 +21,37 @@ public class Ground : MonoBehaviour
         switch (_name)
             {
                  case "C1"://rutina 1
-                     Debug.Log("Collider: " + _name + "Side: 1");
+                     Debug.Log("Collider: " + _name + " Side: 1");
                      Instantiate(number6, dice.transform.position + new Vector3(0f, 5f, 0f), Quaternion.identity);
                      numberSide = 1;
                      break;
                  case "C2"://rutina 2
-                     Debug.Log("Collider: " + _name + "Side: 2");
+                     Debug.Log("Collider: " + _name + " Side: 2");
                      Instantiate(number5, dice.transform.position + new Vector3(0f, 5f, 0f), Quaternion.identity);
                      numberSide = 2;
                      break;
                  case "C3"://rutina 3
-                     Debug.Log("Collider: " + _name + "Side: 3");
+                     Debug.Log("Collider: " + _name + " Side: 3");
                      Instantiate(number4, dice.transform.position + new Vector3(0f, 5f, 0f), Quaternion.identity);
                      numberSide = 3;
                      break;
                  case "C4"://rutina 4
-                     Debug.Log("Collider: " + _name + "Side: 4");
+                     Debug.Log("Collider: " + _name + " Side: 4");
                      Instantiate(number3, dice.transform.position + new Vector3(0f, 5f, 0f), Quaternion.identity);
                      numberSide = 4;
                      break;
                  case "C5"://rutina 5
-                     Debug.Log("Collider: " + _name + "Side: 5");
+                     Debug.Log("Collider: " + _name + " Side: 5");
                      Instantiate(number2, dice.transform.position + new Vector3(0f, 5f, 0f), Quaternion.identity);
                      numberSide = 5;
                      break;
                  case "C6"://rutina 6
-                     Debug.Log("Collider: " + _name + "Side: 6");
+                     Debug.Log("Collider: " + _name + " Side: 6");
                      Instantiate(number1, dice.transform.position + new Vector3(0f, 5f, 0f), Quaternion.identity);
                      numberSide = 6;
                      break;
                  default:
-                     Debug.Log("No valid collider:" + _name);
+                     Debug.Log("No valid collider: " + _name);
                      numberSide = -1;
                      break;
             }
