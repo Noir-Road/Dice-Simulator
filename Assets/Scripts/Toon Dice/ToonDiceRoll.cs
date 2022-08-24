@@ -10,6 +10,7 @@ public class ToonDiceRoll : MonoBehaviour
     [SerializeField] PhysicMaterial bounce;
     [SerializeField] TextMeshProUGUI score;
     public float rotationAngles;
+    public bool isMoving;
 
     public enum Dice
     {
@@ -21,6 +22,10 @@ public class ToonDiceRoll : MonoBehaviour
 
     void Update()
     {
+        if (rb.velocity != Vector3.zero)
+            isMoving = true;
+        else
+            isMoving = false;
 
 
         if (Input.GetKeyDown("space"))
