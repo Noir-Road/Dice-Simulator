@@ -10,19 +10,22 @@ public class Numbers : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+            FadeOutAndDestroy(2.5f);
+    }
+
+    IEnumerator FadeOutAndDestroy(float time )
+     {
          float elapsedTime = 0;
          Color startingColor = transform.GetComponent<Renderer>().material.color;
          Color finalColor = new Color(startingColor.r, startingColor.g, startingColor.b, 0);
-         while (elapsedTime < destroytime)
+         while (elapsedTime < time)
          {
-             transform.GetComponent<Renderer>().material.color = Color.Lerp(startingColor, finalColor, (elapsedTime / destroytime));
+             transform.GetComponent<Renderer>().material.color = Color.Lerp(startingColor, finalColor, (elapsedTime / time));
              elapsedTime += Time.deltaTime;
-             //yield return null;
+             yield return null;
          }
-        Destroy(gameObject,destroytime);
-
-
-    }
+         Destroy(gameObject);
+     }
 
     // Update is called once per frame
     void Update()
