@@ -15,8 +15,8 @@ public class Ground : MonoBehaviour
 
      public void OnTriggerStay(Collider collision)
      {
-      //  var name = collision.gameObject.GetComponentInChildren<BoxCollider>().name;
-        switch (collision.gameObject.name)
+        var _name = collision.gameObject.name;
+        switch (_name)
             {
                  case "C1"://rutina 1
                      Debug.Log("esto es un obje" + name);
