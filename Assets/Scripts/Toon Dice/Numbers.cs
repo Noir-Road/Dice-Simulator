@@ -5,12 +5,13 @@ using UnityEngine;
 public class Numbers : MonoBehaviour
 {
 
-    public float destroytime = 2.5f;
+    public float destroytime = 1.5f;
 
     // Start is called before the first frame update
     void Start()
     {
-            FadeOutAndDestroy(2.5f);
+            //FadeOutAndDestroy(2.5f); No work
+            Destroy(gameObject,destroytime);
     }
 
     IEnumerator FadeOutAndDestroy(float time )
