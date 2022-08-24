@@ -1,36 +1,38 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Sirenix.OdinInspector;
 
 public class Numbers : MonoBehaviour
 {
+    [SerializeField] MeshRenderer mr; // Number Mesh Renderer
+    [InfoBox("The time the number takes before fading out and be destroyed")]
+    [Range(1f,2f)]
+    [SerializeField] float fadeOutTime; 
 
-    public float destroytime = 1.5f;
-
-    // Start is called before the first frame update
-    void Start()
+    void FadeEffect()
     {
-            //FadeOutAndDestroy(2.5f); No work
-            Destroy(gameObject,destroytime);
+        var color = mr.material.GetColor("_BaseColor"); 
+        color.a -= fadeOutTime * Time.deltaTime;
+        mr.material.SetColor("_BaseColor", color);
+        if(color.a <= 0) Destroy(gameObject); // If alpha channel is 0, then, destroy the number
     }
 
-    IEnumerator FadeOutAndDestroy(float time )
-     {
-         float elapsedTime = 0;
-         Color startingColor = transform.GetComponent<Renderer>().material.color;
-         Color finalColor = new Color(startingColor.r, startingColor.g, startingColor.b, 0);
-         while (elapsedTime < time)
-         {
-             transform.GetComponent<Renderer>().material.color = Color.Lerp(startingColor, finalColor, (elapsedTime / time));
-             elapsedTime += Time.deltaTime;
-             yield return null;
-         }
-         Destroy(gameObject);
-     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+    void Update() 
+    { 
+        FadeEffect();
     }
+   // IEnumerator FadeOutAndDestroy(float time )
+   //  {
+   //      float elapsedTime = 0;
+   //      Color startingColor = transform.GetComponent<Renderer>().material.color;
+   //      Color finalColor = new Color(startingColor.r, startingColor.g, startingColor.b, 0);
+   //      while (elapsedTime < time)
+   //      {
+   //          transform.GetComponent<Renderer>().material.color = Color.Lerp(startingColor, finalColor, (elapsedTime / time));
+   //          elapsedTime += Time.deltaTime;
+   //          yield return null;
+   //      }
+   //      Destroy(gameObject);
+   //  }
 }
