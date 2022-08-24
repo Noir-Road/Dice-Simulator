@@ -7,11 +7,16 @@ public class Numbers : MonoBehaviour
 {
     [SerializeField] MeshRenderer mr; // Number Mesh Renderer
     [InfoBox("The time the number takes before fading out and be destroyed")]
+    [SerializeField] float timeBeforeFading;
+    float currentTime;
     [Range(1f,2f)]
     [SerializeField] float fadeOutTime; 
 
     void FadeEffect()
     {
+        currentTime += Time.deltaTime;
+        if(currentTime < timeBeforeFading) return;
+        
         var color = mr.material.GetColor("_BaseColor"); 
         color.a -= fadeOutTime * Time.deltaTime;
         mr.material.SetColor("_BaseColor", color);

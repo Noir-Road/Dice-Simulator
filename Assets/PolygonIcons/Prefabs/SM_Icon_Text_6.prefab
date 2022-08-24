@@ -129,4 +129,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mr: {fileID: 23199459588034256}
+  timeBeforeFading: 1
   fadeOutTime: 1.302
