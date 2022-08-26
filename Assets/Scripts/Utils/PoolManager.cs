@@ -9,6 +9,12 @@ public enum PoolObjectType
     TenSides,
     TwelveSides,
     TwentySides,
+    NumberOne,
+    NumberTwo,
+    NumberThree,
+    NumberFour,
+    NumberFive,
+    NumberSix,
 }
 public class PoolManager : Singleton<PoolManager>
 {

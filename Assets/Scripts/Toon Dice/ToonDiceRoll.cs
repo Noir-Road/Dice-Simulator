@@ -5,6 +5,9 @@ using TMPro;
 
 public class ToonDiceRoll : MonoBehaviour
 {
+
+    [SerializeField] Ground diceState;
+
     [SerializeField] float upDiceForce;
     [SerializeField] public float rotationSpeed;
     [SerializeField] Vector3 _rotation;
@@ -39,23 +42,20 @@ public class ToonDiceRoll : MonoBehaviour
             rotationSpeed += 150.5f;
 
 
-        if (Input.GetKeyDown("space"))
+        if (Input.GetKeyDown("space") || Input.touchCount == 1)
         {
 
             state = Dice.ROLLING;
             LiftDice();
             RequestNewImpulse();
             RequestNewRotationValues();
-
-
-
-
+            diceState.state = Ground.State.Spawning;
         }
 
         if (state == Dice.ROLLING)
         {
             transform.Rotate(_rotation * rotationSpeed * Time.deltaTime);
-            score.text = Random.Range(1, 6).ToString();
+  //          score.text = Random.Range(1, 6).ToString();
             //score.outlineColor.CompareRGB(0);
             //return;
         }
@@ -68,7 +68,7 @@ public class ToonDiceRoll : MonoBehaviour
             state = Dice.IDLE;
            // score.characterSpacing = score.characterSpacing + 3;
             
-            score.text = Ground.numberSide.ToString();
+          //  score.text = Ground.numberSide.ToString();
             //score.text = Random.Range(1, 6).ToString();
             //transform.position = new Vector3(0, 9, 0);
         }
