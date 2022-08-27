@@ -234,7 +234,7 @@ Material:
     - _MCIALO: 0
     - _MCapIntensity: 1
     - _MVCOL: 0
-    - _MaiColPo: 2.79
+    - _MaiColPo: 2.46
     - _Metallic: 0
     - _MixMainTexToOutline: 0
     - _Mode: 0
@@ -270,7 +270,7 @@ Material:
     - _NoisyOutlineIntensity: 0
     - _NormalMapIntensity: 1
     - _OcclusionStrength: 1
-    - _Opacity: 1
+    - _Opacity: 0
     - _Oper: 0
     - _OutlineExtrudeMethod: 0
     - _OutlineWidth: 5.65

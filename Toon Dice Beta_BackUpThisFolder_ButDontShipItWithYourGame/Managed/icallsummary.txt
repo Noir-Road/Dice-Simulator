@@ -275,6 +275,7 @@ UnityEngine.AudioClip::get_samples
 UnityEngine.AudioClip::get_length
 UnityEngine.AudioSettings::StartAudioOutput
 UnityEngine.AudioSettings::StopAudioOutput
+UnityEngine.AudioSource::GetPitch
 UnityEngine.AudioSource::PlayHelper
 UnityEngine.AudioSource::PlayOneShotHelper
 UnityEngine.AudioSource::SetPitch
@@ -540,6 +541,7 @@ UnityEngine.GameObject::CompareTag
 UnityEngine.GameObject::get_activeInHierarchy
 UnityEngine.GameObject::get_activeSelf
 UnityEngine.GameObject::get_layer
+UnityEngine.GameObject::get_tag
 UnityEngine.GameObject::get_sceneCullingMask
 UnityEngine.GameObject::GetComponentFastPath
 UnityEngine.GameObject::Internal_CreateGameObject
@@ -551,6 +553,7 @@ UnityEngine.GameObject::GetComponent
 UnityEngine.GameObject::GetComponentInChildren
 UnityEngine.GameObject::GetComponentInParent
 UnityEngine.GameObject::Internal_AddComponentWithType
+UnityEngine.GameObject::Find
 UnityEngine.GameObject::FindGameObjectWithTag
 UnityEngine.GameObject::get_transform
 UnityEngine.GeometryUtility::TestPlanesAABB_Injected
@@ -743,6 +746,7 @@ UnityEngine.Light::get_shadowStrength
 UnityEngine.Light::get_spotAngle
 UnityEngine.Light::get_bakingOutput_Injected
 UnityEngine.Light::get_color_Injected
+UnityEngine.Light::set_intensity
 UnityEngine.Light::set_shadowCustomResolution
 UnityEngine.Light::get_shadows
 UnityEngine.Light::get_type
@@ -898,6 +902,7 @@ UnityEngine.Physics2D::get_queriesHitTriggers
 UnityEngine.Physics2D::GetRayIntersectionAll_Internal_Injected
 UnityEngine.PhysicsScene::Internal_RaycastTest_Injected
 UnityEngine.PhysicsScene::Internal_Raycast_Injected
+UnityEngine.PhysicsScene::Query_SphereCast_Injected
 UnityEngine.PhysicsScene::Internal_RaycastNonAlloc_Injected
 UnityEngine.PhysicsScene::Internal_SphereCastNonAlloc_Injected
 UnityEngine.PhysicsScene::OverlapSphereNonAlloc_Internal_Injected
@@ -1203,11 +1208,13 @@ UnityEngine.RenderTexture::get_dimension
 UnityEngine.Resources::GetBuiltinResource
 UnityEngine.ResourcesAPIInternal::Load
 UnityEngine.ResourcesAPIInternal::FindShaderByName
+UnityEngine.Rigidbody::get_useGravity
 UnityEngine.Rigidbody::get_mass
 UnityEngine.Rigidbody::AddForce_Injected
 UnityEngine.Rigidbody::AddTorque_Injected
 UnityEngine.Rigidbody::get_velocity_Injected
 UnityEngine.Rigidbody::set_detectCollisions
+UnityEngine.Rigidbody::set_freezeRotation
 UnityEngine.Rigidbody::set_isKinematic
 UnityEngine.Rigidbody::set_mass
 UnityEngine.Rigidbody2D::get_mass
@@ -1243,6 +1250,7 @@ UnityEngine.Skybox::get_material
 UnityEngine.SortingLayer::GetLayerValueFromID
 UnityEngine.SortingLayer::GetSortingLayerIDsInternal
 UnityEngine.SortingLayer::IDToName
+UnityEngine.SphereCollider::get_radius
 UnityEngine.SphereCollider::set_radius
 UnityEngine.Sprite::GetPacked
 UnityEngine.Sprite::GetPackingMode

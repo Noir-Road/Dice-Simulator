@@ -155,12 +155,12 @@ Library: lib_burst_generated
 --root-assembly=D:\Unity\Builds\Git Team Projects\Dice-Simulator\Temp\StagingArea\Data\Managed\Unity.TextMeshPro.dll
 --root-assembly=D:\Unity\Builds\Git Team Projects\Dice-Simulator\Temp\StagingArea\Data\Managed\Unity.Burst.dll
 --root-assembly=D:\Unity\Builds\Git Team Projects\Dice-Simulator\Temp\StagingArea\Data\Managed\UnityEngine.Advertisements.dll
+--root-assembly=D:\Unity\Builds\Git Team Projects\Dice-Simulator\Temp\StagingArea\Data\Managed\Assembly-CSharp.dll
 --root-assembly=D:\Unity\Builds\Git Team Projects\Dice-Simulator\Temp\StagingArea\Data\Managed\UnityEngine.Purchasing.Stores.dll
 --root-assembly=D:\Unity\Builds\Git Team Projects\Dice-Simulator\Temp\StagingArea\Data\Managed\Unity.RenderPipeline.Universal.ShaderLibrary.dll
 --root-assembly=D:\Unity\Builds\Git Team Projects\Dice-Simulator\Temp\StagingArea\Data\Managed\UnityEngine.Purchasing.dll
 --root-assembly=D:\Unity\Builds\Git Team Projects\Dice-Simulator\Temp\StagingArea\Data\Managed\Cinemachine.dll
 --root-assembly=D:\Unity\Builds\Git Team Projects\Dice-Simulator\Temp\StagingArea\Data\Managed\Unity.Services.Core.Environments.dll
---root-assembly=D:\Unity\Builds\Git Team Projects\Dice-Simulator\Temp\StagingArea\Data\Managed\Assembly-CSharp.dll
 --root-assembly=D:\Unity\Builds\Git Team Projects\Dice-Simulator\Temp\StagingArea\Data\Managed\Unity.Services.Analytics.dll
 --root-assembly=D:\Unity\Builds\Git Team Projects\Dice-Simulator\Temp\StagingArea\Data\Managed\UnityEngine.Monetization.dll
 --root-assembly=D:\Unity\Builds\Git Team Projects\Dice-Simulator\Temp\StagingArea\Data\Managed\Unity.Services.Core.Internal.dll
