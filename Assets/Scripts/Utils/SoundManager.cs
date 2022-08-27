@@ -73,6 +73,14 @@ public class SoundManager : MonoBehaviour
         s.source.Stop();
         s.fadeOutCurrentTime = 0f;
     }
+
+
+    private void Start() {
+        PlaySound("Main Theme");
+    }
+
+
+
 }
 [Serializable]
 public class Sounds

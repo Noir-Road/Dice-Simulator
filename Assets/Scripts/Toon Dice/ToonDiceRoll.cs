@@ -48,6 +48,7 @@ public class ToonDiceRoll : MonoBehaviour
         {
 
             state = Dice.ROLLING;
+          //  SoundManager.Instance.PlaySound("Test");
             LiftDice();
             RequestNewImpulse();
             RequestNewRotationValues();
