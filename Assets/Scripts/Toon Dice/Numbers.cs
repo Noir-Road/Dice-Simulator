@@ -24,7 +24,7 @@ public class Numbers : MonoBehaviour
         mr.material.SetColor("_BaseColor", color);
         if(color.a <= 0) 
         {
-            PoolManager.Instance.ReturnObjectOfType(gameObject,type); // If alpha channel is 0, then, destroy the number
+            PoolManager.Instance.ReturnObjectOfType(gameObject,type); // If alpha channel is 0, then, sent back to pool
             currentTime = 0f;
         }
     }

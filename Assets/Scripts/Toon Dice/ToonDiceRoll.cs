@@ -14,6 +14,8 @@ public class ToonDiceRoll : MonoBehaviour
     [SerializeField] Rigidbody rb;
     [SerializeField] PhysicMaterial bounce;
     [SerializeField] TextMeshProUGUI score;
+
+    [SerializeField] float impulseDirection;
     public float rotationAngles;
     public static bool isMoving;
 
@@ -51,55 +53,50 @@ public class ToonDiceRoll : MonoBehaviour
             RequestNewRotationValues();
             diceState.state = Ground.State.Spawning;
         }
-
-        if (state == Dice.ROLLING)
-        {
-            transform.Rotate(_rotation * rotationSpeed * Time.deltaTime);
-  //          score.text = Random.Range(1, 6).ToString();
-            //score.outlineColor.CompareRGB(0);
-            //return;
-        }
-
-
-        if (rb.transform.position.y <= 2)
-        {
-
-           // rb.MovePosition(Vector3);
-            state = Dice.IDLE;
-           // score.characterSpacing = score.characterSpacing + 3;
-            
-          //  score.text = Ground.numberSide.ToString();
-            //score.text = Random.Range(1, 6).ToString();
-            //transform.position = new Vector3(0, 9, 0);
-        }
+        
+        BackToOrigin();
     }
     
 
-    void LiftDice()
+    void LiftDice() // Straight Jump
     {
        // transform.rotation = Quaternion.identity; //Aligned for all axis
-        rb.AddForce(new Vector3(0f, Random.Range(1000, upDiceForce) ,0f)); // Raise the dice force
-        rb.AddForce(0,Mathf.Abs(RandomValues()),0, ForceMode.Impulse);
+      //  rb.AddForce(new Vector3(0f, Random.Range(1000, upDiceForce) ,0f)); // Raise the dice force
+        rb.AddForce(0,Mathf.Abs(RandomLift()),0, ForceMode.Impulse);
+       // rb.AddForce(new Vector3(0,upDiceForce,0f));
         
     }
 
-    void RequestNewImpulse()
+    void RequestNewImpulse() // Jump to any coordinate of the world
     {
-        float dirX = RandomValues();
-        float diry = RandomValues();
-        float dirZ = RandomValues();
+        float dirX = RandomImpulse();
+        float diry = RandomImpulse();
+        float dirZ = RandomImpulse();
         rb.AddForce(dirX,Mathf.Abs(diry),dirZ, ForceMode.VelocityChange);
     }
 
-        void RequestNewRotationValues()
+    void RequestNewRotationValues() // Random Rotation
     {
-        float dirX = RandomValues();
-        float dirY = RandomValues();
-        float dirZ = RandomValues();
+        float dirX = RandomRotation();
+        float dirY = RandomRotation();
+        float dirZ = RandomRotation();
         _rotation.x = dirX;
         _rotation.y = dirY;
         _rotation.z = dirZ;
     }
 
-    float RandomValues() => Random.Range(-rotationAngles, rotationAngles);
+    void FixedUpdate()
+    {
+        if(state == Dice.IDLE) return;
+        transform.Rotate(_rotation * rotationSpeed * Time.fixedDeltaTime);
+    }
+
+    float RandomRotation() => Random.Range(-rotationSpeed, rotationSpeed);
+    float RandomImpulse() => Random.Range(-impulseDirection, impulseDirection);
+    float RandomLift() => Random.Range(0, upDiceForce);
+
+    void BackToOrigin() // If Dice fall beyond -5, will set position back to origin.
+    {
+        if(rb.transform.position.y <= -5) transform.position = Vector3.zero;
+    }
 }

@@ -5,8 +5,9 @@ public class Ground : MonoBehaviour
     [HideInInspector] public enum State{Idle, Spawning}
     [HideInInspector] public State state;
 
+    [SerializeField] ToonDiceRoll toon;
 
-    public static short numberSide = 0;
+    int extraNumbers;
 
      public void OnTriggerStay(Collider collision)
      {
@@ -15,34 +16,50 @@ public class Ground : MonoBehaviour
                 {
                     case "C1"://rutina 1
                         if(state != State.Spawning) return;
-                        SpawnerToonManager.Instance.SpawnNumber(PoolObjectType.NumberSix);;
+                        MultipleNumbers(PoolObjectType.NumberSix);
                         state = State.Idle;
                         break;
                     case "C2"://rutina 2
                         if(state != State.Spawning) return;
-                        SpawnerToonManager.Instance.SpawnNumber(PoolObjectType.NumberFive);;
+                        MultipleNumbers(PoolObjectType.NumberFive);
                         state = State.Idle;
                         break;
                     case "C3"://rutina 3
                        if(state != State.Spawning) return;
-                        SpawnerToonManager.Instance.SpawnNumber(PoolObjectType.NumberFour);;
+                        MultipleNumbers(PoolObjectType.NumberFour);
                         state = State.Idle;
                         break;
                     case "C4"://rutina 4
                         if(state != State.Spawning) return;
-                        SpawnerToonManager.Instance.SpawnNumber(PoolObjectType.NumberThree);;
+                        MultipleNumbers(PoolObjectType.NumberThree);
                         state = State.Idle;
                         break;
                     case "C5"://rutina 5
                         if(state != State.Spawning) return;
-                        SpawnerToonManager.Instance.SpawnNumber(PoolObjectType.NumberTwo);;
+                       MultipleNumbers(PoolObjectType.NumberTwo);
                         state = State.Idle;
                         break;
                     case "C6"://rutina 6
                        if(state != State.Spawning) return;
-                        SpawnerToonManager.Instance.SpawnNumber(PoolObjectType.NumberOne);;
+                       MultipleNumbers(PoolObjectType.NumberOne);
                         state = State.Idle;
                         break;
                 }
+     }
+
+     private void OnCollisionEnter(Collision other) {
+        if(other.gameObject.CompareTag("Dice")) 
+        {
+           toon.state = ToonDiceRoll.Dice.IDLE;
+        }
+     }
+
+     void MultipleNumbers(PoolObjectType type)
+     {
+        extraNumbers = Random.Range(1,16);
+        for (int i = 0; i < extraNumbers; i++)
+        {
+            SpawnerToonManager.Instance.SpawnNumber(type);
+        }
      }
 }

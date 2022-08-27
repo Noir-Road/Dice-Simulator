@@ -390,13 +390,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 09e9bd4d1dcb5ed41b682ab6a7c204ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  diceState: {fileID: 0}
   upDiceForce: 2000
   rotationSpeed: 0
   _rotation: {x: 0, y: 0, z: 0}
   rb: {fileID: 6310060877225326429}
   bounce: {fileID: 0}
   score: {fileID: 0}
-  rotationAngles: 40
+  impulseDirection: 40
+  rotationAngles: 250
   state: 0
 --- !u!65 &1474184574
 BoxCollider:
