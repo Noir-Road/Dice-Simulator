@@ -15,7 +15,10 @@ public class ToonDiceRoll : MonoBehaviour
     [SerializeField] PhysicMaterial bounce;
     [SerializeField] TextMeshProUGUI score;
 
+    internal static GameObject ground;
+
     [SerializeField] float impulseDirection;
+
     public float rotationAngles;
     public static bool isMoving;
 
@@ -29,16 +32,20 @@ public class ToonDiceRoll : MonoBehaviour
 
     void Update()
     {
-        if (rb.velocity != Vector3.zero)
+        ground = GameObject.FindGameObjectWithTag("Ground");
+        //var score = gameObject.GetComponent<TextMeshPro>();
+        //if (rb.velocity != Vector3.zero)
+        if (rb.velocity.magnitude > 0.7)
         {
             isMoving = true;
         }
         else
         {
             isMoving = false;
-            Debug.Log("Dice IDLE");
+            //Debug.Log("Dice IDLE");
+            score.SetText(Ground.numberSide.ToString());
+            
         }
-
 
         if (Input.GetMouseButton(1))
             rotationSpeed += 150.5f;

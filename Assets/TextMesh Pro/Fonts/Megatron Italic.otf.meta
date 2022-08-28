@@ -1,0 +1,22 @@
+fileFormatVersion: 2
+guid: e2704f3e600af896bb9f6784edcfa55e
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontNames:
+  - Megatron
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: c2a54d6a0615f42b3bddb0d40c4658f7, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

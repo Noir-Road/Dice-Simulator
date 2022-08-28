@@ -67,7 +67,7 @@ namespace PolyverseSkiesAsset
 
             if (skyboxDay != null && skyboxNight != null)
             {
-                skyboxMaterial.Lerp(skyboxDay, skyboxNight, timeOfDay);
+                //skyboxMaterial.Lerp(skyboxDay, skyboxNight, timeOfDay);
                 RenderSettings.skybox = skyboxMaterial;
             }
 

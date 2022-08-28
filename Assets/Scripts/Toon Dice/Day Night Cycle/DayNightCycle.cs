@@ -21,6 +21,6 @@ public class DayNightCycle : MonoBehaviour
         if (dontCycle) return;
         velocity = timeVelocity * Time.time;
 
-        skies.timeOfDay = Mathf.PingPong(velocity, timeOfDay);
+        //skies.timeOfDay = Mathf.PingPong(velocity, timeOfDay);
     }
 }
