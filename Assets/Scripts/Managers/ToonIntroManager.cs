@@ -1,34 +1,72 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using Sirenix.OdinInspector;
-
+using System.Threading.Tasks;
+using UnityEngine.UI;
 public class ToonIntroManager : MonoBehaviour
 {
+    [Title("Components to fade")]
     [SerializeField] MeshRenderer diceMaterial;
-    [SerializeField] Material groundMaterial;
+    [SerializeField] MeshRenderer groundMaterial;
+    [SerializeField] Image blackImg;
 
-    [InfoBox("The time the number takes before fading out and be destroyed")]
-    [SerializeField] float timeBeforeFading;
+    [Title("Fade Effect Duration")]
+    [SerializeField] float fadeInTime;
     float currentTime;
-    [Range(1f,2f)]
-    [SerializeField] float fadeOutTime;
-    bool stop;
 
-    void FadeEffect()
-    {
-        if(!stop)
-        currentTime += Time.deltaTime;
-        if(currentTime < timeBeforeFading) return;
-        
-        var color = diceMaterial.material.GetColor("Main Color Power"); 
-        color.a += fadeOutTime * Time.deltaTime;
-        diceMaterial.material.SetColor("Main Color Power", color);
-        if(color.a >= 2.80f) stop = true;
-        Debug.Log("Object Faded");
+    [Title("Dice Noise Effect")]
+    [SerializeField] float magnitude;
+	[SerializeField] float frequency;
+    float intensity;
+    bool noiser;
+
+    void Start() {
+
+        intensity = groundMaterial.material.GetFloat("_MaiColPo");
+        FadeTasker();
     }
 
-    private void Update() {
-        FadeEffect();
+    async void FadeTasker() // Wait for task before continue
+    {
+        await Task.Delay(2000); // Wait 2 seconds before proceed
+        await FadeEffect(groundMaterial, 1f); // Fade in the ground
+        await FadeEffect(diceMaterial, 2.81f); // Fade Dice
+        noiser = true;
+        await Task.Delay(2000);
+        await FadeOutScreen();
+    }
+
+    async Task FadeEffect(MeshRenderer mr, float power)
+    {
+        currentTime = 0f;
+        while(currentTime <= fadeInTime)
+        {
+            currentTime += Time.deltaTime;
+            var color = mr.material.GetFloat("_MaiColPo"); 
+            color = Mathf.Lerp(0, power, currentTime / fadeInTime);
+            mr.material.SetFloat("_MaiColPo", color);
+            await Task.Yield(); // Task completed, return to FadeTasker
+        }
+    }
+
+    async Task FadeOutScreen()
+    {
+        currentTime = 0f;
+        while(currentTime <= fadeInTime)
+        {
+            currentTime += Time.deltaTime;
+            var image = blackImg.color;
+            image.a = Mathf.Lerp(0,1, currentTime / fadeInTime);
+            blackImg.color = image;
+            await Task.Yield(); // Task completed, return to FadeTasker
+            // Load New scene
+        }
+    }
+
+    void Update()  => DiceNoise();
+
+    void DiceNoise()
+    {
+        if(!noiser) return;
+        diceMaterial.material.SetFloat("_MaiColPo", intensity = 1f + Mathf.PerlinNoise(Time.time * frequency, 0f) * magnitude);
     }
 } 
