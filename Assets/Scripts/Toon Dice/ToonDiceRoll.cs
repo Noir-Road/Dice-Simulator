@@ -13,7 +13,7 @@ public class ToonDiceRoll : MonoBehaviour
     [SerializeField] Vector3 _rotation;
     [SerializeField] Rigidbody rb;
     [SerializeField] PhysicMaterial bounce;
-    [SerializeField] TextMeshProUGUI score;
+    [SerializeField] public TextMeshProUGUI score;
 
     internal static GameObject ground;
 
@@ -32,9 +32,7 @@ public class ToonDiceRoll : MonoBehaviour
 
     void Update()
     {
-        ground = GameObject.FindGameObjectWithTag("Ground");
-        //var score = gameObject.GetComponent<TextMeshPro>();
-        //if (rb.velocity != Vector3.zero)
+
         if (rb.velocity.magnitude > 0.7)
         {
             isMoving = true;
@@ -43,19 +41,23 @@ public class ToonDiceRoll : MonoBehaviour
         {
             isMoving = false;
             //Debug.Log("Dice IDLE");
+            state = Dice.IDLE;
             score.SetText(Ground.numberSide.ToString());
-            
         }
 
-        if (Input.GetMouseButton(1))
-            rotationSpeed += 150.5f;
+        if (rb.velocity == Vector3.zero)
+            state = Dice.IDLE;
+
+
+        if (Input.GetMouseButton(1) || Input.touchCount == 2)
+            rotationSpeed += 15.5f;
 
 
         if (Input.GetKeyDown("space") || Input.touchCount == 1)
         {
 
             state = Dice.ROLLING;
-          //  SoundManager.Instance.PlaySound("Test");
+            //SoundManager.Instance.PlaySound("Test");
             LiftDice();
             RequestNewImpulse();
             RequestNewRotationValues();
@@ -68,10 +70,10 @@ public class ToonDiceRoll : MonoBehaviour
 
     void LiftDice() // Straight Jump
     {
-       // transform.rotation = Quaternion.identity; //Aligned for all axis
-      //  rb.AddForce(new Vector3(0f, Random.Range(1000, upDiceForce) ,0f)); // Raise the dice force
+        // transform.rotation = Quaternion.identity; //Aligned for all axis
+        //  rb.AddForce(new Vector3(0f, Random.Range(1000, upDiceForce) ,0f)); // Raise the dice force
         rb.AddForce(0,Mathf.Abs(RandomLift()),0, ForceMode.Impulse);
-       // rb.AddForce(new Vector3(0,upDiceForce,0f));
+        // rb.AddForce(new Vector3(0,upDiceForce,0f));
         
     }
 

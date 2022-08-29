@@ -110,8 +110,8 @@ Material:
     - Vector1_AADD838F: 10
     - Vector1_C1D16DBE: 0.58
     - Vector1_C39D93FF: 0.2
-    - Vector1_CE098D07: 2.05
-    - Vector1_EBB5CF27: 1.54
+    - Vector1_CE098D07: 1
+    - Vector1_EBB5CF27: 0.3
     - _Big_Wave: 7.7
     - _Big_WindAmount: 0.4
     - _Big_Windspeed: 0.75
