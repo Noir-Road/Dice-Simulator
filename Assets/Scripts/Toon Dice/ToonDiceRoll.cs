@@ -19,8 +19,11 @@ public class ToonDiceRoll : MonoBehaviour
 
     [SerializeField] float impulseDirection;
 
+    [SerializeField] float isMovingVelocityLimit;
+
     public float rotationAngles;
     public static bool isMoving;
+    public float mutiplyGravity;
 
     public enum Dice
     {
@@ -33,7 +36,7 @@ public class ToonDiceRoll : MonoBehaviour
     void Update()
     {
 
-        if (rb.velocity.magnitude > 0.3)
+        if ( rb.velocity.magnitude > isMovingVelocityLimit)
         {
             isMoving = true;
         }
@@ -45,9 +48,6 @@ public class ToonDiceRoll : MonoBehaviour
             score.SetText(Ground.numberSide.ToString());
             diceState.state = Ground.State.Spawning;
         }
-
-        if (rb.velocity == Vector3.zero)
-            state = Dice.IDLE;
 
         if (Input.GetMouseButton(1) || Input.touchCount == 2)
             rotationSpeed += 15.5f;
@@ -96,13 +96,21 @@ public class ToonDiceRoll : MonoBehaviour
 
     void FixedUpdate()
     {
-        if(state == Dice.IDLE) return;
+        if(state == Dice.IDLE) 
+            return;
+
+        else if(state == Dice.ROLLING)
+        {
+            rb.AddForce(Physics.gravity + (Physics.gravity * mutiplyGravity), ForceMode.Acceleration);
+        }
+        
         transform.Rotate(_rotation * rotationSpeed * Time.fixedDeltaTime);
+        
     }
 
 
     float RandomRotation() => Random.Range(-rotationSpeed, rotationSpeed) + rotationSpeed;
-    float RandomImpulse() => Random.Range(5, impulseDirection) + impulseDirection;
+    float RandomImpulse() => Random.Range(-impulseDirection, impulseDirection);
     float RandomLift() => Random.Range(0, upDiceForce);
 
     void BackToOrigin() // If Dice fall beyond -5, will set position back to origin.
