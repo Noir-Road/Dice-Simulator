@@ -13,6 +13,9 @@ public class Ground : MonoBehaviour
      public void OnTriggerStay(Collider collision)
      {
         var _name = collision.gameObject.name;
+
+        if(toon.state == ToonDiceRoll.Dice.IDLE)
+        {
             switch (_name)
                 {
                     case "C1"://rutina 1
@@ -51,8 +54,15 @@ public class Ground : MonoBehaviour
                         numberSide = 1;
                         state = State.Idle;
                         break;
+                    default:
+                        Debug.Log("No valid collider:" + _name);
+                        numberSide = -1;
+                        break;
                 }
-                Debug.Log("Collider: " + _name + " Side: " + numberSide);
+        }
+
+        Debug.Log("Collider: " + _name + " Side: " + numberSide);
+     
      }
 
      private void OnCollisionEnter(Collision other) {
@@ -64,7 +74,7 @@ public class Ground : MonoBehaviour
 
      void MultipleNumbers(PoolObjectType type)
      {
-        extraNumbers = Random.Range(1,16);
+        extraNumbers = Random.Range(6,16);
         for (int i = 0; i < extraNumbers; i++)
         {
             SpawnerToonManager.Instance.SpawnNumber(type);

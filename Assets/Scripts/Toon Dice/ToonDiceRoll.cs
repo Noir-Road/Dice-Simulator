@@ -33,7 +33,7 @@ public class ToonDiceRoll : MonoBehaviour
     void Update()
     {
 
-        if (rb.velocity.magnitude > 0.7)
+        if (rb.velocity.magnitude > 0.3)
         {
             isMoving = true;
         }
@@ -43,11 +43,11 @@ public class ToonDiceRoll : MonoBehaviour
             //Debug.Log("Dice IDLE");
             state = Dice.IDLE;
             score.SetText(Ground.numberSide.ToString());
+            diceState.state = Ground.State.Spawning;
         }
 
         if (rb.velocity == Vector3.zero)
             state = Dice.IDLE;
-
 
         if (Input.GetMouseButton(1) || Input.touchCount == 2)
             rotationSpeed += 15.5f;
@@ -61,7 +61,6 @@ public class ToonDiceRoll : MonoBehaviour
             LiftDice();
             RequestNewImpulse();
             RequestNewRotationValues();
-            diceState.state = Ground.State.Spawning;
         }
         
         BackToOrigin();
@@ -101,8 +100,9 @@ public class ToonDiceRoll : MonoBehaviour
         transform.Rotate(_rotation * rotationSpeed * Time.fixedDeltaTime);
     }
 
-    float RandomRotation() => Random.Range(-rotationSpeed, rotationSpeed);
-    float RandomImpulse() => Random.Range(-impulseDirection, impulseDirection);
+
+    float RandomRotation() => Random.Range(-rotationSpeed, rotationSpeed) + rotationSpeed;
+    float RandomImpulse() => Random.Range(5, impulseDirection) + impulseDirection;
     float RandomLift() => Random.Range(0, upDiceForce);
 
     void BackToOrigin() // If Dice fall beyond -5, will set position back to origin.
