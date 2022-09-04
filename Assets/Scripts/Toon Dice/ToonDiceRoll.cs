@@ -53,7 +53,7 @@ public class ToonDiceRoll : MonoBehaviour
             rotationSpeed += 15.5f;
 
 
-        if (Input.GetKeyDown("space") || Input.touchCount == 1)
+        if (Input.GetButton("Jump") || Input.touchCount == 1)
         {
 
             state = Dice.ROLLING;
