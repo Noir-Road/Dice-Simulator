@@ -111,10 +111,10 @@ public class Ground : MonoBehaviour
             yield return null;
         }
 
-        Debug.Log("Primero");
+        /*Debug.Log("Primero");
         yield return new WaitForSeconds(3f);
         Debug.Log("Segundo");
         yield return new WaitForSeconds(5f);
-        Application.Quit();
+        Application.Quit(); */
      }
 }
