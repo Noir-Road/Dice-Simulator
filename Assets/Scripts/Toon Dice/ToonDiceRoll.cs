@@ -23,9 +23,6 @@ public class ToonDiceRoll : MonoBehaviour
     public float rotationAngles;
     public static bool isMoving;
     public float mutiplyGravity;
-
-    public SoundManager sm;
-
     public enum Dice
     {
         IDLE,
@@ -66,8 +63,10 @@ public class ToonDiceRoll : MonoBehaviour
             RequestNewRotationValues();
 
             if(CountJumps > CountJumpsAchievement)
-                sm.StopSound("Main Theme");
-                sm.PlaySound("snake_jazz");
+            {
+                SoundManager.Instance.StopSound("Main Theme");
+                SoundManager.Instance.PlaySound("snake_jazz");         
+            }
 
         }
         
