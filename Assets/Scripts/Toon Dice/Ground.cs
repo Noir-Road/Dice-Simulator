@@ -12,6 +12,7 @@ public class Ground : MonoBehaviour
     [SerializeField] Material diceMaterial;
     [SerializeField] Color32[] diceColors;
     [SerializeField] float transitionDuration;
+    [SerializeField] float startTransitionDuration;
     float currentTime;
 
     public static short numberSide = 0;
@@ -101,15 +102,19 @@ public class Ground : MonoBehaviour
 
      IEnumerator ColorLerp(Color32 originColor, Color32 colorDestination)
      {
-        currentTime = 0f;
-        while(currentTime < transitionDuration)
-        {
-            currentTime += Time.deltaTime;
-            var colorTest = diceMaterial.GetColor("_MainColor");
-            colorTest = Color32.Lerp(originColor,colorDestination, currentTime / transitionDuration);
-            diceMaterial.SetColor("_MainColor", colorTest);
-            yield return null;
-        }
+            currentTime = 0f;
+
+            yield return new WaitForSeconds(startTransitionDuration);
+            
+            while(currentTime < transitionDuration)
+            {
+                currentTime += Time.deltaTime;
+                var colorTest = diceMaterial.GetColor("_MainColor");
+                colorTest = Color32.Lerp(originColor,colorDestination, currentTime / transitionDuration);
+                diceMaterial.SetColor("_MainColor", colorTest);
+                yield return null;
+            }
+
 
         /*Debug.Log("Primero");
         yield return new WaitForSeconds(3f);

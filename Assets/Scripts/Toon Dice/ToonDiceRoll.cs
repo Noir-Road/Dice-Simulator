@@ -14,16 +14,17 @@ public class ToonDiceRoll : MonoBehaviour
     [SerializeField] Rigidbody rb;
     [SerializeField] PhysicMaterial bounce;
     [SerializeField] public TextMeshProUGUI score;
-
     internal static GameObject ground;
-
     [SerializeField] float impulseDirection;
-
     [SerializeField] float isMovingVelocityLimit;
+    [SerializeField] public int CountJumps=0;
+    [SerializeField] public int CountJumpsAchievement=20;
 
     public float rotationAngles;
     public static bool isMoving;
     public float mutiplyGravity;
+
+    public SoundManager sm;
 
     public enum Dice
     {
@@ -32,6 +33,7 @@ public class ToonDiceRoll : MonoBehaviour
     } // Either the Dice is Rolling or Idle
 
     public Dice state;
+
 
     void Update()
     {
@@ -56,11 +58,17 @@ public class ToonDiceRoll : MonoBehaviour
         if (Input.GetButton("Jump") || Input.touchCount == 1)
         {
 
+            CountJumps++;
             state = Dice.ROLLING;
             //SoundManager.Instance.PlaySound("Test");
             LiftDice();
             RequestNewImpulse();
             RequestNewRotationValues();
+
+            if(CountJumps > CountJumpsAchievement)
+                sm.StopSound("Main Theme");
+                sm.PlaySound("snake_jazz");
+
         }
         
         BackToOrigin();
