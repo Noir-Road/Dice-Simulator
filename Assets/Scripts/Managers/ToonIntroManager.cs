@@ -2,11 +2,14 @@ using UnityEngine;
 using Sirenix.OdinInspector;
 using System.Threading.Tasks;
 using UnityEngine.UI;
+using TMPro;
+using UnityEngine.SceneManagement;
 public class ToonIntroManager : MonoBehaviour
 {
     [Title("Components to fade")]
     [SerializeField] MeshRenderer diceMaterial;
     [SerializeField] MeshRenderer groundMaterial;
+    [SerializeField] TextMeshProUGUI gameText;
     [SerializeField] Image blackImg;
 
     [Title("Fade Effect Duration")]
@@ -29,13 +32,15 @@ public class ToonIntroManager : MonoBehaviour
     {
         await Task.Delay(2000); // Wait 2 seconds before proceed
         await FadeEffect(groundMaterial, 1f); // Fade in the ground
+        await FadeInTexts();
         await FadeEffect(diceMaterial, 2.81f); // Fade Dice
         noiser = true;
         await Task.Delay(2000);
-        await FadeOutScreen();
+        await FadeInScreen();
+        SceneManager.LoadScene("Toon Simulator");
     }
 
-    async Task FadeEffect(MeshRenderer mr, float power)
+    async Task FadeEffect(MeshRenderer mr, float power) // Fade out Mesh's of Ground & Dice
     {
         currentTime = 0f;
         while(currentTime <= fadeInTime)
@@ -44,11 +49,11 @@ public class ToonIntroManager : MonoBehaviour
             var color = mr.material.GetFloat("_MaiColPo"); 
             color = Mathf.Lerp(0, power, currentTime / fadeInTime);
             mr.material.SetFloat("_MaiColPo", color);
-            await Task.Yield(); // Task completed, return to FadeTasker
+            await Task.Yield(); // Repeat if task is not completed
         }
     }
 
-    async Task FadeOutScreen()
+    async Task FadeInScreen() // Fade In a background black img.
     {
         currentTime = 0f;
         while(currentTime <= fadeInTime)
@@ -57,8 +62,20 @@ public class ToonIntroManager : MonoBehaviour
             var image = blackImg.color;
             image.a = Mathf.Lerp(0,1, currentTime / fadeInTime);
             blackImg.color = image;
-            await Task.Yield(); // Task completed, return to FadeTasker
-            // Load New scene
+            await Task.Yield(); // Repeat if task is not completed
+        }
+    }
+
+    async Task FadeInTexts()
+    {
+        currentTime = 0f;
+        while(currentTime <= fadeInTime)
+        {
+            currentTime += Time.deltaTime;
+            var alpha = gameText.color;
+            alpha.a = Mathf.Lerp(0,1, currentTime / fadeInTime);
+            gameText.color = alpha;
+            await Task.Yield(); // Repeat if task is not completed
         }
     }
 
