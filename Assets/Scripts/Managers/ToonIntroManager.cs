@@ -66,7 +66,7 @@ public class ToonIntroManager : MonoBehaviour
         }
     }
 
-    async Task FadeInTexts()
+    async Task FadeInTexts() // Fade In Text Mesh Pro. Need to update for more texts ?
     {
         currentTime = 0f;
         while(currentTime <= fadeInTime)
