@@ -15,6 +15,7 @@ public enum PoolObjectType
     NumberFour,
     NumberFive,
     NumberSix,
+    ToonExplosion,
 }
 public class PoolManager : Singleton<PoolManager>
 {

@@ -75,7 +75,7 @@ public class SoundManager : MonoBehaviour
     }
 
 
-    private void Start() {
+    void Start() {
         PlaySound("Main Theme");
     }
 

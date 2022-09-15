@@ -5,9 +5,12 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/Ocelot Splash.unity
+    guid: ec8977c1438f0fd0e8c6faa8522b160b
   - enabled: 0
-    path: Assets/Scenes/Main Menu.unity
-    guid: 04eda3e25143229469cd5f581fd710eb
+    path: Assets/Scenes/Toon Splash.unity
+    guid: fbbd14ec60c7c2a488415f0a6316f20a
   - enabled: 1
     path: Assets/Scenes/Toon Simulator.unity
     guid: 881e1ef4b1f11344fa8ade4a48bf8426

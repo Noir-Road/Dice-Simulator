@@ -7,7 +7,6 @@ public class ToonDiceRoll : MonoBehaviour
 {
 
     [SerializeField] Ground diceState;
-
     [SerializeField] float upDiceForce;
     [SerializeField] public float rotationSpeed;
     [SerializeField] Vector3 _rotation;
@@ -17,8 +16,8 @@ public class ToonDiceRoll : MonoBehaviour
     internal static GameObject ground;
     [SerializeField] float impulseDirection;
     [SerializeField] float isMovingVelocityLimit;
-    [SerializeField] public int CountJumps=0;
-    [SerializeField] public int CountJumpsAchievement=20;
+    [SerializeField] public int countJumps=0;
+    [SerializeField] public int countJumpsAchievement=20;
 
     public float rotationAngles;
     public static bool isMoving;
@@ -55,14 +54,14 @@ public class ToonDiceRoll : MonoBehaviour
         if (Input.GetButton("Jump") || Input.touchCount == 1)
         {
 
-            CountJumps++;
+           // countJumps++;
             state = Dice.ROLLING;
             //SoundManager.Instance.PlaySound("Test");
             LiftDice();
             RequestNewImpulse();
             RequestNewRotationValues();
 
-            if(CountJumps > CountJumpsAchievement)
+            if(countJumps > countJumpsAchievement)
             {
                 SoundManager.Instance.StopSound("Main Theme");
                 SoundManager.Instance.PlaySound("snake_jazz");         
@@ -74,13 +73,9 @@ public class ToonDiceRoll : MonoBehaviour
     }
     
 
-    void LiftDice() // Straight Jump
+    void LiftDice() // Straight Jump (Y Axis ONLY)
     {
-        // transform.rotation = Quaternion.identity; //Aligned for all axis
-        //  rb.AddForce(new Vector3(0f, Random.Range(1000, upDiceForce) ,0f)); // Raise the dice force
         rb.AddForce(0,Mathf.Abs(RandomLift()),0, ForceMode.Impulse);
-        // rb.AddForce(new Vector3(0,upDiceForce,0f));
-        
     }
 
     void RequestNewImpulse() // Jump to any coordinate of the world
@@ -111,7 +106,7 @@ public class ToonDiceRoll : MonoBehaviour
             rb.AddForce(Physics.gravity + (Physics.gravity * mutiplyGravity), ForceMode.Acceleration);
         }
         
-        transform.Rotate(_rotation * rotationSpeed * Time.fixedDeltaTime);
+        transform.Rotate(_rotation * rotationSpeed * Time.deltaTime);
         
     }
 

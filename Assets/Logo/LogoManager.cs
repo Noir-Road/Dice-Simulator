@@ -1,10 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 using UnityEngine;
 using Sirenix.OdinInspector;
 using UnityEngine.UI;
 using TMPro;
 using System.Threading.Tasks;
+
 public class LogoManager : MonoBehaviour
 {
     [InfoBox("This Script handles the Splash for Ocelot Manager. Please fill the fields with the required components")]
@@ -17,8 +17,9 @@ public class LogoManager : MonoBehaviour
     [Title("Fade Effect Duration(Timer)")]
     [SerializeField] float fadeTime;
     float currentTime;
+
     void Start() {
-        OcelotTasker();    
+        OcelotTasker();  
     }
 
     async void OcelotTasker() // Wait for each function to be completed before running the next function.
@@ -28,7 +29,8 @@ public class LogoManager : MonoBehaviour
         await FadeInTexts();
         await ShineLerpMovement();
         await FadeImages(blackScreen);
-        Debug.Log("Tasker Completed");
+       // Debug.Log("Tasker Completed");
+       SceneManager.LoadScene("Toon Simulator");
     }
 
     async Task FadeImages(Image img)
@@ -56,7 +58,9 @@ public class LogoManager : MonoBehaviour
         }
     }
 
-    async Task ShineLerpMovement()
+    // Lerp Shine Movement across the Ocelot Picture.
+    // This color can be changed from the inspector is not hard coded.
+    async Task ShineLerpMovement() 
     {
         currentTime = 0f;
         while(currentTime <= fadeTime)

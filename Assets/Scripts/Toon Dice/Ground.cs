@@ -1,12 +1,17 @@
 using UnityEngine;
 using Sirenix.OdinInspector;
 using System.Collections;
+using TMPro;
 public class Ground : MonoBehaviour
 {
- [HideInInspector] public enum State{Idle, Spawning}
-    [HideInInspector] public State state;
+     public enum State{Idle, Spawning}
+     public State state;
 
-    [SerializeField] ToonDiceRoll toon;
+    [Title("Components")]
+    [SerializeField] ToonDiceRoller toon;
+    [SerializeField] TextMeshProUGUI scoreText;
+    [SerializeField] ParticleSystem ps;
+    [SerializeField] Gradient[] grad;
 
     [Title("Dice Colors")]
     [SerializeField] Material diceMaterial;
@@ -16,57 +21,33 @@ public class Ground : MonoBehaviour
     float currentTime;
 
     public static short numberSide = 0;
-    int extraNumbers;
+    int numbersLimit;
 
-     public void OnTriggerStay(Collider collision)
-     {
+
+    void OnTriggerStay(Collider collision)
+    {
         var _name = collision.gameObject.name;
-
-        if(toon.state == ToonDiceRoll.Dice.IDLE)
+        if(toon.internalSpeed <= 0.01f && toon.isGrounded)
         {
             switch (_name)
                 {
                     case "C1"://rutina 1
-                        if(state != State.Spawning) return;
-                        MultipleNumbers(PoolObjectType.NumberSix);
-                        StartCoroutine(ColorLerp(diceColors[0], diceColors[1]));
-                        numberSide = 6;
-                        state = State.Idle;
+                        CustomDice(PoolObjectType.NumberSix, diceColors[0], "6", 0, 0);
                         break;
                     case "C2"://rutina 2
-                        if(state != State.Spawning) return;
-                        MultipleNumbers(PoolObjectType.NumberFive);
-                        StartCoroutine(ColorLerp(diceColors[1], diceColors[2]));
-                        numberSide = 5;
-                        state = State.Idle;
+                        CustomDice(PoolObjectType.NumberFive, diceColors[1], "5", 1, 1);
                         break;
                     case "C3"://rutina 3
-                       if(state != State.Spawning) return;
-                        MultipleNumbers(PoolObjectType.NumberFour);
-                        StartCoroutine(ColorLerp(diceColors[3], diceColors[4]));
-                        numberSide = 4;
-                        state = State.Idle;
+                        CustomDice(PoolObjectType.NumberFour, diceColors[2], "4", 2, 2);
                         break;
                     case "C4"://rutina 4
-                        if(state != State.Spawning) return;
-                        MultipleNumbers(PoolObjectType.NumberThree);
-                        StartCoroutine(ColorLerp(diceColors[4], diceColors[5]));
-                        numberSide = 3;
-                        state = State.Idle;
+                        CustomDice(PoolObjectType.NumberThree, diceColors[3], "3", 3, 3);
                         break;
                     case "C5"://rutina 5
-                        if(state != State.Spawning) return;
-                        MultipleNumbers(PoolObjectType.NumberTwo);
-                        StartCoroutine(ColorLerp(diceColors[5], diceColors[1]));
-                        numberSide = 2;
-                        state = State.Idle;
+                        CustomDice(PoolObjectType.NumberTwo, diceColors[4], "2", 4, 4);
                         break;
                     case "C6"://rutina 6
-                       if(state != State.Spawning) return;
-                        MultipleNumbers(PoolObjectType.NumberOne);
-                        StartCoroutine(ColorLerp(diceColors[5], diceColors[0]));
-                        numberSide = 1;
-                        state = State.Idle;
+                        CustomDice(PoolObjectType.NumberOne, diceColors[5], "1", 5, 5);
                         break;
                     default:
                         Debug.Log("No valid collider:" + _name);
@@ -75,32 +56,33 @@ public class Ground : MonoBehaviour
                 }
         }
 
-        Debug.Log("Collider: " + _name + " Side: " + numberSide);
-     
-     }
+       // Debug.Log("Collider: " + _name + " Side: " + numberSide);
+    }
 
-     private void OnCollisionEnter(Collision other) {
-        if(other.gameObject.CompareTag("Dice")) 
-        {
-           toon.state = ToonDiceRoll.Dice.IDLE;
-        }
-     }
+    void CustomDice(PoolObjectType _type, Color32 _color, string _text, int gradient, int colors)
+    {
+        if(state != State.Spawning) return;
+
+        StartCoroutine(ColorLerp(_color)); // Color transition effect
+        scoreText.text = _text.ToString(); // Set text on UI
+        scoreText.color = _color; // Change color of text UI
+        MultipleNumbers(_type); // Number Spawner
+        CustomizerManager.Instance.ChangeExplosionColor(gradient); // Explosion Color Changer
+        CustomizerManager.Instance.ChangeNumberColor(colors); // Change Numbers Color
+        
+        state = State.Idle;
+    }
 
      void MultipleNumbers(PoolObjectType type)
      {
-        extraNumbers = Random.Range(6,16);
-        for (int i = 0; i < extraNumbers; i++)
+        numbersLimit = Random.Range(6,16);
+        for (int i = 0; i < numbersLimit; i++)
         {
             SpawnerToonManager.Instance.SpawnNumber(type);
         }
      }
 
-     public void ChangeDiceColor(Color32 _color)
-     {
-        diceMaterial.SetColor("_MainColor", _color);
-     }
-
-     IEnumerator ColorLerp(Color32 originColor, Color32 colorDestination)
+     IEnumerator ColorLerp(Color32 colorDestination)
      {
             currentTime = 0f;
 
@@ -110,16 +92,9 @@ public class Ground : MonoBehaviour
             {
                 currentTime += Time.deltaTime;
                 var colorTest = diceMaterial.GetColor("_MainColor");
-                colorTest = Color32.Lerp(originColor,colorDestination, currentTime / transitionDuration);
+                colorTest = Color32.Lerp(diceMaterial.GetColor("_MainColor"),colorDestination, currentTime / transitionDuration);
                 diceMaterial.SetColor("_MainColor", colorTest);
                 yield return null;
             }
-
-
-        /*Debug.Log("Primero");
-        yield return new WaitForSeconds(3f);
-        Debug.Log("Segundo");
-        yield return new WaitForSeconds(5f);
-        Application.Quit(); */
      }
 }

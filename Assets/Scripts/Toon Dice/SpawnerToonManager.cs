@@ -19,5 +19,11 @@ public class SpawnerToonManager : MonoBehaviour
         number.transform.rotation = Quaternion.identity;
         number.SetActive(true);
     }
-    
+    public void SpawnExplosion(PoolObjectType type)
+    {
+        var number = PoolManager.Instance.GetPoolObject(type);
+        number.transform.position = dice.transform.position + new Vector3(0f,-0.8f,0f);
+        number.transform.rotation = Quaternion.identity;
+        number.SetActive(true);
+    }    
 }

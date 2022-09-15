@@ -35,6 +35,7 @@ public class Numbers : MonoBehaviour
     }
 
     void OnEnable() {
+        CustomizerManager.Instance.AddNumbers(gameObject);
         RestoreColor();
     }
 
