@@ -809,7 +809,6 @@ IL2CPP_EXTERN_C String_t* _stringLiteral4E533056845C4805133D1E97CA9EF7834D48038B
 IL2CPP_EXTERN_C String_t* _stringLiteral51282E2AAC09AC6EDBC2C1C237C0183F97FEE379;
 IL2CPP_EXTERN_C String_t* _stringLiteral53B02E97E5C1B3EBDA35C7604988E2D7CF5A5FE2;
 IL2CPP_EXTERN_C String_t* _stringLiteral55F097B2603C69F9353B2AE824F1FE43E6B46F87;
-IL2CPP_EXTERN_C String_t* _stringLiteral56E364BE37151A793410AD6116212709E3480509;
 IL2CPP_EXTERN_C String_t* _stringLiteral56FA0C8D9308880001A2ECB99BAADD0188191D3C;
 IL2CPP_EXTERN_C String_t* _stringLiteral5FDB63D8DB81F77B80EA20910C85F12DD109AB35;
 IL2CPP_EXTERN_C String_t* _stringLiteral65425A7905CC1C8F255C3954170A76D55BB6CA5D;
@@ -5029,16 +5028,12 @@ struct CustomizerManager_tD0E39443739502E46946A93587FBAC201C823D53  : public Mon
 {
 	// System.Collections.Generic.List`1<UnityEngine.GameObject> CustomizerManager::explosionsList
 	List_1_tB951CE80B58D1BF9650862451D8DAD8C231F207B* ___explosionsList_5;
-	// UnityEngine.GameObject CustomizerManager::explosionPrefab
-	GameObject_t76FEDD663AB33C991A9C9A23129337651094216F* ___explosionPrefab_6;
 	// UnityEngine.Gradient[] CustomizerManager::gradients
-	GradientU5BU5D_t0C577E5F4C6B0B3E5E565B7F427161380E47B7D8* ___gradients_7;
+	GradientU5BU5D_t0C577E5F4C6B0B3E5E565B7F427161380E47B7D8* ___gradients_6;
 	// System.Collections.Generic.List`1<UnityEngine.GameObject> CustomizerManager::numbersList
-	List_1_tB951CE80B58D1BF9650862451D8DAD8C231F207B* ___numbersList_8;
-	// UnityEngine.Material CustomizerManager::mt
-	Material_t18053F08F347D0DCA5E1140EC7EC4533DD8A14E3* ___mt_9;
+	List_1_tB951CE80B58D1BF9650862451D8DAD8C231F207B* ___numbersList_7;
 	// UnityEngine.Color[] CustomizerManager::_colors
-	ColorU5BU5D_t612261CF293F6FFC3D80AB52259FF0DC2B2CC389* ____colors_10;
+	ColorU5BU5D_t612261CF293F6FFC3D80AB52259FF0DC2B2CC389* ____colors_8;
 };
 
 struct CustomizerManager_tD0E39443739502E46946A93587FBAC201C823D53_StaticFields
@@ -5322,28 +5317,26 @@ struct Ground_t3A6E265B327D38866FB20EEC69AB4FE1D6A0598C  : public MonoBehaviour_
 	ToonDiceRoller_t53154CCC805A935D4DE354EF6B28EC8AEE815AF6* ___toon_5;
 	// TMPro.TextMeshProUGUI Ground::scoreText
 	TextMeshProUGUI_t101091AF4B578BB534C92E9D1EEAF0611636D957* ___scoreText_6;
-	// UnityEngine.ParticleSystem Ground::ps
-	ParticleSystem_tB19986EE308BD63D36FB6025EEEAFBEDB97C67C1* ___ps_7;
 	// UnityEngine.Gradient[] Ground::grad
-	GradientU5BU5D_t0C577E5F4C6B0B3E5E565B7F427161380E47B7D8* ___grad_8;
+	GradientU5BU5D_t0C577E5F4C6B0B3E5E565B7F427161380E47B7D8* ___grad_7;
 	// UnityEngine.Material Ground::diceMaterial
-	Material_t18053F08F347D0DCA5E1140EC7EC4533DD8A14E3* ___diceMaterial_9;
+	Material_t18053F08F347D0DCA5E1140EC7EC4533DD8A14E3* ___diceMaterial_8;
 	// UnityEngine.Color32[] Ground::diceColors
-	Color32U5BU5D_t38116C3E91765C4C5726CE12C77FAD7F9F737259* ___diceColors_10;
+	Color32U5BU5D_t38116C3E91765C4C5726CE12C77FAD7F9F737259* ___diceColors_9;
 	// System.Single Ground::transitionDuration
-	float ___transitionDuration_11;
+	float ___transitionDuration_10;
 	// System.Single Ground::startTransitionDuration
-	float ___startTransitionDuration_12;
+	float ___startTransitionDuration_11;
 	// System.Single Ground::currentTime
-	float ___currentTime_13;
+	float ___currentTime_12;
 	// System.Int32 Ground::numbersLimit
-	int32_t ___numbersLimit_15;
+	int32_t ___numbersLimit_14;
 };
 
 struct Ground_t3A6E265B327D38866FB20EEC69AB4FE1D6A0598C_StaticFields
 {
 	// System.Int16 Ground::numberSide
-	int16_t ___numberSide_14;
+	int16_t ___numberSide_13;
 };
 
 // LevelManager
@@ -8662,12 +8655,12 @@ inline PolyverseSkies_t8C99474AEA72355F2E84E8EAB9E088002313AB51* Component_GetCo
 }
 // System.Void DayNightCycle::TimeCycle()
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void DayNightCycle_TimeCycle_mC82F7C2F94E0EAFAF498C38F2FFBAEC1E4ACDAC7 (DayNightCycle_t2F009151F900B14E57AB0BFCD5FF00292F3270A9* __this, const RuntimeMethod* method) ;
+// UnityEngine.Color UnityEngine.Color32::op_Implicit(UnityEngine.Color32)
+IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR Color_tD001788D726C3A7F1379BEED0260B9591F440C1F Color32_op_Implicit_m47CBB138122B400E0B1F4BFD7C30A6C2C00FCA3E_inline (Color32_t73C5004937BF5BB8AD55323D51AAA40A898EF48B ___c0, const RuntimeMethod* method) ;
 // System.Void Ground::CustomDice(PoolObjectType,UnityEngine.Color32,System.String,System.Int32,System.Int32)
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void Ground_CustomDice_m008B77263CEF9377AFF5EF65DF88D6DFC0571D76 (Ground_t3A6E265B327D38866FB20EEC69AB4FE1D6A0598C* __this, int32_t ____type0, Color32_t73C5004937BF5BB8AD55323D51AAA40A898EF48B ____color1, String_t* ____text2, int32_t ___gradient3, int32_t ___colors4, const RuntimeMethod* method) ;
 // System.Collections.IEnumerator Ground::ColorLerp(UnityEngine.Color32)
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR RuntimeObject* Ground_ColorLerp_mADA3252D63912F7AF3ECBB55A3E2B20CF04E05A3 (Ground_t3A6E265B327D38866FB20EEC69AB4FE1D6A0598C* __this, Color32_t73C5004937BF5BB8AD55323D51AAA40A898EF48B ___colorDestination0, const RuntimeMethod* method) ;
-// UnityEngine.Color UnityEngine.Color32::op_Implicit(UnityEngine.Color32)
-IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR Color_tD001788D726C3A7F1379BEED0260B9591F440C1F Color32_op_Implicit_m47CBB138122B400E0B1F4BFD7C30A6C2C00FCA3E_inline (Color32_t73C5004937BF5BB8AD55323D51AAA40A898EF48B ___c0, const RuntimeMethod* method) ;
 // System.Void Ground::MultipleNumbers(PoolObjectType)
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void Ground_MultipleNumbers_m00A8E5C054C3F4C0D3955A3B5E782F7EE6561AF6 (Ground_t3A6E265B327D38866FB20EEC69AB4FE1D6A0598C* __this, int32_t ___type0, const RuntimeMethod* method) ;
 // System.Void CustomizerManager::ChangeExplosionColor(System.Int32)
@@ -19208,7 +19201,7 @@ IL_000e_1:
 				L_8 = ParticleSystem_get_colorOverLifetime_mD8C72661EFE9BB063126752E744544EE2FF5814C(L_7, NULL);
 				V_1 = L_8;
 				// particles.color = gradients[_gradient];
-				GradientU5BU5D_t0C577E5F4C6B0B3E5E565B7F427161380E47B7D8* L_9 = __this->___gradients_7;
+				GradientU5BU5D_t0C577E5F4C6B0B3E5E565B7F427161380E47B7D8* L_9 = __this->___gradients_6;
 				int32_t L_10 = ____gradient0;
 				NullCheck(L_9);
 				int32_t L_11 = L_10;
@@ -19283,7 +19276,7 @@ IL_0079_1:
 				L_21 = ParticleSystem_get_colorOverLifetime_mD8C72661EFE9BB063126752E744544EE2FF5814C(L_20, NULL);
 				V_2 = L_21;
 				// particles.color = gradients[_gradient];
-				GradientU5BU5D_t0C577E5F4C6B0B3E5E565B7F427161380E47B7D8* L_22 = __this->___gradients_7;
+				GradientU5BU5D_t0C577E5F4C6B0B3E5E565B7F427161380E47B7D8* L_22 = __this->___gradients_6;
 				int32_t L_23 = ____gradient0;
 				NullCheck(L_22);
 				int32_t L_24 = L_23;
@@ -19331,7 +19324,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void CustomizerManager_AddNumbers_m97AC26213E
 	}
 	{
 		// if(!numbersList.Contains(numbers)) numbersList.Add(numbers);
-		List_1_tB951CE80B58D1BF9650862451D8DAD8C231F207B* L_0 = __this->___numbersList_8;
+		List_1_tB951CE80B58D1BF9650862451D8DAD8C231F207B* L_0 = __this->___numbersList_7;
 		GameObject_t76FEDD663AB33C991A9C9A23129337651094216F* L_1 = ___numbers0;
 		NullCheck(L_0);
 		bool L_2;
@@ -19343,7 +19336,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void CustomizerManager_AddNumbers_m97AC26213E
 	}
 	{
 		// if(!numbersList.Contains(numbers)) numbersList.Add(numbers);
-		List_1_tB951CE80B58D1BF9650862451D8DAD8C231F207B* L_3 = __this->___numbersList_8;
+		List_1_tB951CE80B58D1BF9650862451D8DAD8C231F207B* L_3 = __this->___numbersList_7;
 		GameObject_t76FEDD663AB33C991A9C9A23129337651094216F* L_4 = ___numbers0;
 		NullCheck(L_3);
 		List_1_Add_m43FBF207375C6E06B8C45ECE614F9B8008FB686E_inline(L_3, L_4, List_1_Add_m43FBF207375C6E06B8C45ECE614F9B8008FB686E_RuntimeMethod_var);
@@ -19374,7 +19367,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void CustomizerManager_ChangeNumberColor_m301
 	memset((&V_0), 0, sizeof(V_0));
 	{
 		// foreach(var number in numbersList)
-		List_1_tB951CE80B58D1BF9650862451D8DAD8C231F207B* L_0 = __this->___numbersList_8;
+		List_1_tB951CE80B58D1BF9650862451D8DAD8C231F207B* L_0 = __this->___numbersList_7;
 		NullCheck(L_0);
 		Enumerator_t88BD1282EF117E59AACFC9EC55B89F0B9EDACE60 L_1;
 		L_1 = List_1_GetEnumerator_mA843D26C63E5963415DFCA6E49DFA27AFD9C75E8(L_0, List_1_GetEnumerator_mA843D26C63E5963415DFCA6E49DFA27AFD9C75E8_RuntimeMethod_var);
@@ -19410,7 +19403,7 @@ IL_000e_1:
 				L_4 = Renderer_get_material_m5BA2A00816C4CC66580D4B2E409CF10718C15656(L_3, NULL);
 				// _numberColor.SetColor("_EmissionColor", _colors[_color]);
 				Material_t18053F08F347D0DCA5E1140EC7EC4533DD8A14E3* L_5 = L_4;
-				ColorU5BU5D_t612261CF293F6FFC3D80AB52259FF0DC2B2CC389* L_6 = __this->____colors_10;
+				ColorU5BU5D_t612261CF293F6FFC3D80AB52259FF0DC2B2CC389* L_6 = __this->____colors_8;
 				int32_t L_7 = ____color0;
 				NullCheck(L_6);
 				int32_t L_8 = L_7;
@@ -19418,7 +19411,7 @@ IL_000e_1:
 				NullCheck(L_5);
 				Material_SetColor_mFAB32FAA44461E46FD707B34184EC080CBB3539F(L_5, _stringLiteralB92EF51E45166C91E2762DB6C9F27C8BD6EBE466, L_9, NULL);
 				// _numberColor.SetColor("_BaseColor", _colors[_color]);
-				ColorU5BU5D_t612261CF293F6FFC3D80AB52259FF0DC2B2CC389* L_10 = __this->____colors_10;
+				ColorU5BU5D_t612261CF293F6FFC3D80AB52259FF0DC2B2CC389* L_10 = __this->____colors_8;
 				int32_t L_11 = ____color0;
 				NullCheck(L_10);
 				int32_t L_12 = L_11;
@@ -19474,8 +19467,8 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void CustomizerManager__ctor_mEFEBF3BD7198708
 		List_1_tB951CE80B58D1BF9650862451D8DAD8C231F207B* L_1 = (List_1_tB951CE80B58D1BF9650862451D8DAD8C231F207B*)il2cpp_codegen_object_new(List_1_tB951CE80B58D1BF9650862451D8DAD8C231F207B_il2cpp_TypeInfo_var);
 		NullCheck(L_1);
 		List_1__ctor_m447372C1EF7141193B93090A77395B786C72C7BC(L_1, List_1__ctor_m447372C1EF7141193B93090A77395B786C72C7BC_RuntimeMethod_var);
-		__this->___numbersList_8 = L_1;
-		Il2CppCodeGenWriteBarrier((void**)(&__this->___numbersList_8), (void*)L_1);
+		__this->___numbersList_7 = L_1;
+		Il2CppCodeGenWriteBarrier((void**)(&__this->___numbersList_7), (void*)L_1);
 		MonoBehaviour__ctor_m592DB0105CA0BC97AA1C5F4AD27B12D68A3B7C1E(__this, NULL);
 		return;
 	}
@@ -19818,6 +19811,29 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void DayNightCycle__ctor_mA2B6C9B178964D2867D
 #pragma clang diagnostic ignored "-Winvalid-offsetof"
 #pragma clang diagnostic ignored "-Wunused-variable"
 #endif
+// System.Void Ground::Start()
+IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void Ground_Start_mBF4265513CFEC2580CB8D11421110923814C522B (Ground_t3A6E265B327D38866FB20EEC69AB4FE1D6A0598C* __this, const RuntimeMethod* method) 
+{
+	static bool s_Il2CppMethodInitialized;
+	if (!s_Il2CppMethodInitialized)
+	{
+		il2cpp_codegen_initialize_runtime_metadata((uintptr_t*)&_stringLiteral23E80B19348AABD00B1A5523E569122717D63A8E);
+		s_Il2CppMethodInitialized = true;
+	}
+	{
+		// void Start() => diceMaterial.SetColor("_MainColor", diceColors[0]); // Reset Dice color [BLUEISH]
+		Material_t18053F08F347D0DCA5E1140EC7EC4533DD8A14E3* L_0 = __this->___diceMaterial_8;
+		Color32U5BU5D_t38116C3E91765C4C5726CE12C77FAD7F9F737259* L_1 = __this->___diceColors_9;
+		NullCheck(L_1);
+		int32_t L_2 = 0;
+		Color32_t73C5004937BF5BB8AD55323D51AAA40A898EF48B L_3 = (L_1)->GetAt(static_cast<il2cpp_array_size_t>(L_2));
+		Color_tD001788D726C3A7F1379BEED0260B9591F440C1F L_4;
+		L_4 = Color32_op_Implicit_m47CBB138122B400E0B1F4BFD7C30A6C2C00FCA3E_inline(L_3, NULL);
+		NullCheck(L_0);
+		Material_SetColor_mFAB32FAA44461E46FD707B34184EC080CBB3539F(L_0, _stringLiteral23E80B19348AABD00B1A5523E569122717D63A8E, L_4, NULL);
+		return;
+	}
+}
 // System.Void Ground::OnTriggerStay(UnityEngine.Collider)
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void Ground_OnTriggerStay_mEBAD5A863CB76F93B0BD58CFB288B078FC1A70E4 (Ground_t3A6E265B327D38866FB20EEC69AB4FE1D6A0598C* __this, Collider_t1CC3163924FCD6C4CC2E816373A929C1E3D55E76* ___collision0, const RuntimeMethod* method) 
 {
@@ -19931,7 +19947,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void Ground_OnTriggerStay_mEBAD5A863CB76F93B0
 IL_008a:
 	{
 		// CustomDice(PoolObjectType.NumberSix, diceColors[0], "6", 0, 0);
-		Color32U5BU5D_t38116C3E91765C4C5726CE12C77FAD7F9F737259* L_19 = __this->___diceColors_10;
+		Color32U5BU5D_t38116C3E91765C4C5726CE12C77FAD7F9F737259* L_19 = __this->___diceColors_9;
 		NullCheck(L_19);
 		int32_t L_20 = 0;
 		Color32_t73C5004937BF5BB8AD55323D51AAA40A898EF48B L_21 = (L_19)->GetAt(static_cast<il2cpp_array_size_t>(L_20));
@@ -19943,7 +19959,7 @@ IL_008a:
 IL_00a6:
 	{
 		// CustomDice(PoolObjectType.NumberFive, diceColors[1], "5", 1, 1);
-		Color32U5BU5D_t38116C3E91765C4C5726CE12C77FAD7F9F737259* L_22 = __this->___diceColors_10;
+		Color32U5BU5D_t38116C3E91765C4C5726CE12C77FAD7F9F737259* L_22 = __this->___diceColors_9;
 		NullCheck(L_22);
 		int32_t L_23 = 1;
 		Color32_t73C5004937BF5BB8AD55323D51AAA40A898EF48B L_24 = (L_22)->GetAt(static_cast<il2cpp_array_size_t>(L_23));
@@ -19955,7 +19971,7 @@ IL_00a6:
 IL_00c2:
 	{
 		// CustomDice(PoolObjectType.NumberFour, diceColors[2], "4", 2, 2);
-		Color32U5BU5D_t38116C3E91765C4C5726CE12C77FAD7F9F737259* L_25 = __this->___diceColors_10;
+		Color32U5BU5D_t38116C3E91765C4C5726CE12C77FAD7F9F737259* L_25 = __this->___diceColors_9;
 		NullCheck(L_25);
 		int32_t L_26 = 2;
 		Color32_t73C5004937BF5BB8AD55323D51AAA40A898EF48B L_27 = (L_25)->GetAt(static_cast<il2cpp_array_size_t>(L_26));
@@ -19967,7 +19983,7 @@ IL_00c2:
 IL_00de:
 	{
 		// CustomDice(PoolObjectType.NumberThree, diceColors[3], "3", 3, 3);
-		Color32U5BU5D_t38116C3E91765C4C5726CE12C77FAD7F9F737259* L_28 = __this->___diceColors_10;
+		Color32U5BU5D_t38116C3E91765C4C5726CE12C77FAD7F9F737259* L_28 = __this->___diceColors_9;
 		NullCheck(L_28);
 		int32_t L_29 = 3;
 		Color32_t73C5004937BF5BB8AD55323D51AAA40A898EF48B L_30 = (L_28)->GetAt(static_cast<il2cpp_array_size_t>(L_29));
@@ -19979,7 +19995,7 @@ IL_00de:
 IL_00f9:
 	{
 		// CustomDice(PoolObjectType.NumberTwo, diceColors[4], "2", 4, 4);
-		Color32U5BU5D_t38116C3E91765C4C5726CE12C77FAD7F9F737259* L_31 = __this->___diceColors_10;
+		Color32U5BU5D_t38116C3E91765C4C5726CE12C77FAD7F9F737259* L_31 = __this->___diceColors_9;
 		NullCheck(L_31);
 		int32_t L_32 = 4;
 		Color32_t73C5004937BF5BB8AD55323D51AAA40A898EF48B L_33 = (L_31)->GetAt(static_cast<il2cpp_array_size_t>(L_32));
@@ -19991,7 +20007,7 @@ IL_00f9:
 IL_0114:
 	{
 		// CustomDice(PoolObjectType.NumberOne, diceColors[5], "1", 5, 5);
-		Color32U5BU5D_t38116C3E91765C4C5726CE12C77FAD7F9F737259* L_34 = __this->___diceColors_10;
+		Color32U5BU5D_t38116C3E91765C4C5726CE12C77FAD7F9F737259* L_34 = __this->___diceColors_9;
 		NullCheck(L_34);
 		int32_t L_35 = 5;
 		Color32_t73C5004937BF5BB8AD55323D51AAA40A898EF48B L_36 = (L_34)->GetAt(static_cast<il2cpp_array_size_t>(L_35));
@@ -20009,7 +20025,7 @@ IL_012f:
 		il2cpp_codegen_runtime_class_init_inline(Debug_t8394C7EEAECA3689C2C9B9DE9C7166D73596276F_il2cpp_TypeInfo_var);
 		Debug_Log_m87A9A3C761FF5C43ED8A53B16190A53D08F818BB(L_38, NULL);
 		// numberSide = -1;
-		((Ground_t3A6E265B327D38866FB20EEC69AB4FE1D6A0598C_StaticFields*)il2cpp_codegen_static_fields_for(Ground_t3A6E265B327D38866FB20EEC69AB4FE1D6A0598C_il2cpp_TypeInfo_var))->___numberSide_14 = (int16_t)(-1);
+		((Ground_t3A6E265B327D38866FB20EEC69AB4FE1D6A0598C_StaticFields*)il2cpp_codegen_static_fields_for(Ground_t3A6E265B327D38866FB20EEC69AB4FE1D6A0598C_il2cpp_TypeInfo_var))->___numberSide_13 = (int16_t)(-1);
 	}
 
 IL_0145:
@@ -20042,13 +20058,13 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void Ground_CustomDice_m008B77263CEF9377AFF5E
 
 IL_000a:
 	{
-		// 
+		// StartCoroutine(ColorLerp(_color)); // Color transition effect
 		Color32_t73C5004937BF5BB8AD55323D51AAA40A898EF48B L_1 = ____color1;
 		RuntimeObject* L_2;
 		L_2 = Ground_ColorLerp_mADA3252D63912F7AF3ECBB55A3E2B20CF04E05A3(__this, L_1, NULL);
 		Coroutine_t85EA685566A254C23F3FD77AB5BDFFFF8799596B* L_3;
 		L_3 = MonoBehaviour_StartCoroutine_m4CAFF732AA28CD3BDC5363B44A863575530EC812(__this, L_2, NULL);
-		// StartCoroutine(ColorLerp(_color)); // Color transition effect
+		// scoreText.text = _text.ToString(); // Set text on UI
 		TextMeshProUGUI_t101091AF4B578BB534C92E9D1EEAF0611636D957* L_4 = __this->___scoreText_6;
 		String_t* L_5 = ____text2;
 		NullCheck(L_5);
@@ -20056,29 +20072,29 @@ IL_000a:
 		L_6 = VirtualFuncInvoker0< String_t* >::Invoke(3 /* System.String System.Object::ToString() */, L_5);
 		NullCheck(L_4);
 		VirtualActionInvoker1< String_t* >::Invoke(66 /* System.Void TMPro.TMP_Text::set_text(System.String) */, L_4, L_6);
-		// scoreText.text = _text.ToString(); // Set text on UI
+		// scoreText.color = _color; // Change color of text UI
 		TextMeshProUGUI_t101091AF4B578BB534C92E9D1EEAF0611636D957* L_7 = __this->___scoreText_6;
 		Color32_t73C5004937BF5BB8AD55323D51AAA40A898EF48B L_8 = ____color1;
 		Color_tD001788D726C3A7F1379BEED0260B9591F440C1F L_9;
 		L_9 = Color32_op_Implicit_m47CBB138122B400E0B1F4BFD7C30A6C2C00FCA3E_inline(L_8, NULL);
 		NullCheck(L_7);
 		VirtualActionInvoker1< Color_tD001788D726C3A7F1379BEED0260B9591F440C1F >::Invoke(23 /* System.Void UnityEngine.UI.Graphic::set_color(UnityEngine.Color) */, L_7, L_9);
-		// scoreText.color = _color; // Change color of text UI
+		// MultipleNumbers(_type); // Number Spawner
 		int32_t L_10 = ____type0;
 		Ground_MultipleNumbers_m00A8E5C054C3F4C0D3955A3B5E782F7EE6561AF6(__this, L_10, NULL);
-		// MultipleNumbers(_type); // Number Spawner
+		// CustomizerManager.Instance.ChangeExplosionColor(gradient); // Explosion Color Changer
 		CustomizerManager_tD0E39443739502E46946A93587FBAC201C823D53* L_11 = ((CustomizerManager_tD0E39443739502E46946A93587FBAC201C823D53_StaticFields*)il2cpp_codegen_static_fields_for(CustomizerManager_tD0E39443739502E46946A93587FBAC201C823D53_il2cpp_TypeInfo_var))->___Instance_4;
 		int32_t L_12 = ___gradient3;
 		NullCheck(L_11);
 		CustomizerManager_ChangeExplosionColor_m8F185D8EF82707EC793DE2EB3BF38C23F80F7C44(L_11, L_12, NULL);
-		// CustomizerManager.Instance.ChangeExplosionColor(gradient); // Explosion Color Changer
+		// CustomizerManager.Instance.ChangeNumberColor(colors); // Change Numbers Color
 		CustomizerManager_tD0E39443739502E46946A93587FBAC201C823D53* L_13 = ((CustomizerManager_tD0E39443739502E46946A93587FBAC201C823D53_StaticFields*)il2cpp_codegen_static_fields_for(CustomizerManager_tD0E39443739502E46946A93587FBAC201C823D53_il2cpp_TypeInfo_var))->___Instance_4;
 		int32_t L_14 = ___colors4;
 		NullCheck(L_13);
 		CustomizerManager_ChangeNumberColor_m3011F85A9DF89C361359AC285A724FD246ECC6F8(L_13, L_14, NULL);
-		// CustomizerManager.Instance.ChangeNumberColor(colors); // Change Numbers Color
+		// state = State.Idle;
 		__this->___state_4 = 0;
-		// 
+		// }
 		return;
 	}
 }
@@ -20093,39 +20109,39 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void Ground_MultipleNumbers_m00A8E5C054C3F4C0
 	}
 	int32_t V_0 = 0;
 	{
-		// void MultipleNumbers(PoolObjectType type)
+		// numbersLimit = Random.Range(6,16);
 		int32_t L_0;
 		L_0 = Random_Range_m6763D9767F033357F88B6637F048F4ACA4123B68(6, ((int32_t)16), NULL);
-		__this->___numbersLimit_15 = L_0;
-		// {
+		__this->___numbersLimit_14 = L_0;
+		// for (int i = 0; i < numbersLimit; i++)
 		V_0 = 0;
 		goto IL_0021;
 	}
 
 IL_0012:
 	{
-		// for (int i = 0; i < numbersLimit; i++)
+		// SpawnerToonManager.Instance.SpawnNumber(type);
 		SpawnerToonManager_t59AF3A7B0B5E63B20ED293966DDA0033595CF424* L_1 = ((SpawnerToonManager_t59AF3A7B0B5E63B20ED293966DDA0033595CF424_StaticFields*)il2cpp_codegen_static_fields_for(SpawnerToonManager_t59AF3A7B0B5E63B20ED293966DDA0033595CF424_il2cpp_TypeInfo_var))->___Instance_4;
 		int32_t L_2 = ___type0;
 		NullCheck(L_1);
 		SpawnerToonManager_SpawnNumber_m2B71410F23AE477EFA172DC387E283DBAC93E35F(L_1, L_2, NULL);
-		// {
+		// for (int i = 0; i < numbersLimit; i++)
 		int32_t L_3 = V_0;
 		V_0 = ((int32_t)il2cpp_codegen_add(L_3, 1));
 	}
 
 IL_0021:
 	{
-		// {
+		// for (int i = 0; i < numbersLimit; i++)
 		int32_t L_4 = V_0;
-		int32_t L_5 = __this->___numbersLimit_15;
+		int32_t L_5 = __this->___numbersLimit_14;
 		if ((((int32_t)L_4) < ((int32_t)L_5)))
 		{
 			goto IL_0012;
 		}
 	}
 	{
-		// SpawnerToonManager.Instance.SpawnNumber(type);
+		// }
 		return;
 	}
 }
@@ -20229,14 +20245,14 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR bool U3CColorLerpU3Ed__16_MoveNext_m7763F77BE
 IL_0022:
 	{
 		__this->___U3CU3E1__state_0 = (-1);
-		// IEnumerator ColorLerp(Color32 colorDestination)
+		// currentTime = 0f;
 		Ground_t3A6E265B327D38866FB20EEC69AB4FE1D6A0598C* L_3 = V_1;
 		NullCheck(L_3);
-		L_3->___currentTime_13 = (0.0f);
-		// currentTime = 0f;
+		L_3->___currentTime_12 = (0.0f);
+		// yield return new WaitForSeconds(startTransitionDuration);
 		Ground_t3A6E265B327D38866FB20EEC69AB4FE1D6A0598C* L_4 = V_1;
 		NullCheck(L_4);
-		float L_5 = L_4->___startTransitionDuration_12;
+		float L_5 = L_4->___startTransitionDuration_11;
 		WaitForSeconds_tF179DF251655B8DF044952E70A60DF4B358A3DD3* L_6 = (WaitForSeconds_tF179DF251655B8DF044952E70A60DF4B358A3DD3*)il2cpp_codegen_object_new(WaitForSeconds_tF179DF251655B8DF044952E70A60DF4B358A3DD3_il2cpp_TypeInfo_var);
 		NullCheck(L_6);
 		WaitForSeconds__ctor_m579F95BADEDBAB4B3A7E302C6EE3995926EF2EFC(L_6, L_5, NULL);
@@ -20254,27 +20270,27 @@ IL_004e:
 
 IL_0057:
 	{
-		// while(currentTime < transitionDuration)
+		// currentTime += Time.deltaTime;
 		Ground_t3A6E265B327D38866FB20EEC69AB4FE1D6A0598C* L_7 = V_1;
 		Ground_t3A6E265B327D38866FB20EEC69AB4FE1D6A0598C* L_8 = V_1;
 		NullCheck(L_8);
-		float L_9 = L_8->___currentTime_13;
+		float L_9 = L_8->___currentTime_12;
 		float L_10;
 		L_10 = Time_get_deltaTime_mC3195000401F0FD167DD2F948FD2BC58330D0865(NULL);
 		NullCheck(L_7);
-		L_7->___currentTime_13 = ((float)il2cpp_codegen_add(L_9, L_10));
-		// {
+		L_7->___currentTime_12 = ((float)il2cpp_codegen_add(L_9, L_10));
+		// var colorTest = diceMaterial.GetColor("_MainColor");
 		Ground_t3A6E265B327D38866FB20EEC69AB4FE1D6A0598C* L_11 = V_1;
 		NullCheck(L_11);
-		Material_t18053F08F347D0DCA5E1140EC7EC4533DD8A14E3* L_12 = L_11->___diceMaterial_9;
+		Material_t18053F08F347D0DCA5E1140EC7EC4533DD8A14E3* L_12 = L_11->___diceMaterial_8;
 		NullCheck(L_12);
 		Color_tD001788D726C3A7F1379BEED0260B9591F440C1F L_13;
 		L_13 = Material_GetColor_mAC702C70081A597DD2AA2F4627B1A1C65DDF6609(L_12, _stringLiteral23E80B19348AABD00B1A5523E569122717D63A8E, NULL);
 		V_2 = L_13;
-		// currentTime += Time.deltaTime;
+		// colorTest = Color32.Lerp(diceMaterial.GetColor("_MainColor"),colorDestination, currentTime / transitionDuration);
 		Ground_t3A6E265B327D38866FB20EEC69AB4FE1D6A0598C* L_14 = V_1;
 		NullCheck(L_14);
-		Material_t18053F08F347D0DCA5E1140EC7EC4533DD8A14E3* L_15 = L_14->___diceMaterial_9;
+		Material_t18053F08F347D0DCA5E1140EC7EC4533DD8A14E3* L_15 = L_14->___diceMaterial_8;
 		NullCheck(L_15);
 		Color_tD001788D726C3A7F1379BEED0260B9591F440C1F L_16;
 		L_16 = Material_GetColor_mAC702C70081A597DD2AA2F4627B1A1C65DDF6609(L_15, _stringLiteral23E80B19348AABD00B1A5523E569122717D63A8E, NULL);
@@ -20283,23 +20299,23 @@ IL_0057:
 		Color32_t73C5004937BF5BB8AD55323D51AAA40A898EF48B L_18 = __this->___colorDestination_3;
 		Ground_t3A6E265B327D38866FB20EEC69AB4FE1D6A0598C* L_19 = V_1;
 		NullCheck(L_19);
-		float L_20 = L_19->___currentTime_13;
+		float L_20 = L_19->___currentTime_12;
 		Ground_t3A6E265B327D38866FB20EEC69AB4FE1D6A0598C* L_21 = V_1;
 		NullCheck(L_21);
-		float L_22 = L_21->___transitionDuration_11;
+		float L_22 = L_21->___transitionDuration_10;
 		Color32_t73C5004937BF5BB8AD55323D51AAA40A898EF48B L_23;
 		L_23 = Color32_Lerp_mA2474A351A93CC63EA568E92C99B6E8D91065F7C_inline(L_17, L_18, ((float)(L_20/L_22)), NULL);
 		Color_tD001788D726C3A7F1379BEED0260B9591F440C1F L_24;
 		L_24 = Color32_op_Implicit_m47CBB138122B400E0B1F4BFD7C30A6C2C00FCA3E_inline(L_23, NULL);
 		V_2 = L_24;
-		// var colorTest = diceMaterial.GetColor("_MainColor");
+		// diceMaterial.SetColor("_MainColor", colorTest);
 		Ground_t3A6E265B327D38866FB20EEC69AB4FE1D6A0598C* L_25 = V_1;
 		NullCheck(L_25);
-		Material_t18053F08F347D0DCA5E1140EC7EC4533DD8A14E3* L_26 = L_25->___diceMaterial_9;
+		Material_t18053F08F347D0DCA5E1140EC7EC4533DD8A14E3* L_26 = L_25->___diceMaterial_8;
 		Color_tD001788D726C3A7F1379BEED0260B9591F440C1F L_27 = V_2;
 		NullCheck(L_26);
 		Material_SetColor_mFAB32FAA44461E46FD707B34184EC080CBB3539F(L_26, _stringLiteral23E80B19348AABD00B1A5523E569122717D63A8E, L_27, NULL);
-		// colorTest = Color32.Lerp(diceMaterial.GetColor("_MainColor"),colorDestination, currentTime / transitionDuration);
+		// yield return null;
 		__this->___U3CU3E2__current_1 = NULL;
 		Il2CppCodeGenWriteBarrier((void**)(&__this->___U3CU3E2__current_1), (void*)NULL);
 		__this->___U3CU3E1__state_0 = 2;
@@ -20313,20 +20329,20 @@ IL_00ce:
 
 IL_00d5:
 	{
-		// yield return new WaitForSeconds(startTransitionDuration);
+		// while(currentTime < transitionDuration)
 		Ground_t3A6E265B327D38866FB20EEC69AB4FE1D6A0598C* L_28 = V_1;
 		NullCheck(L_28);
-		float L_29 = L_28->___currentTime_13;
+		float L_29 = L_28->___currentTime_12;
 		Ground_t3A6E265B327D38866FB20EEC69AB4FE1D6A0598C* L_30 = V_1;
 		NullCheck(L_30);
-		float L_31 = L_30->___transitionDuration_11;
+		float L_31 = L_30->___transitionDuration_10;
 		if ((((float)L_29) < ((float)L_31)))
 		{
 			goto IL_0057;
 		}
 	}
 	{
-		// yield return null;
+		// }
 		return (bool)0;
 	}
 }
@@ -20716,7 +20732,7 @@ IL_0023:
 		// score.SetText(Ground.numberSide.ToString());
 		TextMeshProUGUI_t101091AF4B578BB534C92E9D1EEAF0611636D957* L_4 = __this->___score_10;
 		String_t* L_5;
-		L_5 = Int16_ToString_mD65153B762673B865D4F8FF9B567BECC1ABF6D23((&((Ground_t3A6E265B327D38866FB20EEC69AB4FE1D6A0598C_StaticFields*)il2cpp_codegen_static_fields_for(Ground_t3A6E265B327D38866FB20EEC69AB4FE1D6A0598C_il2cpp_TypeInfo_var))->___numberSide_14), NULL);
+		L_5 = Int16_ToString_mD65153B762673B865D4F8FF9B567BECC1ABF6D23((&((Ground_t3A6E265B327D38866FB20EEC69AB4FE1D6A0598C_StaticFields*)il2cpp_codegen_static_fields_for(Ground_t3A6E265B327D38866FB20EEC69AB4FE1D6A0598C_il2cpp_TypeInfo_var))->___numberSide_13), NULL);
 		NullCheck(L_4);
 		TMP_Text_SetText_m848189C290727009A95A00E432B66DFB2F2C3454(L_4, L_5, (bool)1, NULL);
 		// diceState.state = Ground.State.Spawning;
@@ -21447,7 +21463,6 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void ToonDiceRoller_OnCollisionEnter_mA643A1D
 	if (!s_Il2CppMethodInitialized)
 	{
 		il2cpp_codegen_initialize_runtime_metadata((uintptr_t*)&SoundManager_tCA2CCAC5CDF1BA10E525C01C8D1D0DFAC9BE3734_il2cpp_TypeInfo_var);
-		il2cpp_codegen_initialize_runtime_metadata((uintptr_t*)&_stringLiteral56E364BE37151A793410AD6116212709E3480509);
 		il2cpp_codegen_initialize_runtime_metadata((uintptr_t*)&_stringLiteral7A65EFC5BB52048E35B0D3E2214BCF8CE116440A);
 		il2cpp_codegen_initialize_runtime_metadata((uintptr_t*)&_stringLiteralBDA775852E2DD359293FE37DAAB5A353E5B0F32C);
 		s_Il2CppMethodInitialized = true;
@@ -21463,7 +21478,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void ToonDiceRoller_OnCollisionEnter_mA643A1D
 		L_2 = GameObject_CompareTag_m6378BE50D009A93D46036F74CC3F7E2ECB0636E5(L_1, _stringLiteral7A65EFC5BB52048E35B0D3E2214BCF8CE116440A, NULL);
 		if (!L_2)
 		{
-			goto IL_0053;
+			goto IL_0037;
 		}
 	}
 	{
@@ -21486,22 +21501,6 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void ToonDiceRoller_OnCollisionEnter_mA643A1D
 	}
 
 IL_0037:
-	{
-		// if(internalSpeed <= 0.2f) SoundManager.Instance.PlaySound("Landing Two");
-		float L_5 = __this->___internalSpeed_10;
-		if ((!(((float)L_5) <= ((float)(0.200000003f)))))
-		{
-			goto IL_0053;
-		}
-	}
-	{
-		// if(internalSpeed <= 0.2f) SoundManager.Instance.PlaySound("Landing Two");
-		SoundManager_tCA2CCAC5CDF1BA10E525C01C8D1D0DFAC9BE3734* L_6 = ((SoundManager_tCA2CCAC5CDF1BA10E525C01C8D1D0DFAC9BE3734_StaticFields*)il2cpp_codegen_static_fields_for(SoundManager_tCA2CCAC5CDF1BA10E525C01C8D1D0DFAC9BE3734_il2cpp_TypeInfo_var))->___Instance_4;
-		NullCheck(L_6);
-		SoundManager_PlaySound_m05C485B3FA1816CB339B5C81DFA99E1ADA11A7F3(L_6, _stringLiteral56E364BE37151A793410AD6116212709E3480509, NULL);
-	}
-
-IL_0053:
 	{
 		// }
 		return;

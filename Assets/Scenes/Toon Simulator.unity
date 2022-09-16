@@ -3276,7 +3276,6 @@ MonoBehaviour:
   state: 0
   toon: {fileID: 1640755083}
   scoreText: {fileID: 1291731807}
-  ps: {fileID: 0}
   grad: []
   diceMaterial: {fileID: 2100000, guid: 65560ffc06fabe24fb961d70cff12be4, type: 2}
   diceColors:
@@ -6736,7 +6735,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   explosionsList: []
-  explosionPrefab: {fileID: 8608813684747448622, guid: 04354f9d447d00041b5df69d1211d114, type: 3}
   gradients:
   - serializedVersion: 2
     key0: {r: 0, g: 1, b: 0.7384672, a: 1}
@@ -6907,7 +6905,6 @@ MonoBehaviour:
     m_NumColorKeys: 2
     m_NumAlphaKeys: 3
   numbersList: []
-  mt: {fileID: 0}
   _colors:
   - {r: 0, g: 0.6415094, b: 0.44528294, a: 1}
   - {r: 0.5754717, g: 0, b: 0, a: 1}
@@ -6967,7 +6964,7 @@ MonoBehaviour:
     loop: 1
     fadeIn: 1
     fadeInDuration: 1.5
-    fadeInRange: {x: 0, y: 1}
+    fadeInRange: {x: 0, y: 0.35}
     fadeOut: 0
     fadeOutDuration: 1
     fadeOutRange: {x: 0, y: 0}
@@ -7004,7 +7001,7 @@ MonoBehaviour:
     source: {fileID: 0}
   - clipName: Landing Two
     clip: {fileID: 8300000, guid: dd49ad93645ea0d458a6d5dc1f762e7b, type: 3}
-    volume: 0.3
+    volume: 0.4
     pitch: 1
     loop: 0
     fadeIn: 0
@@ -8512,7 +8509,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.7782705, y: 1}
+    m_SensorSize: {x: 1.7775306, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0

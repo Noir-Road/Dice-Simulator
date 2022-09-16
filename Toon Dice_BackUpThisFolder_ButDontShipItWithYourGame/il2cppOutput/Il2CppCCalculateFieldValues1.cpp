@@ -32585,16 +32585,12 @@ struct CustomizerManager_tD0E39443739502E46946A93587FBAC201C823D53  : public Mon
 {
 	// System.Collections.Generic.List`1<UnityEngine.GameObject> CustomizerManager::explosionsList
 	List_1_tB951CE80B58D1BF9650862451D8DAD8C231F207B* ___explosionsList_5;
-	// UnityEngine.GameObject CustomizerManager::explosionPrefab
-	GameObject_t76FEDD663AB33C991A9C9A23129337651094216F* ___explosionPrefab_6;
 	// UnityEngine.Gradient[] CustomizerManager::gradients
-	GradientU5BU5D_t0C577E5F4C6B0B3E5E565B7F427161380E47B7D8* ___gradients_7;
+	GradientU5BU5D_t0C577E5F4C6B0B3E5E565B7F427161380E47B7D8* ___gradients_6;
 	// System.Collections.Generic.List`1<UnityEngine.GameObject> CustomizerManager::numbersList
-	List_1_tB951CE80B58D1BF9650862451D8DAD8C231F207B* ___numbersList_8;
-	// UnityEngine.Material CustomizerManager::mt
-	Material_t18053F08F347D0DCA5E1140EC7EC4533DD8A14E3* ___mt_9;
+	List_1_tB951CE80B58D1BF9650862451D8DAD8C231F207B* ___numbersList_7;
 	// UnityEngine.Color[] CustomizerManager::_colors
-	ColorU5BU5D_t612261CF293F6FFC3D80AB52259FF0DC2B2CC389* ____colors_10;
+	ColorU5BU5D_t612261CF293F6FFC3D80AB52259FF0DC2B2CC389* ____colors_8;
 };
 
 struct CustomizerManager_tD0E39443739502E46946A93587FBAC201C823D53_StaticFields
@@ -33435,28 +33431,26 @@ struct Ground_t3A6E265B327D38866FB20EEC69AB4FE1D6A0598C  : public MonoBehaviour_
 	ToonDiceRoller_t53154CCC805A935D4DE354EF6B28EC8AEE815AF6* ___toon_5;
 	// TMPro.TextMeshProUGUI Ground::scoreText
 	TextMeshProUGUI_t101091AF4B578BB534C92E9D1EEAF0611636D957* ___scoreText_6;
-	// UnityEngine.ParticleSystem Ground::ps
-	ParticleSystem_tB19986EE308BD63D36FB6025EEEAFBEDB97C67C1* ___ps_7;
 	// UnityEngine.Gradient[] Ground::grad
-	GradientU5BU5D_t0C577E5F4C6B0B3E5E565B7F427161380E47B7D8* ___grad_8;
+	GradientU5BU5D_t0C577E5F4C6B0B3E5E565B7F427161380E47B7D8* ___grad_7;
 	// UnityEngine.Material Ground::diceMaterial
-	Material_t18053F08F347D0DCA5E1140EC7EC4533DD8A14E3* ___diceMaterial_9;
+	Material_t18053F08F347D0DCA5E1140EC7EC4533DD8A14E3* ___diceMaterial_8;
 	// UnityEngine.Color32[] Ground::diceColors
-	Color32U5BU5D_t38116C3E91765C4C5726CE12C77FAD7F9F737259* ___diceColors_10;
+	Color32U5BU5D_t38116C3E91765C4C5726CE12C77FAD7F9F737259* ___diceColors_9;
 	// System.Single Ground::transitionDuration
-	float ___transitionDuration_11;
+	float ___transitionDuration_10;
 	// System.Single Ground::startTransitionDuration
-	float ___startTransitionDuration_12;
+	float ___startTransitionDuration_11;
 	// System.Single Ground::currentTime
-	float ___currentTime_13;
+	float ___currentTime_12;
 	// System.Int32 Ground::numbersLimit
-	int32_t ___numbersLimit_15;
+	int32_t ___numbersLimit_14;
 };
 
 struct Ground_t3A6E265B327D38866FB20EEC69AB4FE1D6A0598C_StaticFields
 {
 	// System.Int16 Ground::numberSide
-	int16_t ___numberSide_14;
+	int16_t ___numberSide_13;
 };
 
 // Cinemachine.GroupWeightManipulator
@@ -41863,9 +41857,9 @@ IL2CPP_EXTERN_C const int32_t g_FieldOffsetTable5001[10] =
 IL2CPP_EXTERN_C const int32_t g_FieldOffsetTable5002[2] = 
 {
 	static_cast<int32_t>(offsetof(UIRotation_tCD2CE58A78033A8D2F114E9043162C36DE93C3AC, ___rotation_4)),static_cast<int32_t>(offsetof(UIRotation_tCD2CE58A78033A8D2F114E9043162C36DE93C3AC, ___speed_5)),};
-IL2CPP_EXTERN_C const int32_t g_FieldOffsetTable5003[7] = 
+IL2CPP_EXTERN_C const int32_t g_FieldOffsetTable5003[5] = 
 {
-	static_cast<int32_t>(offsetof(CustomizerManager_tD0E39443739502E46946A93587FBAC201C823D53_StaticFields, ___Instance_4)),static_cast<int32_t>(offsetof(CustomizerManager_tD0E39443739502E46946A93587FBAC201C823D53, ___explosionsList_5)),static_cast<int32_t>(offsetof(CustomizerManager_tD0E39443739502E46946A93587FBAC201C823D53, ___explosionPrefab_6)),static_cast<int32_t>(offsetof(CustomizerManager_tD0E39443739502E46946A93587FBAC201C823D53, ___gradients_7)),static_cast<int32_t>(offsetof(CustomizerManager_tD0E39443739502E46946A93587FBAC201C823D53, ___numbersList_8)),static_cast<int32_t>(offsetof(CustomizerManager_tD0E39443739502E46946A93587FBAC201C823D53, ___mt_9)),static_cast<int32_t>(offsetof(CustomizerManager_tD0E39443739502E46946A93587FBAC201C823D53, ____colors_10)),};
+	static_cast<int32_t>(offsetof(CustomizerManager_tD0E39443739502E46946A93587FBAC201C823D53_StaticFields, ___Instance_4)),static_cast<int32_t>(offsetof(CustomizerManager_tD0E39443739502E46946A93587FBAC201C823D53, ___explosionsList_5)),static_cast<int32_t>(offsetof(CustomizerManager_tD0E39443739502E46946A93587FBAC201C823D53, ___gradients_6)),static_cast<int32_t>(offsetof(CustomizerManager_tD0E39443739502E46946A93587FBAC201C823D53, ___numbersList_7)),static_cast<int32_t>(offsetof(CustomizerManager_tD0E39443739502E46946A93587FBAC201C823D53, ____colors_8)),};
 IL2CPP_EXTERN_C const int32_t g_FieldOffsetTable5004[3] = 
 {
 	static_cast<int32_t>(offsetof(U3CZoomU3Ed__5_t405CC757EFD71A6F9BADB0CCC92E7E66E64E18A1, ___U3CU3E1__state_0)),static_cast<int32_t>(offsetof(U3CZoomU3Ed__5_t405CC757EFD71A6F9BADB0CCC92E7E66E64E18A1, ___U3CU3E2__current_1)),static_cast<int32_t>(offsetof(U3CZoomU3Ed__5_t405CC757EFD71A6F9BADB0CCC92E7E66E64E18A1, ___U3CU3E4__this_2)),};
@@ -41881,9 +41875,9 @@ IL2CPP_EXTERN_C const int32_t g_FieldOffsetTable5007[3] =
 IL2CPP_EXTERN_C const int32_t g_FieldOffsetTable5008[4] = 
 {
 	static_cast<int32_t>(offsetof(U3CColorLerpU3Ed__16_t818B788ED8A71A245F6E8BB1E9841DE16F9ED338, ___U3CU3E1__state_0)),static_cast<int32_t>(offsetof(U3CColorLerpU3Ed__16_t818B788ED8A71A245F6E8BB1E9841DE16F9ED338, ___U3CU3E2__current_1)),static_cast<int32_t>(offsetof(U3CColorLerpU3Ed__16_t818B788ED8A71A245F6E8BB1E9841DE16F9ED338, ___U3CU3E4__this_2)),static_cast<int32_t>(offsetof(U3CColorLerpU3Ed__16_t818B788ED8A71A245F6E8BB1E9841DE16F9ED338, ___colorDestination_3)),};
-IL2CPP_EXTERN_C const int32_t g_FieldOffsetTable5009[12] = 
+IL2CPP_EXTERN_C const int32_t g_FieldOffsetTable5009[11] = 
 {
-	static_cast<int32_t>(offsetof(Ground_t3A6E265B327D38866FB20EEC69AB4FE1D6A0598C, ___state_4)),static_cast<int32_t>(offsetof(Ground_t3A6E265B327D38866FB20EEC69AB4FE1D6A0598C, ___toon_5)),static_cast<int32_t>(offsetof(Ground_t3A6E265B327D38866FB20EEC69AB4FE1D6A0598C, ___scoreText_6)),static_cast<int32_t>(offsetof(Ground_t3A6E265B327D38866FB20EEC69AB4FE1D6A0598C, ___ps_7)),static_cast<int32_t>(offsetof(Ground_t3A6E265B327D38866FB20EEC69AB4FE1D6A0598C, ___grad_8)),static_cast<int32_t>(offsetof(Ground_t3A6E265B327D38866FB20EEC69AB4FE1D6A0598C, ___diceMaterial_9)),static_cast<int32_t>(offsetof(Ground_t3A6E265B327D38866FB20EEC69AB4FE1D6A0598C, ___diceColors_10)),static_cast<int32_t>(offsetof(Ground_t3A6E265B327D38866FB20EEC69AB4FE1D6A0598C, ___transitionDuration_11)),static_cast<int32_t>(offsetof(Ground_t3A6E265B327D38866FB20EEC69AB4FE1D6A0598C, ___startTransitionDuration_12)),static_cast<int32_t>(offsetof(Ground_t3A6E265B327D38866FB20EEC69AB4FE1D6A0598C, ___currentTime_13)),static_cast<int32_t>(offsetof(Ground_t3A6E265B327D38866FB20EEC69AB4FE1D6A0598C_StaticFields, ___numberSide_14)),static_cast<int32_t>(offsetof(Ground_t3A6E265B327D38866FB20EEC69AB4FE1D6A0598C, ___numbersLimit_15)),};
+	static_cast<int32_t>(offsetof(Ground_t3A6E265B327D38866FB20EEC69AB4FE1D6A0598C, ___state_4)),static_cast<int32_t>(offsetof(Ground_t3A6E265B327D38866FB20EEC69AB4FE1D6A0598C, ___toon_5)),static_cast<int32_t>(offsetof(Ground_t3A6E265B327D38866FB20EEC69AB4FE1D6A0598C, ___scoreText_6)),static_cast<int32_t>(offsetof(Ground_t3A6E265B327D38866FB20EEC69AB4FE1D6A0598C, ___grad_7)),static_cast<int32_t>(offsetof(Ground_t3A6E265B327D38866FB20EEC69AB4FE1D6A0598C, ___diceMaterial_8)),static_cast<int32_t>(offsetof(Ground_t3A6E265B327D38866FB20EEC69AB4FE1D6A0598C, ___diceColors_9)),static_cast<int32_t>(offsetof(Ground_t3A6E265B327D38866FB20EEC69AB4FE1D6A0598C, ___transitionDuration_10)),static_cast<int32_t>(offsetof(Ground_t3A6E265B327D38866FB20EEC69AB4FE1D6A0598C, ___startTransitionDuration_11)),static_cast<int32_t>(offsetof(Ground_t3A6E265B327D38866FB20EEC69AB4FE1D6A0598C, ___currentTime_12)),static_cast<int32_t>(offsetof(Ground_t3A6E265B327D38866FB20EEC69AB4FE1D6A0598C_StaticFields, ___numberSide_13)),static_cast<int32_t>(offsetof(Ground_t3A6E265B327D38866FB20EEC69AB4FE1D6A0598C, ___numbersLimit_14)),};
 IL2CPP_EXTERN_C const int32_t g_FieldOffsetTable5010[6] = 
 {
 	static_cast<int32_t>(offsetof(Numbers_t2C284EE588B8E1807B53C79634D362AFCD93A738, ___mr_4)),static_cast<int32_t>(offsetof(Numbers_t2C284EE588B8E1807B53C79634D362AFCD93A738, ___timeBeforeFading_5)),static_cast<int32_t>(offsetof(Numbers_t2C284EE588B8E1807B53C79634D362AFCD93A738, ___currentTime_6)),static_cast<int32_t>(offsetof(Numbers_t2C284EE588B8E1807B53C79634D362AFCD93A738, ___fadeOutTime_7)),static_cast<int32_t>(offsetof(Numbers_t2C284EE588B8E1807B53C79634D362AFCD93A738, ___type_8)),static_cast<int32_t>(offsetof(Numbers_t2C284EE588B8E1807B53C79634D362AFCD93A738, ___full_9)),};

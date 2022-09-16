@@ -10,7 +10,6 @@ public class Ground : MonoBehaviour
     [Title("Components")]
     [SerializeField] ToonDiceRoller toon;
     [SerializeField] TextMeshProUGUI scoreText;
-    [SerializeField] ParticleSystem ps;
     [SerializeField] Gradient[] grad;
 
     [Title("Dice Colors")]
@@ -23,6 +22,7 @@ public class Ground : MonoBehaviour
     public static short numberSide = 0;
     int numbersLimit;
 
+    void Start() => diceMaterial.SetColor("_MainColor", diceColors[0]); // Reset Dice color [BLUEISH]
 
     void OnTriggerStay(Collider collision)
     {
@@ -73,17 +73,17 @@ public class Ground : MonoBehaviour
         state = State.Idle;
     }
 
-     void MultipleNumbers(PoolObjectType type)
-     {
+    void MultipleNumbers(PoolObjectType type)
+    {
         numbersLimit = Random.Range(6,16);
         for (int i = 0; i < numbersLimit; i++)
         {
             SpawnerToonManager.Instance.SpawnNumber(type);
         }
-     }
+    }
 
-     IEnumerator ColorLerp(Color32 colorDestination)
-     {
+    IEnumerator ColorLerp(Color32 colorDestination)
+    {
             currentTime = 0f;
 
             yield return new WaitForSeconds(startTransitionDuration);
@@ -96,5 +96,5 @@ public class Ground : MonoBehaviour
                 diceMaterial.SetColor("_MainColor", colorTest);
                 yield return null;
             }
-     }
+    }
 }

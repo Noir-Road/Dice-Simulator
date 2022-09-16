@@ -11,12 +11,10 @@ public class CustomizerManager : MonoBehaviour
 
     [Title("Explosions")]
     [SerializeField] List<GameObject> explosionsList = new List<GameObject>();
-    [SerializeField] GameObject explosionPrefab;
     [SerializeField] Gradient[] gradients;
 
     [Title("Numbers")]
     [SerializeField] List<GameObject> numbersList = new List<GameObject>();
-    [SerializeField] Material mt;
     [SerializeField] Color[] _colors;
 
 
@@ -51,10 +49,12 @@ public class CustomizerManager : MonoBehaviour
         foreach(var number in numbersList)
         {
             var _numberColor = number.GetComponent<MeshRenderer>().material;
-           // _numberColor.SetColor("_EmissionColor", _colors[_color]);
-            _numberColor.SetColor("_EmissionColor", new Color(255f,190f,100f,3f));
-           // _numberColor.SetColor("_BaseColor", _colors[_color]);
-            _numberColor.SetColor("_BaseColor", new Color(255f,190f,100f,3f));
+            _numberColor.SetColor("_EmissionColor", _colors[_color]);
+            _numberColor.SetColor("_BaseColor", _colors[_color]);
+
+          // Testing Glow power. Not working, too much glow.  
+          //  _numberColor.SetColor("_EmissionColor", new Color(255f,190f,100f,3f));
+          //  _numberColor.SetColor("_BaseColor", new Color(255f,190f,100f,3f));
         }
     }
 

@@ -60,7 +60,7 @@ public class ToonDiceRoller : MonoBehaviour
                 RequestNewRotationValues();
             break;
 
-            case State.Falling: // Dice is Falling to ground
+            case State.Falling: // Dice is Falling
             rb.AddForce(Physics.gravity * mutiplyGravity, ForceMode.Acceleration);
             break;
         }
@@ -139,7 +139,7 @@ public class ToonDiceRoller : MonoBehaviour
                 playingSound = true;
                 SoundManager.Instance.PlaySound("Landing One");
             }
-            if(internalSpeed <= 0.2f) SoundManager.Instance.PlaySound("Landing Two");
+          //  if(internalSpeed == 0f) SoundManager.Instance.PlaySound("Landing Two");
         }
     }
 
