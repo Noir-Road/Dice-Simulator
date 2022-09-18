@@ -1,6 +1,15 @@
 # Change Log
 
 <a name="v0.15.1"></a>
+## [Beta 2.0] - 2022-09-17
+### Added
+- Updated to Google Play Internal release for further testing. Waiting on approval.
+- Adjusted menu panel color.
+- Removed trophy button, not implemented yet (Should be ready for next release)
+### Known Bugs
+- Sound bug persiting upon landing. Multiple sound detected. Commented for now, need more research
+
+<a name="v0.15.1"></a>
 ## [Beta 1.9] - 2022-09-17
 ### Added
 - Start menu fade in in game sound.
