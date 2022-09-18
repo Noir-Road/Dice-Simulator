@@ -284,6 +284,7 @@ GameObject:
   - component: {fileID: 6310060877225326427}
   - component: {fileID: 6310060877225326429}
   - component: {fileID: 1474184574}
+  - component: {fileID: 1640755089}
   m_Layer: 0
   m_Name: Dots
   m_TagString: Dice
@@ -319,14 +320,14 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6310060877225326431}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 867b9f4339c17df46b3a9439f920f16f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   state: 0
   upForce: 10
-  impulseDirection: 18
+  impulseDirection: 12
   mutiplyGravity: 2.8
   rotationSpeed: 20
   rotationAngles: {x: 0, y: 0, z: 0}
@@ -414,3 +415,18 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.14881842, y: 0.14883192, z: 0.14883181}
   m_Center: {x: 0.000000014901161, y: 0, z: 0}
+--- !u!114 &1640755089
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6310060877225326431}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1abd60c377bcf0e4186235994ffdfefe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  toonDiceRoller: {fileID: 4441309751237553421}
+  tapRange: 10
+  speedModifier: 0.05

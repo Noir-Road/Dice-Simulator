@@ -6593,38 +6593,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 7696167, guid: b937367f5cf91e94fa1e401261f60dd4, type: 3}
-      propertyPath: m_IsTrigger
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 53815255, guid: b937367f5cf91e94fa1e401261f60dd4, type: 3}
-      propertyPath: m_IsTrigger
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 450581103, guid: b937367f5cf91e94fa1e401261f60dd4, type: 3}
-      propertyPath: m_IsTrigger
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1295708625, guid: b937367f5cf91e94fa1e401261f60dd4, type: 3}
-      propertyPath: m_IsTrigger
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1482389131, guid: b937367f5cf91e94fa1e401261f60dd4, type: 3}
-      propertyPath: m_IsTrigger
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1509429732, guid: b937367f5cf91e94fa1e401261f60dd4, type: 3}
-      propertyPath: m_IsTrigger
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 4441309751237553421, guid: b937367f5cf91e94fa1e401261f60dd4, type: 3}
       propertyPath: ground
       value: 
       objectReference: {fileID: 903619698}
-    - target: {fileID: 4441309751237553421, guid: b937367f5cf91e94fa1e401261f60dd4, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 6310060877225326425, guid: b937367f5cf91e94fa1e401261f60dd4, type: 3}
       propertyPath: m_RootOrder
       value: 9
@@ -6672,10 +6644,6 @@ PrefabInstance:
     - target: {fileID: 6310060877225326431, guid: b937367f5cf91e94fa1e401261f60dd4, type: 3}
       propertyPath: m_Name
       value: Dice
-      objectReference: {fileID: 0}
-    - target: {fileID: 6310060877225326431, guid: b937367f5cf91e94fa1e401261f60dd4, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b937367f5cf91e94fa1e401261f60dd4, type: 3}
@@ -6965,9 +6933,9 @@ MonoBehaviour:
     fadeIn: 1
     fadeInDuration: 1.5
     fadeInRange: {x: 0, y: 0.35}
-    fadeOut: 0
-    fadeOutDuration: 1
-    fadeOutRange: {x: 0, y: 0}
+    fadeOut: 1
+    fadeOutDuration: 1.5
+    fadeOutRange: {x: 0.35, y: 0}
     fadeInCurrentTime: 0
     fadeOutCurrentTime: 0
     source: {fileID: 0}

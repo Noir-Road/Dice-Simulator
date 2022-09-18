@@ -1,6 +1,14 @@
 # Change Log
 
 <a name="v0.15.1"></a>
+## [Beta 1.9] - 2022-09-17
+### Added
+- Start menu fade in in game sound.
+- Increased glow explosions a bit.
+### Known Bugs
+- Sound bug persiting upon landing. Multiple sound detected. Commented for now, need more research
+
+<a name="v0.15.1"></a>
 ## [Beta 1.8] - 2022-09-14
 ### Bug Fixes
 - Dice color now reset color back to blue.

@@ -41,6 +41,7 @@ public class ToonMainMenu : MonoBehaviour
     public void FadeMenu()
     {
         StartCoroutine(FadeMainMenu());
+        SoundManager.Instance.PlaySound("Main Theme");
         cGroup.interactable = false;
     }
 
