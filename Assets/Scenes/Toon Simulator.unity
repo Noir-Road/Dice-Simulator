@@ -6843,6 +6843,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1640755089, guid: b937367f5cf91e94fa1e401261f60dd4, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1640755089, guid: b937367f5cf91e94fa1e401261f60dd4, type: 3}
+      propertyPath: rollSpeed
+      value: 900
+      objectReference: {fileID: 0}
+    - target: {fileID: 1640755089, guid: b937367f5cf91e94fa1e401261f60dd4, type: 3}
+      propertyPath: swipeRange
+      value: 15
+      objectReference: {fileID: 0}
     - target: {fileID: 4441309751237553421, guid: b937367f5cf91e94fa1e401261f60dd4, type: 3}
       propertyPath: ground
       value: 
@@ -6894,6 +6906,10 @@ PrefabInstance:
     - target: {fileID: 6310060877225326431, guid: b937367f5cf91e94fa1e401261f60dd4, type: 3}
       propertyPath: m_Name
       value: Dice
+      objectReference: {fileID: 0}
+    - target: {fileID: 6310060877225326431, guid: b937367f5cf91e94fa1e401261f60dd4, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b937367f5cf91e94fa1e401261f60dd4, type: 3}
@@ -8727,7 +8743,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.7775306, y: 1}
+    m_SensorSize: {x: 1.7774725, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0

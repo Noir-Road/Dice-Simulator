@@ -5,21 +5,18 @@ using UnityEngine;
 public class DiceMovement : MonoBehaviour
 {
     [SerializeField] ToonDiceRoller toonDiceRoller;
+    [SerializeField] float rollSpeed;
+    [SerializeField] float swipeRange;
     [SerializeField] float tapRange;
-    Touch touch;
-    public float speedModifier;
-
     Vector2 startTouchPosition;
     Vector2 currentPosition;
     Vector2 endTouchPosition;
     bool stopTouch;
-
-    void Start() {
-        speedModifier = 0.01f;
-    }
+    bool isMoving;
 
     void Update() {
-        Swipe();    
+        Swipe();
+        KeyboardControlls();
     }
 
     void Swipe()
@@ -33,24 +30,68 @@ public class DiceMovement : MonoBehaviour
         {
             currentPosition = Input.GetTouch(0).position;
             var distance = currentPosition - startTouchPosition;
-            touch = Input.GetTouch(0);
 
-            if(touch.phase == TouchPhase.Moved)
+            if(!stopTouch)
             {
-                transform.position = new Vector3(transform.position.x + touch.deltaPosition.x * speedModifier, transform.position.y, transform.position.z + touch.deltaPosition.y * speedModifier);
+                if(distance.x < -swipeRange)
+                {
+                    Debug.Log("Left");
+                    StartCoroutine(Roll(Vector3.left));
+                }
+                else if(distance.x > swipeRange)
+                {
+                    Debug.Log("Right");
+                    StartCoroutine(Roll(Vector3.right));
+                }
+                else if(distance.y > swipeRange)
+                {
+                    Debug.Log("Up");
+                    StartCoroutine(Roll(Vector3.forward));
+                }
+                else if(distance.y < -swipeRange)
+                {
+                    Debug.Log("Down");
+                    StartCoroutine(Roll(Vector3.back));
+                }
             }
-
-          //| if(!stopTouch)
-          //| {
-          //|     if(distance.x < -swipeRange || distance.x > swipeRange || distance.y > swipeRange || distance.y < -swipeRange) stopTouch = true;
-          //| }
         }
     }
 
-    private void FixedUpdate() {
+    void KeyboardControlls()
+    {
+        if(isMoving) return;
+        if(Input.GetKey(KeyCode.UpArrow)) StartCoroutine(Roll(Vector3.forward));
+        else if(Input.GetKey(KeyCode.DownArrow)) StartCoroutine(Roll(Vector3.back));
+        else if(Input.GetKey(KeyCode.RightArrow)) StartCoroutine(Roll(Vector3.right));
+        else if(Input.GetKey(KeyCode.LeftArrow)) StartCoroutine(Roll(Vector3.left));
+
+    }
+
+
+
+    IEnumerator Roll( Vector3 direction)
+    {
+        isMoving = true;
+        stopTouch = true;
+        var remainingAngle = 90f;
+        var rotationCenter = transform.position + direction / 2 + Vector3.down / 2;
+        var rotationAxis = Vector3.Cross(Vector3.up, direction);
+
+        while(remainingAngle > 0)
+        {
+            var rotationAngle = Mathf.Min(Time.deltaTime * rollSpeed, remainingAngle);
+            transform.RotateAround(rotationCenter, rotationAxis, rotationAngle);
+            remainingAngle -= rotationAngle;
+            yield return null;
+        }
+        stopTouch = false;
+        isMoving = false;
+    }
+
+    void FixedUpdate() {
     if(Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Ended)
         {
-          //  stopTouch = false;
+            stopTouch = false;
             
             endTouchPosition = Input.GetTouch(0).position;
 
