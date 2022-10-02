@@ -1,0 +1,26 @@
+{
+	"AchievementIDs":[
+		{
+			"InternalID":"LongFly",
+			"AppleID":"",
+			"GoogleID":"CgkItv3-3pcWEAIQAQ"
+		}
+	],
+	"LeaderboardIDs":[],
+	"CloudVariables":[
+		{
+			"Key":"",
+			"Type":"0",
+			"DefaultValue":"0",
+			"PersistenceType":"0",
+			"AllowNegative":false
+		}
+	],
+	"AppleSupported":false,
+	"GoogleSupported":true,
+	"GoogleAppID":"762287472310",
+	"GoogleSetupRun":true,
+	"DebugModeEnabled":true,
+	"Version":"2.7.5",
+	"SettingsLocation":"0"
+}
