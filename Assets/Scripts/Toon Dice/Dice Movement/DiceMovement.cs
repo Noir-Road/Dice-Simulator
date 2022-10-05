@@ -14,10 +14,71 @@ public class DiceMovement : MonoBehaviour
     bool stopTouch;
     bool isMoving;
 
+    public float power = 10f;
+    public Rigidbody rb;
+    public Vector3 minPower;
+    public Vector3 maxPower;
+
+    Camera cam;
+    Vector3 force;
+    Vector3 startPoint;
+    Vector3 endPoint;
+    TrajectoryLine tl;
+
+    private void Start() {
+        cam = Camera.main;
+        tl = GetComponent<TrajectoryLine>();
+    }
+
+
     void Update() {
         Swipe();
+        //DragAndShot();
         KeyboardControlls();
     }
+
+    void DragAndShot()
+    {
+        if(Input.GetMouseButtonDown(0))
+        {
+            //Debug.Log("Right Mouse Button");
+            startPoint = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            //startPoint = Input.mousePosition;
+            Debug.Log(startPoint);
+
+            startPoint.z = 5;
+
+        }
+        if(Input.GetMouseButton(0))
+        {
+            Vector3 currentPoint = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            //Vector3 currentPoint = Input.mousePosition;
+            currentPoint.z = 5;
+            Debug.Log(currentPoint);
+            tl.RenderLine(startPoint, currentPoint);
+            Debug.DrawLine(startPoint, currentPoint, Color.green, 10f);
+        }
+
+        if(Input.GetMouseButtonUp(0))
+        {
+            //Debug.Log("Right Mouse Button");
+            endPoint = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            //endPoint = Input.mousePosition;
+            Debug.DrawLine(startPoint, endPoint, Color.magenta, 10f);
+            tl.RenderLine(startPoint, endPoint);
+            Debug.Log(endPoint);
+
+            //endPoint.z = 15;
+
+            force = new Vector3(Mathf.Clamp(startPoint.x - endPoint.x, minPower.x, maxPower.x), Mathf.Clamp(startPoint.y - endPoint.y, minPower.y, maxPower.y), Mathf.Clamp(startPoint.z - endPoint.z, minPower.z, maxPower.z));
+            rb.AddForce(force * power, ForceMode.Impulse);
+
+        }
+
+
+
+    }
+
 
     void Swipe()
     {
