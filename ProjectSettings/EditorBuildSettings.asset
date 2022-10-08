@@ -17,4 +17,6 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/Dice Simulator.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
-  m_configObjects: {}
+  m_configObjects:
+    com.unity.adaptiveperformance.loader_settings: {fileID: 11400000, guid: 01c4c6f0150db6f92938b91e9cea33cd, type: 2}
+    com.unity.adaptiveperformance.simulator.provider_settings: {fileID: 11400000, guid: e3a116c6dd998600f94bd1760a28de9f, type: 2}

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -13,72 +14,142 @@ public class DiceMovement : MonoBehaviour
     Vector2 endTouchPosition;
     bool stopTouch;
     bool isMoving;
-
-    public float power = 10f;
+    internal static GameObject dice;
+    TrajectoryLine tl;
+    public Camera cam;
     public Rigidbody rb;
-    public Vector3 minPower;
-    public Vector3 maxPower;
-
-    Camera cam;
-    Vector3 force;
+    public Vector3 force;
     Vector3 startPoint;
     Vector3 endPoint;
-    TrajectoryLine tl;
+    Vector3 currentPoint;
+    public Vector3 minPower;
+    public Vector3 maxPower;
+    public float power = 10f;
+    public float xRotationAngle = 0f;
+    public float yLineRenderPower = 0f;
+    public float rotateSpeed = 5f;
+    public float shotPowerMultiplier = 30f;
+    public float limitLengthShot = 10f;
+    public float minRotationAngle = 120f;
+    public float maxRotationAngle = 260f;
+
 
     private void Start() {
         cam = Camera.main;
         tl = GetComponent<TrajectoryLine>();
     }
 
-
     void Update() {
-        Swipe();
-        //DragAndShot();
+        //Swipe();
+        DragAndShot();
+        //ClickAndHit();
         KeyboardControlls();
     }
 
     void DragAndShot()
     {
+        dice = GameObject.FindGameObjectWithTag("Dice");
+
         if(Input.GetMouseButtonDown(0))
         {
-            //Debug.Log("Right Mouse Button");
-            startPoint = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            //startPoint = Input.mousePosition;
-            Debug.Log(startPoint);
-
-            startPoint.z = 5;
-
+            transform.position = dice.transform.position;
         }
         if(Input.GetMouseButton(0))
         {
-            Vector3 currentPoint = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            //Vector3 currentPoint = Input.mousePosition;
-            currentPoint.z = 5;
-            Debug.Log(currentPoint);
-            tl.RenderLine(startPoint, currentPoint);
-            Debug.DrawLine(startPoint, currentPoint, Color.green, 10f);
+            xRotationAngle += Input.GetAxis("Mouse X") * rotateSpeed;
+            yLineRenderPower += Input.GetAxis("Mouse Y") * rotateSpeed;
+            
+            if(yLineRenderPower < 0 )
+            {
+                yLineRenderPower = 0;
+            }
+            if(yLineRenderPower > limitLengthShot )
+            {
+                yLineRenderPower = limitLengthShot;
+            }
+
+            if(xRotationAngle < minRotationAngle )
+            {
+                xRotationAngle = minRotationAngle;
+            }
+
+            if(xRotationAngle > maxRotationAngle )
+            {
+                xRotationAngle = maxRotationAngle;
+            }
+
+            transform.rotation = Quaternion.Euler(0f, -xRotationAngle, 0f);
+            
+            startPoint =  transform.position;
+            endPoint =  transform.position + transform.forward * Math.Abs(limitLengthShot - yLineRenderPower);
+        
+            tl.RenderLine(startPoint,endPoint);
+
         }
 
         if(Input.GetMouseButtonUp(0))
         {
-            //Debug.Log("Right Mouse Button");
-            endPoint = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            //endPoint = Input.mousePosition;
-            Debug.DrawLine(startPoint, endPoint, Color.magenta, 10f);
-            tl.RenderLine(startPoint, endPoint);
-            Debug.Log(endPoint);
-
-            //endPoint.z = 15;
-
+            
             force = new Vector3(Mathf.Clamp(startPoint.x - endPoint.x, minPower.x, maxPower.x), Mathf.Clamp(startPoint.y - endPoint.y, minPower.y, maxPower.y), Mathf.Clamp(startPoint.z - endPoint.z, minPower.z, maxPower.z));
+            //force = new Vector3(startPoint.x - endPoint.x, startPoint.y - endPoint.y, startPoint.z - endPoint.z);
+            
+            power = (endPoint - startPoint).magnitude * shotPowerMultiplier;
+
             rb.AddForce(force * power, ForceMode.Impulse);
+            tl.EndLine();
+
+            Debug.Log("FORCE: " + force + " POWER: " + power);
+            Debug.Log("Inicio: " + startPoint);
+            Debug.Log("Fin: " + endPoint);
 
         }
 
-
-
     }
 
+    void ClickAndHit()
+    {
+        dice = GameObject.FindGameObjectWithTag("Dice");
+        if(Input.GetMouseButtonDown(0))
+        {
+            //startPoint = cam.ScreenToWorldPoint(Input.mousePosition);
+            startPoint = dice.transform.position;
+            startPoint.y=0;
+        }
+        if(Input.GetMouseButton(0))
+        {
+            
+            currentPoint = cam.ScreenToWorldPoint(Input.mousePosition);
+            currentPoint = currentPoint * 0.1f;
+            currentPoint.y=0;
+
+            power = (startPoint-currentPoint).magnitude;
+
+            Vector3 forward = Camera.main.transform.forward;
+            Vector3 actualForward = Vector3.ProjectOnPlane(Input.mousePosition, Vector3.up).normalized;
+            Vector3 endpoint = actualForward * 5;
+
+            tl.RenderLine(startPoint, currentPoint);
+            //Debug.DrawLine(currentPoint2, currentPoint, Color.green, 10f);
+        }
+
+        if(Input.GetMouseButtonUp(0))
+        {
+            endPoint = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+
+            //startPoint =  currentPoint2;
+            endPoint = currentPoint;
+
+            force = new Vector3(Mathf.Clamp(startPoint.x - endPoint.x, minPower.x, maxPower.x), Mathf.Clamp(startPoint.y - endPoint.y, minPower.y, maxPower.y), Mathf.Clamp(startPoint.z - endPoint.z, minPower.z, maxPower.z));
+            //force = new Vector3(startPoint.x - endPoint.x, startPoint.y - endPoint.y, startPoint.z - endPoint.z);
+
+            rb.AddForce(force * power, ForceMode.Impulse);
+            tl.EndLine();
+
+            Debug.Log("FORCE: " + force + " POWER: " + power);
+            Debug.Log("Inicio: " + startPoint);
+            Debug.Log("Fin: " + endPoint);
+        }
+    }
 
     void Swipe()
     {

@@ -26,6 +26,6 @@ public class TrajectoryLine : MonoBehaviour
 
     public void EndLine()
     {
-        
+        lr.positionCount = 0;
     }
 }
